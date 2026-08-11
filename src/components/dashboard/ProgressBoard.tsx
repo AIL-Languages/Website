@@ -4,9 +4,12 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { languages, levels, optionLabel } from "@/lib/academic/options";
 import type { PublicUser } from "@/lib/auth/types";
-import type { LevelCompletion, ProgressSnapshot } from "@/lib/reports/store";
+import type {
+  AttendanceRecord,
+  LevelCompletion,
+  ProgressSnapshot,
+} from "@/lib/reports/types";
 import { attendanceSummary, latestProgress } from "@/lib/reports/stats";
-import type { AttendanceRecord } from "@/lib/reports/store";
 
 const input = "w-full rounded-xl border border-navy/10 px-4 py-3";
 

@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PublicUser } from "@/lib/auth/types";
-import type { AttendanceRecord } from "@/lib/reports/store";
+import type { AttendanceRecord } from "@/lib/reports/types";
 import { attendanceSummary } from "@/lib/reports/stats";
 
 const input = "w-full rounded-xl border border-navy/10 px-4 py-3";

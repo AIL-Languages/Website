@@ -3,7 +3,7 @@ import type {
   Diploma,
   LevelCompletion,
   ProgressSnapshot,
-} from "@/lib/reports/store";
+} from "@/lib/reports/types";
 
 export function inPeriod(date: string, from?: string, to?: string) {
   const day = date.slice(0, 10);

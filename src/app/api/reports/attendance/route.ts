@@ -7,10 +7,9 @@ import {
 } from "@/lib/reports/access";
 import {
   ATTENDANCE_STATUSES,
-  createAttendance,
-  listAttendance,
   type AttendanceStatus,
-} from "@/lib/reports/store";
+} from "@/lib/reports/types";
+import { createAttendance, listAttendance } from "@/lib/reports/store";
 
 export const runtime = "nodejs";
 

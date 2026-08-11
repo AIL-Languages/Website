@@ -13,7 +13,7 @@ import type {
   Diploma,
   LevelCompletion,
   ProgressSnapshot,
-} from "@/lib/reports/store";
+} from "@/lib/reports/types";
 import { attendanceSummary, skillAverage } from "@/lib/reports/stats";
 
 const navy = rgb(0, 26 / 255, 61 / 255);

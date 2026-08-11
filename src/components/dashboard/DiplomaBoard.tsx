@@ -4,8 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { languages, levels, optionLabel } from "@/lib/academic/options";
 import type { PublicUser } from "@/lib/auth/types";
-import type { Diploma, LevelCompletion } from "@/lib/reports/store";
-import { isDiplomaEligible } from "@/lib/reports/store";
+import { isDiplomaEligible, type Diploma, type LevelCompletion } from "@/lib/reports/types";
 import { diplomaForCompletion } from "@/lib/reports/stats";
 
 type Props = {
