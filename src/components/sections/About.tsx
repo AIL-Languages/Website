@@ -1,0 +1,51 @@
+const pillars = [
+  {
+    title: "Nuestra misión",
+    text: "Facilitar el aprendizaje de idiomas mediante una enseñanza personalizada, práctica y de calidad que permita a nuestros estudiantes comunicarse con seguridad en un entorno cada vez más global.",
+  },
+  {
+    title: "Nuestra visión",
+    text: "Consolidar a A-Inman Languages como una academia virtual de referencia por su calidad académica, atención personalizada e innovación en la enseñanza de idiomas.",
+  },
+  {
+    title: "Nuestros valores",
+    text: "Profesionalismo · Confianza · Calidad · Compromiso · Comunicación · Flexibilidad · Aprendizaje continuo.",
+  },
+];
+
+export function About() {
+  return (
+    <section id="nosotros" className="relative bg-mist py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
+            Quiénes somos
+          </p>
+          <h2 className="font-display text-3xl font-bold text-navy sm:text-4xl">
+            Aprender un idioma es mucho más que estudiar gramática.
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted">
+            Es aprender a comunicarte con confianza.
+          </p>
+          <p className="mt-6 max-w-2xl leading-relaxed text-ink/85">
+            A-Inman Languages es una academia virtual enfocada en brindar formación
+            lingüística personalizada, práctica y comunicativa. Acompañamos a cada
+            estudiante en el desarrollo de habilidades para situarse en contextos
+            académicos, profesionales, laborales, de viaje o de la vida cotidiana.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          {pillars.map((item) => (
+            <article key={item.title} className="border-t-2 border-cyan/70 pt-5">
+              <h3 className="font-display text-xl font-semibold text-navy">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
