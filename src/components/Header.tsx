@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BrandLogo } from "@/components/brand/BrandLogo";
+import { HeaderBrandLockup } from "@/components/brand/HeaderBrandLockup";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import type { UserRole } from "@/lib/auth/admin";
 import { navItems } from "@/lib/site";
@@ -64,25 +64,7 @@ export function Header() {
           scrolled ? "py-2 sm:py-2.5" : "py-2.5 sm:py-3.5"
         }`}
       >
-        <Link
-          href="#inicio"
-          aria-label="Ir al inicio de A-Inman Languages"
-          className="group relative z-10 inline-flex shrink-0 items-center transition duration-200 hover:scale-[1.02] hover:drop-shadow-[0_0_12px_rgba(0,224,230,0.35)]"
-        >
-          <BrandLogo
-            variant="isotype"
-            forceTheme="dark"
-            alt="A-Inman Languages"
-            priority
-            width={180}
-            height={78}
-            className={`w-auto object-contain transition-[height] duration-300 ${
-              scrolled
-                ? "h-9 max-w-[130px] sm:h-11 sm:max-w-[150px]"
-                : "h-10 max-w-[140px] sm:h-12 sm:max-w-[160px] lg:h-[52px] lg:max-w-[180px]"
-            }`}
-          />
-        </Link>
+        <HeaderBrandLockup scrolled={scrolled} href="#inicio" />
 
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Principal">
           {navItems.map((item) => (
