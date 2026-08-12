@@ -1,5 +1,3 @@
-import { site } from "@/lib/site";
-
 export type CmsHeroContent = {
   headline: string;
   subheadline: string;
@@ -59,18 +57,18 @@ export function defaultCmsContent(): CmsSiteContent {
     updatedAt: null,
     updatedBy: null,
     hero: {
-      headline: site.headline,
+      headline: "Idiomas que conectan",
       subheadline:
-        "Academia virtual de inglés, portugués y español para extranjeros, con metodología práctica y formación adaptada a tus objetivos.",
-      primaryCtaLabel: "Conoce nuestros cursos",
-      primaryCtaHref: "#cursos",
-      secondaryCtaLabel: "Crea tu cuenta",
-      secondaryCtaHref: "#registro",
+        "Aprende inglés, portugués o español mediante clases online personalizadas, horarios flexibles y una metodología práctica enfocada en comunicación real.",
+      primaryCtaLabel: "Solicitar información",
+      primaryCtaHref: "#contacto",
+      secondaryCtaLabel: "Ver programas",
+      secondaryCtaHref: "#cursos",
       advantages: [
-        "100 % online",
-        "Clases personalizadas",
-        "Profesores certificados",
+        "Clases 100% online",
         "Horarios flexibles",
+        "Atención personalizada",
+        "Profesores especializados",
       ],
     },
     about: {

@@ -22,7 +22,6 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <JoinProfiles />
         <About />
         <AcademicDirectorSection />
         <Languages />
@@ -35,6 +34,7 @@ export default function HomePage() {
         <Translation />
         <Testimonials />
         <PartnershipsSection />
+        <JoinProfiles />
         <ContactCta />
       </main>
       <Footer />

@@ -76,10 +76,10 @@ export function Languages() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-              Nuestros idiomas
+              Nuestros programas
             </p>
             <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-              Formación lingüística con propósito
+              Nuestros programas de idiomas
             </h2>
           </div>
           <ButtonLink href="#contacto" variant="ghost">
