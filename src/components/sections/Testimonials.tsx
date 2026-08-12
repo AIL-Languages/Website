@@ -6,7 +6,7 @@ export function Testimonials() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
             Testimonios
           </p>
-          <h2 className="font-display text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
             Lo que dicen nuestros estudiantes
           </h2>
         </div>
@@ -15,7 +15,7 @@ export function Testimonials() {
           {[1, 2, 3].map((slot) => (
             <article
               key={slot}
-              className="rounded-[1.5rem] border border-dashed border-navy/20 bg-white/70 p-7"
+              className="rounded-[1.5rem] border border-dashed border-navy/20 bg-card/70 p-7"
             >
               <div className="h-3 w-24 rounded-full bg-navy/10" />
               <div className="mt-4 space-y-2">

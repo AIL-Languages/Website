@@ -1,23 +1,20 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { RoleFields } from "@/components/auth/RoleFields";
+import { AvailabilityEditor } from "@/components/scheduling/AvailabilityEditor";
 import { detailsFromForm } from "@/lib/academic/details";
 import type { PublicProfileRole } from "@/lib/auth/admin";
 import { roleLabel } from "@/lib/auth/admin";
+import { TEACHER_APPLICATION_FORM_URL } from "@/lib/recruitment";
 
 const profiles: { value: PublicProfileRole; title: string; text: string }[] = [
   {
     value: "student",
     title: "Alumno",
     text: "Aprende un idioma con clases personalizadas y seguimiento académico.",
-  },
-  {
-    value: "teacher",
-    title: "Profesor",
-    text: "Únete al equipo docente e imparte clases virtuales.",
   },
   {
     value: "coordinator",
@@ -37,7 +34,8 @@ type Props = {
 
 export function RegisterForm({ defaultRole = "student" }: Props) {
   const router = useRouter();
-  const [role, setRole] = useState<PublicProfileRole>(defaultRole);
+  const initialRole = defaultRole === "teacher" ? "student" : defaultRole;
+  const [role, setRole] = useState<PublicProfileRole>(initialRole);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,6 +48,20 @@ export function RegisterForm({ defaultRole = "student" }: Props) {
 
     const form = new FormData(event.currentTarget);
     const details = detailsFromForm(form);
+    if (details.preferredStartDate && !details.startDate) {
+      details.startDate = details.preferredStartDate;
+    }
+    details.timezone = details.timezone || "America/Chihuahua";
+    details.enrollmentStatus = details.enrollmentStatus || "pending";
+
+    let availabilitySlots: unknown[] = [];
+    try {
+      availabilitySlots = JSON.parse(
+        String(form.get("availabilityPayload") || "[]"),
+      ) as unknown[];
+    } catch {
+      availabilitySlots = [];
+    }
 
     try {
       const response = await fetch("/api/auth/register", {
@@ -63,6 +75,7 @@ export function RegisterForm({ defaultRole = "student" }: Props) {
           interest: details.language || details.program || undefined,
           role,
           details,
+          availabilitySlots: role === "student" ? availabilitySlots : undefined,
         }),
       });
 
@@ -71,6 +84,7 @@ export function RegisterForm({ defaultRole = "student" }: Props) {
         error?: string;
         needsEmailConfirmation?: boolean;
         message?: string;
+        user?: { id?: string };
       };
       if (!response.ok || !payload.ok) {
         throw new Error(payload.error || "No se pudo crear la cuenta.");
@@ -124,6 +138,26 @@ export function RegisterForm({ defaultRole = "student" }: Props) {
             </label>
           ))}
         </div>
+        <p className="mt-4 rounded-2xl border border-ail-cyan/25 bg-ail-cyan/8 px-4 py-3 text-xs leading-relaxed text-ink/85">
+          ¿Quieres ser profesor de AIL? La postulación inicia con un formulario de
+          selección; no crea una cuenta docente automática.{" "}
+          <Link
+            href="/registro?perfil=profesor"
+            className="font-semibold text-ail-cyan hover:text-navy"
+          >
+            Ver proceso de aplicación
+          </Link>{" "}
+          o{" "}
+          <a
+            href={TEACHER_APPLICATION_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-ail-cyan hover:text-navy"
+          >
+            abrir Google Forms
+          </a>
+          .
+        </p>
       </fieldset>
 
       <label className="block text-sm font-medium text-ink">
@@ -176,6 +210,10 @@ export function RegisterForm({ defaultRole = "student" }: Props) {
         </p>
         <RoleFields key={role} role={role} />
       </div>
+
+      {role === "student" ? (
+        <AvailabilityEditor key={`availability-${role}`} />
+      ) : null}
 
       {error ? (
         <p className="text-sm text-red-600" role="alert">

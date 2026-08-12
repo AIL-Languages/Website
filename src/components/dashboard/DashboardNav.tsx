@@ -9,7 +9,7 @@ const items = [
   { href: "/dashboard/clases", label: "Mis clases" },
   { href: "/dashboard/calendario", label: "Calendario" },
   { href: "/dashboard/smrt-english", label: "Smrt English", smrt: true },
-  { href: "/dashboard/pagos", label: "Pagos" },
+  { href: "/dashboard/pagos", label: "Pagos y facturación" },
   { href: "/dashboard/reportes", label: "Reportes" },
   { href: "/dashboard/perfil", label: "Mi perfil" },
 ];

@@ -30,6 +30,8 @@ export type TeacherAssignment = {
   studentId: string;
   teacherId: string;
   groupId?: string;
+  status?: "active" | "paused" | "ended";
+  assignedAt?: string;
   createdAt: string;
   createdBy: string;
 };
@@ -138,10 +140,13 @@ export async function createAssignment(
   store.assignments = store.assignments.filter(
     (item) => item.studentId !== input.studentId,
   );
+  const now = new Date().toISOString();
   const item: TeacherAssignment = {
     ...input,
+    status: input.status ?? "active",
+    assignedAt: input.assignedAt ?? now,
     id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
+    createdAt: now,
   };
   store.assignments.unshift(item);
   await writeStore(store);

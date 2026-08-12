@@ -28,8 +28,8 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_right,_rgba(0,184,230,0.22),_transparent_60%)]" />
+    <section className="relative overflow-hidden bg-ail-navy py-20 text-white sm:py-28">
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_right,_rgba(0,224,230,0.22),_transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-lime">

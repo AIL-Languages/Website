@@ -1,10 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { parseDetails } from "@/lib/academic/details";
 import { resolveRole } from "@/lib/auth/admin";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentProfile } from "@/lib/auth/profile";
 import { registerSchema } from "@/lib/auth/validation";
+import {
+  replaceAvailability,
+  WEEKDAYS,
+  type Weekday,
+} from "@/lib/scheduling/store";
 
 export const runtime = "nodejs";
 
@@ -26,7 +31,25 @@ export async function POST(request: NextRequest) {
     const { name, email, password, phone, interest, role: requestedRole, details: rawDetails } =
       parsed.data;
     const role = resolveRole(email, requestedRole);
+
+    // Alta pública no crea profesores: solo tras aprobación de AIL.
+    if (role === "teacher") {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "Para unirte como profesor, completa primero el formulario de aplicación docente. La cuenta de profesor se crea solo tras aprobación de AIL.",
+        },
+        { status: 403 },
+      );
+    }
+
     const details = parseDetails(rawDetails);
+    if (details.preferredStartDate && !details.startDate) {
+      details.startDate = details.preferredStartDate;
+    }
+    details.timezone = details.timezone || "America/Chihuahua";
+    details.enrollmentStatus = details.enrollmentStatus || "pending";
     const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signUp({
@@ -52,12 +75,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: message }, { status: 400 });
     }
 
+    if (data.user && role === "student" && Array.isArray(body.availabilitySlots)) {
+      const slots = (body.availabilitySlots as Array<Record<string, string>>)
+        .filter(
+          (slot) =>
+            slot &&
+            WEEKDAYS.includes(slot.weekday as Weekday) &&
+            slot.availableFrom &&
+            slot.availableTo,
+        )
+        .map((slot) => ({
+          weekday: slot.weekday as Weekday,
+          availableFrom: slot.availableFrom,
+          availableTo: slot.availableTo,
+          timezone: slot.timezone || "America/Chihuahua",
+        }));
+      if (slots.length) {
+        await replaceAvailability(data.user.id, "student", slots);
+      }
+    }
+
     if (!data.session) {
       return NextResponse.json({
         ok: true,
         needsEmailConfirmation: true,
         message:
           "Cuenta creada. Revisa tu correo para confirmar la cuenta antes de iniciar sesión.",
+        user: data.user
+          ? { id: data.user.id, email: data.user.email }
+          : undefined,
       });
     }
 
@@ -119,3 +165,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+

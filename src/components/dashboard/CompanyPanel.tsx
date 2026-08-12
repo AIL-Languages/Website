@@ -53,6 +53,23 @@ export function CompanyPanel({ user, students }: Props) {
 
       <ReportsEntryCard />
 
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          ["Pagos", "/dashboard/pagos#realizar-pago"],
+          ["Facturación", "/dashboard/pagos#facturacion"],
+          ["Comprobantes", "/dashboard/pagos#comprobantes"],
+          ["Estado de cuenta", "/dashboard/pagos#historial"],
+        ].map(([label, href]) => (
+          <a
+            key={label}
+            href={href}
+            className="rounded-[1.25rem] bg-white px-5 py-4 text-sm font-semibold text-navy transition hover:ring-2 hover:ring-cyan/40"
+          >
+            {label} →
+          </a>
+        ))}
+      </div>
+
       <div className="rounded-[1.75rem] bg-white p-6 sm:p-8">
         <h3 className="font-display text-xl font-semibold text-navy">
           Registrar alumno de la empresa

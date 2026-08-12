@@ -22,9 +22,12 @@ export const site = {
 export const navItems = [
   { href: "#inicio", label: "Inicio" },
   { href: "#nosotros", label: "Nosotros" },
+  { href: "#experiencia", label: "Experiencia" },
   { href: "#cursos", label: "Cursos" },
   { href: "#metodologia", label: "Metodología" },
   { href: "#empresas", label: "Empresas" },
+  { href: "#convenios", label: "Convenios" },
+  { href: "#facturacion", label: "Pagos" },
   { href: "#traduccion", label: "Traducción e Interpretación" },
   { href: "#contacto", label: "Contacto" },
 ] as const;

@@ -1,20 +1,57 @@
 @import "tailwindcss";
 
+/* Tema por clase en <html> (reutilizable en landing + dashboard) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --navy: #001a3d;
-  --navy-deep: #000f24;
-  --navy-mid: #0a2a56;
-  --cyan: #00b8e6;
-  --cyan-bright: #2ad4ff;
-  --cyan-soft: #7ee7ff;
-  --lime: #a8e010;
-  --lime-deep: #8bc20a;
-  --white: #ffffff;
-  --mist: #e8f4fb;
-  --ink: #0c1b33;
-  --muted: #5a6f8a;
-  --background: var(--mist);
-  --foreground: var(--ink);
+  --ail-navy: #071b3a;
+  --ail-blue: #168bff;
+  --ail-cyan: #00e0e6;
+  --ail-green: #00f0a3;
+  --ail-white: #ffffff;
+
+  --navy: var(--ail-navy);
+  --navy-deep: #041026;
+  --navy-mid: #0c2a52;
+  --cyan: var(--ail-cyan);
+  --cyan-bright: #4aebf0;
+  --cyan-soft: #8ff4f7;
+  --lime: var(--ail-green);
+  --lime-deep: #00d48f;
+  --white: var(--ail-white);
+  --mist: #f5f9fc;
+  --ink: var(--ail-navy);
+  --muted: color-mix(in srgb, var(--ail-navy) 58%, white);
+  --background: var(--ail-white);
+  --foreground: var(--ail-navy);
+  --card: var(--ail-white);
+  --border: color-mix(in srgb, var(--ail-navy) 12%, transparent);
+  --header-bg: color-mix(in srgb, var(--ail-white) 92%, transparent);
+  --header-fg: var(--ail-navy);
+  --header-muted: color-mix(in srgb, var(--ail-navy) 70%, white);
+}
+
+html.dark,
+html[data-theme="dark"] {
+  --navy: var(--ail-navy);
+  --navy-deep: #040e1f;
+  --navy-mid: #12305c;
+  --cyan: var(--ail-cyan);
+  --cyan-bright: #4aebf0;
+  --cyan-soft: #8ff4f7;
+  --lime: var(--ail-green);
+  --lime-deep: #00d48f;
+  --white: var(--ail-white);
+  --mist: #0a2347;
+  --ink: var(--ail-white);
+  --muted: color-mix(in srgb, var(--ail-white) 68%, transparent);
+  --background: var(--ail-navy);
+  --foreground: var(--ail-white);
+  --card: #0d2a52;
+  --border: color-mix(in srgb, var(--ail-white) 14%, transparent);
+  --header-bg: color-mix(in srgb, var(--ail-navy) 92%, transparent);
+  --header-fg: var(--ail-white);
+  --header-muted: color-mix(in srgb, var(--ail-white) 78%, transparent);
 }
 
 @theme inline {
@@ -31,6 +68,11 @@
   --color-muted: var(--muted);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-ail-navy: var(--ail-navy);
+  --color-ail-blue: var(--ail-blue);
+  --color-ail-cyan: var(--ail-cyan);
+  --color-ail-green: var(--ail-green);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
@@ -43,6 +85,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* Superficies y tipografía semántica (landing + dashboard) */
+.theme-surface {
+  background-color: var(--mist);
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+.theme-card {
+  background-color: var(--card);
+  border-color: var(--border);
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+.theme-heading {
+  color: var(--ink);
 }
 
 h1,
@@ -54,8 +115,13 @@ h4 {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--cyan) 35%, white);
-  color: var(--navy-deep);
+  background: color-mix(in srgb, var(--ail-cyan) 35%, white);
+  color: var(--ail-navy);
+}
+
+html.dark ::selection {
+  background: color-mix(in srgb, var(--ail-cyan) 40%, transparent);
+  color: var(--ail-white);
 }
 
 @keyframes rise-in {
@@ -118,6 +184,10 @@ h4 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
   }
 
   .animate-rise,

@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ButtonLink";
+import { CertificationExamCards } from "@/components/sections/CertificationExamCards";
 
 const programs = [
   {
@@ -19,17 +20,15 @@ const programs = [
   },
 ];
 
-const exams = ["IELTS", "TOEFL iBT", "TOEFL ITP", "CELPE-BRAS"];
-
 export function Programs() {
   return (
-    <section id="empresas" className="bg-white py-20 sm:py-28">
+    <section id="empresas" className="bg-card py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
             Programas especializados
           </p>
-          <h2 className="font-display text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
             Soluciones para estudiantes, profesionales y empresas
           </h2>
         </div>
@@ -40,7 +39,7 @@ export function Programs() {
               key={program.title}
               className="rounded-[1.5rem] border border-navy/8 bg-mist/70 p-7 transition hover:border-cyan/40"
             >
-              <h3 className="font-display text-xl font-semibold text-navy">
+              <h3 className="font-display text-xl font-semibold text-ink">
                 {program.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">{program.text}</p>
@@ -68,16 +67,7 @@ export function Programs() {
                 </ButtonLink>
               </div>
             </div>
-            <ul className="grid grid-cols-2 gap-3">
-              {exams.map((exam) => (
-                <li
-                  key={exam}
-                  className="rounded-2xl border border-white/15 bg-white/5 px-4 py-5 text-center font-display text-lg font-semibold text-cyan-soft"
-                >
-                  {exam}
-                </li>
-              ))}
-            </ul>
+            <CertificationExamCards />
           </div>
         </div>
       </div>

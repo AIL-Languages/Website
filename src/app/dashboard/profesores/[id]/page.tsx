@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdminModuleHeader } from "@/components/dashboard/AdminModuleHeader";
 import { TeacherFileForm } from "@/components/dashboard/TeacherFileForm";
+import { TeacherAvailabilityBlock } from "@/components/scheduling/TeacherAvailabilityBlock";
 import { getAcademicBundle } from "@/lib/academic/store";
 import {
   getProfileById,
@@ -11,6 +12,7 @@ import {
 import { visibleDocuments } from "@/lib/documents/access";
 import { listDocuments, toPublicDocument } from "@/lib/documents/store";
 import { teacherLoad } from "@/lib/ops/load";
+import { listAvailability } from "@/lib/scheduling/store";
 
 export const metadata = { title: "Expediente docente" };
 
@@ -33,6 +35,7 @@ export default async function TeacherFilePage({ params }: Props) {
           item.extracted.summary.toLowerCase().includes(teacher.name.toLowerCase())),
     )
     .map(toPublicDocument);
+  const teacherSlots = await listAvailability(teacher.id, "teacher");
 
   return (
     <main className="space-y-8">
@@ -92,6 +95,19 @@ export default async function TeacherFilePage({ params }: Props) {
         </article>
       </div>
       <TeacherFileForm teacher={teacher} />
+      <TeacherAvailabilityBlock
+        teacherId={teacher.id}
+        initial={teacherSlots.map((slot) => ({
+          weekday: slot.weekday,
+          availableFrom: slot.availableFrom,
+          availableTo: slot.availableTo,
+          timezone: slot.timezone,
+        }))}
+        calendlyUrl={teacher.details.calendlyUrl}
+        calendlyUserId={teacher.details.calendlyUserId}
+        calendlyEventTypeId={teacher.details.calendlyEventTypeId}
+        zoomUserId={teacher.details.zoomUserId}
+      />
       {docs.length ? (
         <section className="rounded-[1.75rem] bg-white p-6">
           <h2 className="font-display text-lg font-semibold text-navy">

@@ -35,6 +35,11 @@ export async function PATCH(request: NextRequest) {
       )
     : undefined;
 
+  const bank =
+    body.bankTransfer && typeof body.bankTransfer === "object"
+      ? (body.bankTransfer as Record<string, string>)
+      : null;
+
   const settings = await updateSettings({
     institutionName: String(body.institutionName ?? ""),
     slogan: String(body.slogan ?? ""),
@@ -55,6 +60,16 @@ export async function PATCH(request: NextRequest) {
     notifySchedule: Boolean(body.notifySchedule),
     notifyAdmin: Boolean(body.notifyAdmin),
     notifyAcademic: Boolean(body.notifyAcademic),
+    bankTransfer: bank
+      ? {
+          institution: String(bank.institution ?? ""),
+          beneficiary: String(bank.beneficiary ?? ""),
+          clabe: String(bank.clabe ?? ""),
+          dimoPhone: String(bank.dimoPhone ?? ""),
+          logoSrc: String(bank.logoSrc ?? "/logo-mercadopago.png"),
+          logoAlt: String(bank.logoAlt ?? "Mercado Pago"),
+        }
+      : undefined,
   });
 
   return NextResponse.json({ ok: true, settings });

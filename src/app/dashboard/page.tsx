@@ -59,9 +59,9 @@ function nextSteps(role: string) {
     ];
   }
   return [
-    "Entra a Smrt English y completa tu primera hora de práctica.",
-    "Revisa Assignments y Assessments de tu clase.",
-    "Coordina tu horario con el equipo AIL.",
+    "Completa tu disponibilidad y fecha deseada de inicio si aún no lo hiciste.",
+    "Cuando te asignen profesor, agenda tu primera clase en Mis clases.",
+    "Complementa con al menos 1 hora semanal en Smrt English.",
   ];
 }
 
@@ -103,12 +103,21 @@ export default async function DashboardPage() {
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/dashboard/smrt-english"
-              className="inline-flex rounded-full bg-cyan px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright"
-            >
-              Ir a Smrt English
-            </Link>
+            {user.role === "student" ? (
+              <Link
+                href="/dashboard/clases"
+                className="inline-flex rounded-full bg-cyan px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright"
+              >
+                Ir a Mis clases
+              </Link>
+            ) : (
+              <Link
+                href="/dashboard/smrt-english"
+                className="inline-flex rounded-full bg-cyan px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright"
+              >
+                Ir a Smrt English
+              </Link>
+            )}
             <a
               href={whatsappLink(
                 `Hola, soy ${user.name}. Ya tengo cuenta en el dashboard (${roleLabel(user.role)}) y quiero continuar.`,

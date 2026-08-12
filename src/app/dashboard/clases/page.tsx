@@ -1,7 +1,21 @@
-import { detailRows } from "@/lib/academic/details";
+import { StudentClassesPanel } from "@/components/scheduling/StudentClassesPanel";
+import {
+  languages,
+  levels,
+  optionLabel,
+  plans,
+} from "@/lib/academic/options";
 import { listGroups } from "@/lib/academic/store";
 import { canCoordinate, roleLabel } from "@/lib/auth/admin";
-import { requireProfile } from "@/lib/auth/profile";
+import { getProfileById, requireProfile } from "@/lib/auth/profile";
+import { resolveCalendlyUrl } from "@/lib/scheduling/calendly";
+import {
+  getPolicies,
+  getRoomForStudent,
+  listClasses,
+  pastClasses,
+  upcomingClasses,
+} from "@/lib/scheduling/store";
 import Link from "next/link";
 
 export const metadata = {
@@ -10,8 +24,67 @@ export const metadata = {
 
 export default async function ClassesPage() {
   const user = await requireProfile();
-  const academic = detailRows(user.role, user.details);
   const groups = canCoordinate(user.role, user.email) ? await listGroups() : [];
+
+  if (user.role === "student") {
+    const classes = await listClasses({ studentId: user.id });
+    const upcoming = upcomingClasses(classes);
+    const history = pastClasses(classes).reverse();
+    const room = await getRoomForStudent(user.id);
+    const policies = await getPolicies();
+    const teacher = user.details.teacherId
+      ? await getProfileById(user.details.teacherId)
+      : null;
+    const calendlyUrl = await resolveCalendlyUrl(teacher?.details.calendlyUrl);
+    const used = Number(user.details.classesUsed || history.filter((item) => item.status === "completed").length || 0);
+    const total = Number(user.details.classesTotal || 12);
+
+    return (
+      <main className="space-y-6">
+        <section className="rounded-[2rem] bg-navy px-6 py-8 text-white sm:px-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime">
+            Mis clases
+          </p>
+          <h1 className="mt-3 font-display text-3xl font-bold">
+            Tu agenda académica AIL
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm text-white/75">
+            Consulta tu curso, agenda sesiones y entra a tu aula virtual desde un
+            solo lugar.
+          </p>
+        </section>
+
+        <StudentClassesPanel
+          course={{
+            language: optionLabel(languages, user.details.language),
+            level: optionLabel(levels, user.details.level),
+            teacher: user.details.teacher || teacher?.name || "Por asignar",
+            plan: optionLabel(plans, user.details.plan),
+            used,
+            total,
+            hasTeacher: Boolean(user.details.teacherId || user.details.teacher),
+          }}
+          upcoming={upcoming}
+          history={history}
+          room={
+            room
+              ? {
+                  ...room,
+                  encryptedHostUrl: undefined,
+                }
+              : null
+          }
+          calendlyUrl={calendlyUrl}
+          policies={{
+            cancellationLimitHours: policies.cancellationLimitHours,
+            rescheduleLimitHours: policies.rescheduleLimitHours,
+            noShowPolicy: policies.noShowPolicy,
+          }}
+          timezone={user.details.timezone || policies.defaultTimezone}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className="space-y-6">
@@ -23,28 +96,9 @@ export default async function ClassesPage() {
           Tu espacio académico
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-white/75">
-          Perfil: {roleLabel(user.role)}. Complementa cada clase con práctica en
-          Smrt English.
+          Perfil: {roleLabel(user.role)}.
         </p>
       </section>
-
-      {academic.length ? (
-        <section className="rounded-[1.75rem] bg-white p-6 sm:p-8">
-          <h2 className="font-display text-xl font-semibold text-navy">
-            Datos de tu programa
-          </h2>
-          <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-            {academic.map((row) => (
-              <div key={row.label}>
-                <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  {row.label}
-                </dt>
-                <dd className="mt-1 text-sm text-ink">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ) : null}
 
       {groups.length ? (
         <section className="rounded-[1.75rem] bg-white p-6 sm:p-8">
@@ -60,16 +114,12 @@ export default async function ClassesPage() {
         </section>
       ) : (
         <section className="rounded-[1.75rem] bg-white p-6 text-sm text-muted">
-          El detalle de grupos y horarios se coordina con AIL. Mientras tanto,
-          usa Smrt English para continuar tu práctica.
-          <div className="mt-4">
-            <Link
-              href="/dashboard/smrt-english"
-              className="font-semibold text-cyan"
-            >
-              Abrir Smrt English →
-            </Link>
-          </div>
+          Usa <Link href="/dashboard/asignacion" className="font-semibold text-cyan">Asignación académica</Link>{" "}
+          para el match alumno–profesor, o{" "}
+          <Link href="/dashboard/coordinacion" className="font-semibold text-cyan">
+            Coordinación
+          </Link>{" "}
+          para grupos y horarios.
         </section>
       )}
     </main>

@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { APP_DATA_DIR } from "@/lib/paths";
+import type { InvoiceUserStatus, ReceiptStatus } from "@/lib/billing/store";
 
 export const PAYMENT_STATUSES = [
   "pagado",
@@ -22,9 +23,20 @@ export type Payment = {
   method?: string;
   status: PaymentStatus;
   documentId?: string;
+  receiptStoredName?: string;
+  receiptOriginalName?: string;
+  receiptMimeType?: string;
+  receiptStatus?: ReceiptStatus;
+  receiptNotes?: string;
+  receiptSubmittedAt?: string;
+  invoiceStatus?: InvoiceUserStatus;
+  invoiceRequestId?: string;
   notes?: string;
   createdAt: string;
   createdBy: string;
+  /** Reserved for Empresa / Corporativo account statements */
+  companyId?: string;
+  scope?: "individual" | "company";
 };
 
 const FILE = path.join(APP_DATA_DIR, "payments.json");

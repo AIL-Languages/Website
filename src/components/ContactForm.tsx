@@ -1,6 +1,12 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import {
+  CONTACT_INTEREST_EVENT,
+  interestLabels,
+  interestOptions,
+  readContactInterest,
+} from "@/lib/interests";
 import { whatsappLink } from "@/lib/site";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -8,6 +14,25 @@ type Status = "idle" | "loading" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [interest, setInterest] = useState("");
+
+  useEffect(() => {
+    function applyInterest(value: string | null) {
+      if (value && value in interestLabels) {
+        setInterest(value);
+      }
+    }
+
+    applyInterest(readContactInterest());
+
+    function onCustom(event: Event) {
+      const detail = (event as CustomEvent<string>).detail;
+      applyInterest(detail);
+    }
+
+    window.addEventListener(CONTACT_INTEREST_EVENT, onCustom);
+    return () => window.removeEventListener(CONTACT_INTEREST_EVENT, onCustom);
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -40,6 +65,7 @@ export function ContactForm() {
       setStatus("success");
       setMessage("Gracias. Recibimos tu solicitud y te contactaremos pronto.");
       form.reset();
+      setInterest("");
     } catch (error) {
       setStatus("error");
       setMessage(
@@ -87,22 +113,24 @@ export function ContactForm() {
           />
         </label>
         <label className="block text-sm font-medium text-ink">
-          Interés
+          Programa de interés
           <select
             required
             name="interest"
-            defaultValue=""
+            value={interest}
+            onChange={(event) => setInterest(event.target.value)}
             className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
           >
             <option value="" disabled>
               Selecciona una opción
             </option>
-            <option value="ingles">Inglés</option>
-            <option value="portugues">Portugués</option>
-            <option value="espanol">Español para extranjeros</option>
-            <option value="certificaciones">Preparación para certificaciones</option>
-            <option value="empresas">Programas corporativos</option>
-            <option value="traduccion">Traducción / Interpretación</option>
+            {interestOptions
+              .filter((option) => option.value !== "")
+              .map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
           </select>
         </label>
       </div>

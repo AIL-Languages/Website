@@ -17,11 +17,14 @@ const services = [
 
 export function Translation() {
   return (
-    <section id="traduccion" className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
-      <div className="pointer-events-none absolute -left-10 top-10 h-72 w-72 rounded-full bg-cyan/20 blur-3xl" />
+    <section
+      id="traduccion"
+      className="relative overflow-hidden bg-ail-navy py-20 text-white sm:py-28"
+    >
+      <div className="pointer-events-none absolute -left-10 top-10 h-72 w-72 rounded-full bg-ail-cyan/20 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-lime">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-ail-green">
             Servicios lingüísticos profesionales
           </p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl">

@@ -7,8 +7,10 @@ import {
   getAcademicBundle,
   updateGroup,
 } from "@/lib/academic/store";
+import { parseDetails } from "@/lib/academic/details";
 import { canCoordinate } from "@/lib/auth/admin";
-import { getCurrentProfile } from "@/lib/auth/profile";
+import { getCurrentProfile, getProfileById } from "@/lib/auth/profile";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
 
@@ -59,7 +61,19 @@ export async function POST(request: NextRequest) {
       teacherId: String(body.teacherId),
       groupId,
       createdBy: current.id,
+      status: "active",
     });
+    const student = await getProfileById(String(body.studentId));
+    const teacher = await getProfileById(String(body.teacherId));
+    if (student && teacher) {
+      const details = parseDetails({
+        ...student.details,
+        teacherId: teacher.id,
+        teacher: teacher.name,
+      });
+      const admin = createAdminClient();
+      await admin.from("profiles").update({ details }).eq("id", student.id);
+    }
     if (groupId) {
       const { groups } = await getAcademicBundle();
       const group = groups.find((item) => item.id === groupId);

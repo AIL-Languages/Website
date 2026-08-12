@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Outfit, Source_Sans_3 } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { themeInitScript } from "@/components/theme/theme-init";
 import "./globals.css";
 
 const display = Outfit({
@@ -22,6 +25,10 @@ export const metadata: Metadata = {
   description:
     "Academia virtual de inglés, portugués y español para extranjeros. Clases personalizadas, grupos reducidos, preparación para certificaciones y servicios de traducción e interpretación.",
   metadataBase: new URL("https://a-inman-languages.local"),
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/brand/ail-isotype-dark.png" }],
+  },
   openGraph: {
     title: "A-Inman Languages",
     description: "Idiomas que conectan oportunidades. Clases 100% online.",
@@ -39,10 +46,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body
-        className="min-h-full flex flex-col bg-mist text-ink"
+        className="flex min-h-full flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
-        {children}
+        <Script
+          id="ail-theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript() }}
+        />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

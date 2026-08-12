@@ -2,6 +2,10 @@ import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { APP_DATA_DIR } from "@/lib/paths";
 import type { PublicProfileRole } from "@/lib/auth/admin";
+import {
+  defaultBankTransfer,
+  type BankTransferDetails,
+} from "@/lib/billing/transfer";
 import { site } from "@/lib/site";
 
 export type AdminLogEntry = {
@@ -33,6 +37,8 @@ export type InstitutionSettings = {
   notifySchedule: boolean;
   notifyAdmin: boolean;
   notifyAcademic: boolean;
+  /** Fuente única: Admin → Configuración → Métodos de pago */
+  bankTransfer: BankTransferDetails;
   log: AdminLogEntry[];
 };
 
@@ -59,6 +65,7 @@ export function defaultSettings(): InstitutionSettings {
     notifySchedule: true,
     notifyAdmin: false,
     notifyAcademic: true,
+    bankTransfer: defaultBankTransfer(),
     log: [],
   };
 }
@@ -67,7 +74,18 @@ async function readSettings(): Promise<InstitutionSettings> {
   await mkdir(APP_DATA_DIR, { recursive: true });
   try {
     const raw = await readFile(FILE, "utf8");
-    return { ...defaultSettings(), ...(JSON.parse(raw) as Partial<InstitutionSettings>) };
+    const parsed = JSON.parse(raw) as Partial<InstitutionSettings>;
+    const defaults = defaultSettings();
+    return {
+      ...defaults,
+      ...parsed,
+      bankTransfer: {
+        ...defaults.bankTransfer,
+        ...(parsed.bankTransfer ?? {}),
+      },
+      enabledProfiles: parsed.enabledProfiles ?? defaults.enabledProfiles,
+      log: parsed.log ?? defaults.log,
+    };
   } catch {
     return defaultSettings();
   }
@@ -89,6 +107,10 @@ export async function updateSettings(patch: Partial<InstitutionSettings>) {
     ...patch,
     log: patch.log ?? current.log,
     enabledProfiles: patch.enabledProfiles ?? current.enabledProfiles,
+    bankTransfer: {
+      ...current.bankTransfer,
+      ...(patch.bankTransfer ?? {}),
+    },
   };
   await writeSettings(next);
   return next;

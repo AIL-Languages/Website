@@ -1,35 +1,41 @@
-import Image from "next/image";
+import { BrandLogo } from "@/components/brand/BrandLogo";
+import { SocialLinks } from "@/components/social/SocialLinks";
 import { site, whatsappLink } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-navy-deep text-white">
-      <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-cyan/15 blur-3xl" />
-      <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-lime/10 blur-3xl" />
+    <footer className="relative overflow-hidden bg-ail-navy text-white transition-[background-color,color] duration-300">
+      <div className="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-ail-cyan/15 blur-3xl" />
+      <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-ail-green/10 blur-3xl" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
         <div>
-          <Image
-            src="/logo-ail.png"
-            alt={site.name}
-            width={180}
-            height={70}
-            className="mb-4 h-14 w-auto"
-            style={{ width: "auto", height: "auto" }}
+          <BrandLogo
+            variant="vertical"
+            forceTheme="dark"
+            className="mb-4 h-auto w-[min(70vw,220px)]"
+            width={240}
+            height={220}
           />
           <p className="max-w-sm text-sm leading-relaxed text-white/75">
             {site.name}
             <br />
-            <span className="text-lime">{site.tagline}</span>
+            <span className="text-ail-green">{site.tagline}</span>
           </p>
+          <SocialLinks variant="onDark" layout="icons" className="mt-6" />
         </div>
 
         <div className="space-y-3 text-sm text-white/80">
           <p className="font-display text-base font-semibold text-white">Contacto</p>
-          <a className="block hover:text-cyan-soft" href={`mailto:${site.email}`}>
+          <a className="block hover:text-ail-cyan" href={`mailto:${site.email}`}>
             {site.email}
           </a>
-          <a className="block hover:text-cyan-soft" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+          <a
+            className="block hover:text-ail-cyan"
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {site.phoneDisplay}
           </a>
           <p>{site.location}</p>
@@ -38,16 +44,19 @@ export function Footer() {
 
         <div className="space-y-3 text-sm text-white/80">
           <p className="font-display text-base font-semibold text-white">Explorar</p>
-          <a className="block hover:text-cyan-soft" href="#cursos">
+          <a className="block hover:text-ail-cyan" href="#cursos">
             Cursos e idiomas
           </a>
-          <a className="block hover:text-cyan-soft" href="#empresas">
+          <a className="block hover:text-ail-cyan" href="#empresas">
             Programas corporativos
           </a>
-          <a className="block hover:text-cyan-soft" href="#traduccion">
+          <a className="block hover:text-ail-cyan" href="#convenios">
+            Convenios y beneficios
+          </a>
+          <a className="block hover:text-ail-cyan" href="#traduccion">
             Traducción e interpretación
           </a>
-          <a className="block hover:text-cyan-soft" href="#contacto">
+          <a className="block hover:text-ail-cyan" href="#contacto">
             Solicitar información
           </a>
         </div>

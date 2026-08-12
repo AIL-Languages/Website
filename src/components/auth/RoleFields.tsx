@@ -44,13 +44,15 @@ export function RoleFields({ role, details = {} }: Props) {
           </select>
         </label>
         <label className="block text-sm font-medium text-ink">
-          Profesor (opcional)
-          <input
-            name="teacher"
-            defaultValue={details.teacher ?? ""}
+          Modalidad
+          <select
+            name="courseType"
+            defaultValue={details.courseType ?? "individual"}
             className={fieldClass}
-            placeholder="Nombre del profesor"
-          />
+          >
+            <option value="individual">Individual</option>
+            <option value="grupo">Grupo</option>
+          </select>
         </label>
         <label className="block text-sm font-medium text-ink">
           Plan
@@ -63,16 +65,33 @@ export function RoleFields({ role, details = {} }: Props) {
             ))}
           </select>
         </label>
-        <label className="block text-sm font-medium text-ink sm:col-span-2">
-          Fecha de inicio
+        <label className="block text-sm font-medium text-ink">
+          Clases por semana
           <input
-            type="date"
-            name="startDate"
-            defaultValue={details.startDate ?? ""}
-            required
+            type="number"
+            min={1}
+            max={7}
+            name="sessionsPerWeek"
+            defaultValue={details.sessionsPerWeek ?? "2"}
             className={fieldClass}
           />
         </label>
+        <label className="block text-sm font-medium text-ink">
+          Fecha deseada de inicio
+          <input
+            type="date"
+            name="preferredStartDate"
+            defaultValue={details.preferredStartDate ?? details.startDate ?? ""}
+            required
+            className={fieldClass}
+          />
+          <span className="mt-1 block text-xs text-muted">
+            Indícanos a partir de qué fecha te gustaría comenzar. La fecha final
+            dependerá de la disponibilidad académica.
+          </span>
+        </label>
+        <input type="hidden" name="timezone" value={details.timezone ?? "America/Chihuahua"} />
+        <input type="hidden" name="enrollmentStatus" value={details.enrollmentStatus ?? "pending"} />
       </div>
     );
   }

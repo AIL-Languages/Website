@@ -21,7 +21,7 @@ export function About() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
             Quiénes somos
           </p>
-          <h2 className="font-display text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
             Aprender un idioma es mucho más que estudiar gramática.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
@@ -38,7 +38,7 @@ export function About() {
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {pillars.map((item) => (
             <article key={item.title} className="border-t-2 border-cyan/70 pt-5">
-              <h3 className="font-display text-xl font-semibold text-navy">
+              <h3 className="font-display text-xl font-semibold text-ink">
                 {item.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">{item.text}</p>

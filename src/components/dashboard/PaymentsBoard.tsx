@@ -93,6 +93,7 @@ export function PaymentsBoard({ payments, students, canManage }: Props) {
           <input name="amount" required placeholder="Monto, ej. 2600" className="rounded-xl border border-navy/10 px-4 py-3" />
           <input name="dueDate" type="date" className="rounded-xl border border-navy/10 px-4 py-3" />
           <select name="method" className="rounded-xl border border-navy/10 px-4 py-3">
+            <option value="mercadopago">Mercado Pago</option>
             <option value="transferencia">Transferencia</option>
             <option value="deposito">Depósito</option>
             <option value="tarjeta">Tarjeta</option>

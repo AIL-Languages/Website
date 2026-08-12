@@ -1,18 +1,25 @@
+import { AdminInvoicePanel } from "@/components/dashboard/AdminInvoicePanel";
 import { AdminModuleHeader } from "@/components/dashboard/AdminModuleHeader";
-import { DocumentsPanel } from "@/components/dashboard/DocumentsPanel";
+import { BillingHistoryTable } from "@/components/dashboard/BillingHistoryTable";
+import { BillingNotifications } from "@/components/dashboard/BillingNotifications";
+import { PaymentTransferFlow } from "@/components/dashboard/PaymentTransferFlow";
 import { PaymentsBoard } from "@/components/dashboard/PaymentsBoard";
 import { canCoordinate, canManageSystem } from "@/lib/auth/admin";
+import { resolveBankTransfer } from "@/lib/billing/transfer";
+import { listInvoiceRequests } from "@/lib/billing/store";
 import { listProfiles, requireProfile } from "@/lib/auth/profile";
-import { visibleDocuments } from "@/lib/documents/access";
-import { listDocuments, toPublicDocument } from "@/lib/documents/store";
 import { listPayments } from "@/lib/ops/payments";
+import { getSettings } from "@/lib/settings/store";
+import Link from "next/link";
 
-export const metadata = { title: "Pagos" };
+export const metadata = { title: "Pagos y facturación" };
 
 export default async function PaymentsPage() {
   const user = await requireProfile();
   const isStaff = canCoordinate(user.role, user.email);
   const isAdmin = canManageSystem(user.role, user.email);
+  const settings = await getSettings();
+  const transfer = resolveBankTransfer(settings);
   const allPayments = await listPayments();
   const directory =
     isStaff || user.role === "company" ? await listProfiles() : [];
@@ -34,7 +41,8 @@ export default async function PaymentsPage() {
       ? allPayments.filter(
           (item) =>
             companyStudentIds.includes(item.studentId) ||
-            item.studentId === user.id,
+            item.studentId === user.id ||
+            item.companyId === user.id,
         )
       : allPayments.filter((item) => item.studentId === user.id);
   const students = isStaff
@@ -42,41 +50,82 @@ export default async function PaymentsPage() {
     : [];
   const canUpload =
     isStaff || user.role === "student" || user.role === "company";
-  const documents = visibleDocuments(user, await listDocuments())
-    .filter((item) => item.kind === "pago" || item.kind === "csf")
-    .map(toPublicDocument);
+  const canRequestInvoice =
+    user.role === "student" || user.role === "company" || isAdmin;
+  const requests = isAdmin
+    ? await listInvoiceRequests()
+    : await listInvoiceRequests(user.id);
 
   return (
     <main className="space-y-8">
       <AdminModuleHeader
-        kicker="Pagos"
-        title="Control de pagos"
-        text={
-          isStaff
-            ? "Registro, vencimientos, comprobantes, historial por alumno y reportes financieros básicos."
-            : "Consulta tu historial y, si aplica, sube un comprobante para verificación."
-        }
+        kicker="Pagos y facturación"
+        title="Pagos y facturación"
+        text="Consulta la información relacionada con tus pagos, comprobantes y facturación de los servicios contratados con A-Inman Languages."
       />
-      <PaymentsBoard
+
+      <BillingNotifications />
+
+      {user.role === "company" ? (
+        <nav className="flex flex-wrap gap-2 text-sm font-semibold">
+          {[
+            ["#transferencia", "Pagos"],
+            ["#facturacion", "Facturación"],
+            ["#comprobantes", "Comprobantes"],
+            ["#historial", "Estado de cuenta"],
+          ].map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              className="rounded-full bg-white px-4 py-2 text-navy"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      ) : null}
+
+      <PaymentTransferFlow
+        details={transfer}
         payments={payments}
-        students={students}
-        canManage={isStaff}
+        user={user}
+        canUpload={canUpload}
+        canRequestInvoice={canRequestInvoice}
       />
-      {canUpload ? (
-        <DocumentsPanel
-          user={user}
-          documents={documents}
-          showIntro={false}
-          defaultKind="pago"
-          filterKinds={["pago", "csf"]}
-          linkableUsers={isStaff ? students : undefined}
+
+      <div id="historial">
+        <BillingHistoryTable
+          payments={payments}
+          requests={requests}
+          canManage={isStaff}
         />
+      </div>
+
+      {isStaff ? (
+        <section className="space-y-4">
+          <h2 className="font-display text-xl font-semibold text-navy">
+            Control operativo
+          </h2>
+          <p className="text-sm text-muted">
+            Registro interno, filtros y confirmación de pagos.
+          </p>
+          <PaymentsBoard
+            payments={payments}
+            students={students}
+            canManage={isStaff}
+          />
+          {isAdmin ? (
+            <Link
+              href="/dashboard/pagos/facturacion"
+              className="inline-flex text-sm font-semibold text-cyan"
+            >
+              Abrir panel de solicitudes de factura →
+            </Link>
+          ) : null}
+        </section>
       ) : null}
-      {isAdmin ? (
-        <p className="text-sm text-muted">
-          Los PDF de certificación y otros documentos viven en el módulo Documentos.
-        </p>
-      ) : null}
+
+      {isAdmin ? <AdminInvoicePanel requests={requests} /> : null}
     </main>
   );
 }

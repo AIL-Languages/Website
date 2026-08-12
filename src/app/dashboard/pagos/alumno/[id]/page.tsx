@@ -24,8 +24,8 @@ export default async function StudentPaymentsPage({ params }: Props) {
         kicker="Historial de pagos"
         title={student.name}
         backHref="/dashboard/pagos"
-        backLabel="← Control de pagos"
-        text="Registrar pago, adjuntar comprobante desde Documentos o Pagos, marcar como pagado y agregar observaciones."
+        backLabel="← Pagos y facturación"
+        text="Registrar pago, adjuntar comprobante, marcar como pagado y dar seguimiento a facturación."
       />
       <PaymentsBoard payments={payments} students={[student]} canManage />
     </main>

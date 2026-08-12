@@ -13,6 +13,7 @@ export type ProfileDetails = {
   teacher?: string;
   plan?: string;
   startDate?: string;
+  preferredStartDate?: string;
   companyId?: string;
   companyName?: string;
   languagesTaught?: string;
@@ -39,6 +40,17 @@ export type ProfileDetails = {
   hireDate?: string;
   daysAvailable?: string;
   proficiencyLevel?: string;
+  sessionsPerWeek?: string;
+  courseType?: string;
+  enrollmentStatus?: string;
+  paymentStatus?: string;
+  timezone?: string;
+  classesTotal?: string;
+  classesUsed?: string;
+  calendlyUrl?: string;
+  calendlyUserId?: string;
+  calendlyEventTypeId?: string;
+  zoomUserId?: string;
 };
 
 const KEYS: (keyof ProfileDetails)[] = [
@@ -47,6 +59,7 @@ const KEYS: (keyof ProfileDetails)[] = [
   "teacher",
   "plan",
   "startDate",
+  "preferredStartDate",
   "companyId",
   "companyName",
   "languagesTaught",
@@ -73,6 +86,17 @@ const KEYS: (keyof ProfileDetails)[] = [
   "hireDate",
   "daysAvailable",
   "proficiencyLevel",
+  "sessionsPerWeek",
+  "courseType",
+  "enrollmentStatus",
+  "paymentStatus",
+  "timezone",
+  "classesTotal",
+  "classesUsed",
+  "calendlyUrl",
+  "calendlyUserId",
+  "calendlyEventTypeId",
+  "zoomUserId",
 ];
 
 export function parseDetails(value: unknown): ProfileDetails {
@@ -131,7 +155,14 @@ export function detailRows(
       { label: "Nivel", value: optionLabel(levels, details.level) },
       { label: "Profesor", value: details.teacher || "Por asignar" },
       { label: "Plan", value: optionLabel(plans, details.plan) },
-      { label: "Fecha de inicio", value: details.startDate || "—" },
+      {
+        label: "Fecha deseada de inicio",
+        value: details.preferredStartDate || details.startDate || "—",
+      },
+      {
+        label: "Clases / semana",
+        value: details.sessionsPerWeek || "—",
+      },
     ];
   }
   if (role === "teacher") {

@@ -18,8 +18,8 @@ const adminModules = [
   },
   {
     href: "/dashboard/pagos",
-    title: "Pagos",
-    text: "Registro, vencimientos, comprobantes, estatus y reportes básicos.",
+    title: "Pagos y facturación",
+    text: "Métodos de pago, comprobantes, solicitudes de factura e historial.",
   },
   {
     href: "/dashboard/documentos",
@@ -35,6 +35,11 @@ const adminModules = [
     href: "/dashboard/coordinacion",
     title: "Coordinación académica",
     text: "Grupos, asignaciones, horarios, niveles y seguimiento.",
+  },
+  {
+    href: "/dashboard/asignacion",
+    title: "Asignación académica",
+    text: "Match manual alumno ↔ profesor según idioma, nivel y disponibilidad.",
   },
 ];
 

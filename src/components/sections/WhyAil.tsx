@@ -37,7 +37,7 @@ export function WhyAil() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
             Diferenciadores
           </p>
-          <h2 className="font-display text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
             ¿Por qué elegir AIL?
           </h2>
         </div>
@@ -46,12 +46,12 @@ export function WhyAil() {
           {reasons.map((reason, index) => (
             <article
               key={reason.title}
-              className={`rounded-[1.5rem] bg-white p-6 shadow-[0_10px_35px_rgba(0,26,61,0.05)] ${
+              className={`rounded-[1.5rem] bg-card p-6 shadow-[0_10px_35px_rgba(0,26,61,0.05)] ${
                 index === reasons.length - 1 ? "lg:col-span-3 lg:max-w-xl" : ""
               }`}
             >
               <div className="mb-4 h-1.5 w-10 rounded-full bg-gradient-to-r from-cyan to-lime" />
-              <h3 className="font-display text-lg font-semibold text-navy">
+              <h3 className="font-display text-lg font-semibold text-ink">
                 {reason.title}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{reason.text}</p>

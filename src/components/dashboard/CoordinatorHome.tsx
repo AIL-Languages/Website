@@ -8,8 +8,8 @@ const modules = [
   },
   {
     href: "/dashboard/pagos",
-    title: "Pagos",
-    text: "Seguimiento de cobros y comprobantes por verificar.",
+    title: "Pagos y facturación",
+    text: "Seguimiento de cobros, comprobantes y solicitudes de factura.",
   },
   {
     href: "/dashboard/profesores",
@@ -20,6 +20,11 @@ const modules = [
     href: "/dashboard/coordinacion",
     title: "Coordinación académica",
     text: "Grupos, horarios, asignaciones y seguimiento.",
+  },
+  {
+    href: "/dashboard/asignacion",
+    title: "Asignación académica",
+    text: "Match manual alumno ↔ profesor según disponibilidad e idioma.",
   },
   {
     href: "/dashboard/reportes",

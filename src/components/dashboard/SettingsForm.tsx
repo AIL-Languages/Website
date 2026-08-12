@@ -56,6 +56,14 @@ export function SettingsForm({ settings }: Props) {
           notifySchedule: form.get("notifySchedule") === "on",
           notifyAdmin: form.get("notifyAdmin") === "on",
           notifyAcademic: form.get("notifyAcademic") === "on",
+          bankTransfer: {
+            institution: String(form.get("bankInstitution") ?? ""),
+            beneficiary: String(form.get("bankBeneficiary") ?? ""),
+            clabe: String(form.get("bankClabe") ?? ""),
+            dimoPhone: String(form.get("bankDimo") ?? ""),
+            logoSrc: String(form.get("bankLogoSrc") ?? "/logo-mercadopago.png"),
+            logoAlt: String(form.get("bankLogoAlt") ?? "Mercado Pago"),
+          },
         }),
       });
       const payload = (await response.json()) as { ok?: boolean; error?: string };
@@ -196,6 +204,64 @@ export function SettingsForm({ settings }: Props) {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="metodos-pago" className="rounded-[1.75rem] bg-white p-6 sm:p-8">
+        <h2 className="font-display text-xl font-semibold text-navy">
+          Métodos de pago
+        </h2>
+        <p className="mt-2 text-sm text-muted">
+          Fuente única para la landing y el dashboard. Si cambias institución,
+          CLABE o DiMo®, se actualiza en toda la plataforma.
+        </p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <label className="text-sm font-medium">
+            Institución
+            <input
+              name="bankInstitution"
+              defaultValue={settings.bankTransfer.institution}
+              className={fieldClass}
+            />
+          </label>
+          <label className="text-sm font-medium">
+            Beneficiario
+            <input
+              name="bankBeneficiary"
+              defaultValue={settings.bankTransfer.beneficiary}
+              className={fieldClass}
+            />
+          </label>
+          <label className="text-sm font-medium sm:col-span-2">
+            CLABE
+            <input
+              name="bankClabe"
+              defaultValue={settings.bankTransfer.clabe}
+              placeholder="18 dígitos"
+              className={fieldClass}
+            />
+          </label>
+          <label className="text-sm font-medium">
+            Celular vinculado a DiMo®
+            <input
+              name="bankDimo"
+              defaultValue={settings.bankTransfer.dimoPhone}
+              className={fieldClass}
+            />
+          </label>
+          <label className="text-sm font-medium">
+            Logo (ruta pública)
+            <input
+              name="bankLogoSrc"
+              defaultValue={settings.bankTransfer.logoSrc}
+              className={fieldClass}
+            />
+          </label>
+          <input
+            type="hidden"
+            name="bankLogoAlt"
+            defaultValue={settings.bankTransfer.logoAlt}
+          />
         </div>
       </section>
 
