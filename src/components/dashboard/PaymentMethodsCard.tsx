@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { PaymentMethod } from "@/lib/billing/store";
+import type { PaymentMethod } from "@/lib/billing/types";
 
 type Props = { methods: PaymentMethod[] };
 

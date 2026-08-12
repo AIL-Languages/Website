@@ -2,8 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Payment } from "@/lib/ops/payments";
-import { receiptStatusLabel, type ReceiptStatus } from "@/lib/billing/store";
+import type { Payment } from "@/lib/ops/payment-types";
+import { receiptStatusLabel, type ReceiptStatus } from "@/lib/billing/types";
 
 type Props = {
   payments: Payment[];

@@ -2,11 +2,11 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { InvoiceRequest } from "@/lib/billing/store";
+import type { InvoiceRequest } from "@/lib/billing/types";
 import {
   INVOICE_ADMIN_STATUSES,
   invoiceAdminStatusLabel,
-} from "@/lib/billing/store";
+} from "@/lib/billing/types";
 
 type Props = { requests: InvoiceRequest[] };
 

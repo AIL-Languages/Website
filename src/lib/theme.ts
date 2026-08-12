@@ -11,9 +11,10 @@ export const brandAssets = {
     light: "/brand/logo-ail-vertical-light.png",
     dark: "/brand/logo-ail-vertical-dark.png",
   },
+  /** Isotipo AIL + avión (fondo transparente) — header / favicon */
   isotype: {
-    light: "/brand/ail-isotype-light.png",
-    dark: "/brand/ail-isotype-dark.png",
+    light: "/brand/ail-logo-header-transparent-light.png",
+    dark: "/brand/ail-logo-header-transparent.png",
   },
 } as const;
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SmrtLogo } from "@/components/dashboard/SmrtLogo";
 
-const items = [
+const baseItems = [
   { href: "/dashboard", label: "Inicio" },
   { href: "/dashboard/clases", label: "Mis clases" },
   { href: "/dashboard/calendario", label: "Calendario" },
@@ -14,13 +14,20 @@ const items = [
   { href: "/dashboard/perfil", label: "Mi perfil" },
 ];
 
+const adminItems = [{ href: "/dashboard/cms", label: "CMS" }];
+
 function isActive(pathname: string, href: string) {
   if (href === "/dashboard") return pathname === "/dashboard";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function DashboardNav() {
+type Props = {
+  showCms?: boolean;
+};
+
+export function DashboardNav({ showCms = false }: Props) {
   const pathname = usePathname();
+  const items = showCms ? [...adminItems, ...baseItems] : baseItems;
 
   return (
     <nav
@@ -39,7 +46,7 @@ export function DashboardNav() {
                 : "text-white/80 hover:bg-white/10 hover:text-white"
             }`}
           >
-            {item.smrt ? (
+            {"smrt" in item && item.smrt ? (
               <SmrtLogo className="h-4 w-auto" height={16} />
             ) : null}
             {item.label}

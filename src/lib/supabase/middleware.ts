@@ -47,9 +47,19 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (isAuthPage && user) {
+    const next = request.nextUrl.searchParams.get("next");
     const dashboardUrl = request.nextUrl.clone();
-    dashboardUrl.pathname = "/dashboard";
-    dashboardUrl.search = "";
+    if (next && next.startsWith("/") && !next.startsWith("//")) {
+      const [pathWithHash, query = ""] = next.split("?");
+      const [pathname, hash = ""] = pathWithHash.split("#");
+      dashboardUrl.pathname = pathname || "/dashboard";
+      dashboardUrl.search = query ? `?${query}` : "";
+      dashboardUrl.hash = hash ? `#${hash}` : "";
+    } else {
+      dashboardUrl.pathname = "/dashboard";
+      dashboardUrl.search = "";
+      dashboardUrl.hash = "";
+    }
     return NextResponse.redirect(dashboardUrl);
   }
 

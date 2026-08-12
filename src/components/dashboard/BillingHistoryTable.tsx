@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import type { Payment } from "@/lib/ops/payments";
-import type { InvoiceRequest } from "@/lib/billing/store";
+import type { Payment } from "@/lib/ops/payment-types";
+import type { InvoiceRequest } from "@/lib/billing/types";
 import {
   invoiceUserStatusFromAdmin,
   invoiceUserStatusLabel,
   receiptStatusLabel,
-} from "@/lib/billing/store";
+} from "@/lib/billing/types";
 
 type Props = {
   payments: Payment[];

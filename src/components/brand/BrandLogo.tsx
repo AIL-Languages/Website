@@ -14,7 +14,7 @@ type Props = {
 
 /**
  * Logo oficial AIL. Cambia por clase `.dark` en <html> (sin filtros CSS).
- * Variantes: horizontal (navbar), vertical (hero/footer), isotype (mobile/favicon).
+ * Variantes: horizontal (institucional), vertical (hero/footer), isotype (header).
  */
 export function BrandLogo({
   variant = "horizontal",
@@ -28,6 +28,8 @@ export function BrandLogo({
   const light = brandAssets[variant].light;
   const dark = brandAssets[variant].dark;
 
+  const imageClass = `object-contain ${className}`;
+
   if (forceTheme === "light") {
     return (
       <Image
@@ -35,8 +37,7 @@ export function BrandLogo({
         alt={alt}
         width={width}
         height={height}
-        className={className}
-        style={{ width: "auto", height: "auto" }}
+        className={imageClass}
         priority={priority}
       />
     );
@@ -49,8 +50,7 @@ export function BrandLogo({
         alt={alt}
         width={width}
         height={height}
-        className={className}
-        style={{ width: "auto", height: "auto" }}
+        className={imageClass}
         priority={priority}
       />
     );
@@ -63,8 +63,7 @@ export function BrandLogo({
         alt={alt}
         width={width}
         height={height}
-        className={`${className} dark:hidden`}
-        style={{ width: "auto", height: "auto" }}
+        className={`${imageClass} dark:hidden`}
         priority={priority}
       />
       <Image
@@ -72,8 +71,7 @@ export function BrandLogo({
         alt={alt}
         width={width}
         height={height}
-        className={`${className} hidden dark:block`}
-        style={{ width: "auto", height: "auto" }}
+        className={`${imageClass} hidden dark:block`}
         priority={priority}
       />
     </span>

@@ -8,7 +8,7 @@ import type {
   AcademicGroup,
   ScheduleSlot,
   TeacherAssignment,
-} from "@/lib/academic/store";
+} from "@/lib/academic/types";
 import type { PublicUser } from "@/lib/auth/types";
 
 type Tab = "alumnos" | "grupos" | "horarios" | "asignaciones" | "seguimiento";

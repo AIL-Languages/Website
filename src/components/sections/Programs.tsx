@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ButtonLink";
 import { CertificationExamCards } from "@/components/sections/CertificationExamCards";
+import { getCmsContent } from "@/lib/cms/store";
 
 const programs = [
   {
@@ -20,16 +21,18 @@ const programs = [
   },
 ];
 
-export function Programs() {
+export async function Programs() {
+  const { programs: copy } = await getCmsContent();
+
   return (
     <section id="empresas" className="bg-card py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-            Programas especializados
+            {copy.eyebrow}
           </p>
           <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-            Soluciones para estudiantes, profesionales y empresas
+            {copy.title}
           </h2>
         </div>
 
@@ -51,19 +54,17 @@ export function Programs() {
           <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime">
-                Certificaciones
+                {copy.certificationsEyebrow}
               </p>
               <h3 className="mt-3 font-display text-3xl font-bold">
-                Prepárate para alcanzar tu siguiente objetivo.
+                {copy.certificationsTitle}
               </h3>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75">
-                Programas de preparación para exámenes internacionales. AIL te
-                acompaña en tu preparación; la certificación la otorga el organismo
-                evaluador correspondiente.
+                {copy.certificationsBody}
               </p>
               <div className="mt-8">
                 <ButtonLink href="#contacto" variant="lime">
-                  Quiero prepararme
+                  {copy.certificationsCta}
                 </ButtonLink>
               </div>
             </div>

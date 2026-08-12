@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PublicUser } from "@/lib/auth/types";
-import type { Payment, PaymentStatus } from "@/lib/ops/payments";
+import type { Payment, PaymentStatus } from "@/lib/ops/payment-types";
 
 type Filter = "all" | PaymentStatus;
 

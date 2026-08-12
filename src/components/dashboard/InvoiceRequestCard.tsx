@@ -2,8 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Payment } from "@/lib/ops/payments";
-import { CFDI_USES, TAX_REGIMES } from "@/lib/billing/store";
+import type { Payment } from "@/lib/ops/payment-types";
+import { CFDI_USES, TAX_REGIMES } from "@/lib/billing/types";
 
 type Props = {
   payments: Payment[];

@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AvailabilityEditor, type DraftSlot } from "@/components/scheduling/AvailabilityEditor";
 import type { PublicUser } from "@/lib/auth/types";
-import { WEEKDAY_LABELS } from "@/lib/scheduling/store";
+import { WEEKDAY_LABELS } from "@/lib/scheduling/types";
 
 type Match = {
   teacherId: string;

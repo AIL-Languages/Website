@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { roleLabel, type PublicProfileRole } from "@/lib/auth/admin";
-import type { InstitutionSettings } from "@/lib/settings/store";
+import type { InstitutionSettings } from "@/lib/settings/types";
 
 const profiles: PublicProfileRole[] = [
   "student",
@@ -212,8 +212,9 @@ export function SettingsForm({ settings }: Props) {
           Métodos de pago
         </h2>
         <p className="mt-2 text-sm text-muted">
-          Fuente única para la landing y el dashboard. Si cambias institución,
-          CLABE o DiMo®, se actualiza en toda la plataforma.
+          Fuente única para el área autenticada (Pagos y facturación). Estos
+          datos no se muestran en la landing pública. Si cambias institución,
+          CLABE o DiMo®, se actualiza para alumnos, empresas y administración.
         </p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           <label className="text-sm font-medium">

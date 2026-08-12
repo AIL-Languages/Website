@@ -6,7 +6,7 @@ import {
   WEEKDAY_LABELS,
   type AvailabilitySlot,
   type Weekday,
-} from "@/lib/scheduling/store";
+} from "@/lib/scheduling/types";
 
 export type DraftSlot = {
   weekday: Weekday;

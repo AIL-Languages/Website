@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { BankTransferCard } from "@/components/billing/BankTransferCard";
 import { InvoiceRequestCard } from "@/components/dashboard/InvoiceRequestCard";
 import type { BankTransferDetails } from "@/lib/billing/transfer";
-import type { Payment } from "@/lib/ops/payments";
+import type { Payment } from "@/lib/ops/payment-types";
 import type { PublicUser } from "@/lib/auth/types";
 
 type Props = {
-  details: BankTransferDetails;
+  details: BankTransferDetails | null;
+  canViewTransfer: boolean;
   payments: Payment[];
   user: PublicUser;
   canUpload: boolean;
@@ -23,6 +24,7 @@ type Step = "transfer" | "receipt" | "invoice-ask" | "invoice" | "done";
 
 export function PaymentTransferFlow({
   details,
+  canViewTransfer,
   payments,
   user,
   canUpload,
@@ -74,19 +76,32 @@ export function PaymentTransferFlow({
 
   return (
     <div className="space-y-6">
-      <BankTransferCard
-        details={details}
-        showPaidButton={step === "transfer" && canUpload}
-        onPaidClick={() => {
-          setStep("receipt");
-          requestAnimationFrame(() => {
-            document.getElementById("comprobantes")?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
+      {canViewTransfer && details ? (
+        <BankTransferCard
+          details={details}
+          compact
+          showPaidButton={step === "transfer" && canUpload}
+          onPaidClick={() => {
+            setStep("receipt");
+            requestAnimationFrame(() => {
+              document.getElementById("comprobantes")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
             });
-          });
-        }}
-      />
+          }}
+        />
+      ) : (
+        <article className="rounded-[1.5rem] border border-navy/10 bg-white p-6">
+          <h2 className="font-display text-xl font-semibold text-navy">
+            Datos para transferencia
+          </h2>
+          <p className="mt-3 text-sm text-muted">
+            No tienes acceso a esta sección. Los datos bancarios solo están
+            disponibles para alumnos, cuentas corporativas y administración.
+          </p>
+        </article>
+      )}
 
       {step === "receipt" || step === "invoice-ask" || step === "invoice" || step === "done" ? (
         <article

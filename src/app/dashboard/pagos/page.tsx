@@ -5,6 +5,7 @@ import { BillingNotifications } from "@/components/dashboard/BillingNotification
 import { PaymentTransferFlow } from "@/components/dashboard/PaymentTransferFlow";
 import { PaymentsBoard } from "@/components/dashboard/PaymentsBoard";
 import { canCoordinate, canManageSystem } from "@/lib/auth/admin";
+import { canViewBankTransferDetails } from "@/lib/billing/access";
 import { resolveBankTransfer } from "@/lib/billing/transfer";
 import { listInvoiceRequests } from "@/lib/billing/store";
 import { listProfiles, requireProfile } from "@/lib/auth/profile";
@@ -18,8 +19,9 @@ export default async function PaymentsPage() {
   const user = await requireProfile();
   const isStaff = canCoordinate(user.role, user.email);
   const isAdmin = canManageSystem(user.role, user.email);
-  const settings = await getSettings();
-  const transfer = resolveBankTransfer(settings);
+  const canViewTransfer = canViewBankTransferDetails(user.role, user.email);
+  const settings = canViewTransfer ? await getSettings() : null;
+  const transfer = canViewTransfer ? resolveBankTransfer(settings) : null;
   const allPayments = await listPayments();
   const directory =
     isStaff || user.role === "company" ? await listProfiles() : [];
@@ -87,6 +89,7 @@ export default async function PaymentsPage() {
 
       <PaymentTransferFlow
         details={transfer}
+        canViewTransfer={canViewTransfer}
         payments={payments}
         user={user}
         canUpload={canUpload}

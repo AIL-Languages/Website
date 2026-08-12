@@ -1,4 +1,4 @@
-import type { InstitutionSettings } from "@/lib/settings/store";
+import type { InstitutionSettings } from "@/lib/settings/types";
 import { site } from "@/lib/site";
 
 export type BankTransferDetails = {
@@ -10,14 +10,36 @@ export type BankTransferDetails = {
   logoAlt: string;
 };
 
+/** Valores oficiales AIL — solo para respuestas autenticadas autorizadas. */
 export const defaultBankTransfer = (): BankTransferDetails => ({
   institution: "Mercado Pago",
-  beneficiary: site.name,
-  clabe: "",
-  dimoPhone: site.phoneDisplay.replace(/^\+52\s*/, "").trim(),
+  beneficiary: "Denisse Arevalo Inman",
+  clabe: "722969014849616086",
+  dimoPhone: "614 603 7223",
   logoSrc: "/logo-mercadopago.png",
   logoAlt: "Mercado Pago",
 });
+
+function cleanBeneficiary(value?: string | null) {
+  const trimmed = value?.trim() || "";
+  if (!trimmed || trimmed === site.name || trimmed === "A-Inman Languages") {
+    return defaultBankTransfer().beneficiary;
+  }
+  return trimmed;
+}
+
+function cleanClabe(value?: string | null) {
+  const trimmed = value?.trim() || "";
+  const digits = trimmed.replace(/\D/g, "");
+  if (
+    !trimmed ||
+    /pendiente/i.test(trimmed) ||
+    digits.length !== 18
+  ) {
+    return defaultBankTransfer().clabe;
+  }
+  return digits;
+}
 
 export function resolveBankTransfer(
   settings?: Pick<InstitutionSettings, "bankTransfer"> | null,
@@ -27,17 +49,27 @@ export function resolveBankTransfer(
   if (!stored) return base;
   return {
     institution: stored.institution?.trim() || base.institution,
-    beneficiary: stored.beneficiary?.trim() || base.beneficiary,
-    clabe: stored.clabe?.trim() || base.clabe,
+    beneficiary: cleanBeneficiary(stored.beneficiary),
+    clabe: cleanClabe(stored.clabe),
     dimoPhone: stored.dimoPhone?.trim() || base.dimoPhone,
     logoSrc: stored.logoSrc?.trim() || base.logoSrc,
     logoAlt: stored.logoAlt?.trim() || base.logoAlt,
   };
 }
 
+export function maskClabe(clabe: string) {
+  const digits = clabe.replace(/\D/g, "");
+  if (digits.length < 4) return "•••• •••• •••• ••••";
+  const last = digits.slice(-4);
+  return `•••• •••• •••• ••${last}`;
+}
+
+export function formatClabeGroups(clabe: string) {
+  const digits = clabe.replace(/\D/g, "");
+  return digits.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+}
+
 export const paymentConceptExamples = [
-  "María López – Agosto 2026",
-  "Juan Pérez – 12 clases",
-  "Empresa XYZ – Capacitación agosto",
-  "Traducción – Nombre del cliente",
+  "Denisse · Agosto 2026",
+  "Nombre del alumno · 12 clases",
 ] as const;

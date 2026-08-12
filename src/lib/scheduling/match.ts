@@ -1,9 +1,9 @@
 import type { PublicUser } from "@/lib/auth/types";
 import {
   listAvailability,
-  rangesOverlap,
   type AvailabilitySlot,
 } from "@/lib/scheduling/store";
+import { rangesOverlap } from "@/lib/scheduling/types";
 import { parseHours } from "@/lib/ops/load";
 import { listGroups } from "@/lib/academic/store";
 

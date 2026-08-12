@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { calendlyEmbedUrl } from "@/lib/scheduling/calendly";
+import { calendlyEmbedUrl } from "@/lib/scheduling/calendly-url";
 
 type Props = {
   url: string;

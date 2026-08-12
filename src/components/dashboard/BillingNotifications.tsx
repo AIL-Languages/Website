@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { BillingNotification } from "@/lib/billing/store";
+import type { BillingNotification } from "@/lib/billing/types";
 
 export function BillingNotifications() {
   const [items, setItems] = useState<BillingNotification[]>([]);

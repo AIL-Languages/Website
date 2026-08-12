@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { AdminLogEntry } from "@/lib/settings/store";
+import type { AdminLogEntry } from "@/lib/settings/types";
 
 type Props = {
   entries: AdminLogEntry[];

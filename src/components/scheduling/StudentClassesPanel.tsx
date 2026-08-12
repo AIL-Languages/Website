@@ -7,7 +7,7 @@ import {
   type ClassStatus,
   type ScheduledClass,
   type VirtualRoom,
-} from "@/lib/scheduling/store";
+} from "@/lib/scheduling/types";
 
 type CourseInfo = {
   language: string;

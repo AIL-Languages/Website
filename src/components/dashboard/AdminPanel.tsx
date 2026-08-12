@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const adminModules = [
   {
+    href: "/dashboard/cms",
+    title: "CMS · Landing",
+    text: "Gestor de contenido de la página pública. Contraseña exclusiva de administradora.",
+  },
+  {
     href: "/dashboard/usuarios",
     title: "Usuarios",
     text: "Alta, edición, suspensión y búsqueda de cuentas de acceso.",

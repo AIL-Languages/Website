@@ -2,7 +2,7 @@
 
 import { CreateUserForm } from "@/components/dashboard/CreateUserForm";
 import { languages, levels } from "@/lib/academic/options";
-import type { AcademicFollowUp, AcademicGroup } from "@/lib/academic/store";
+import type { AcademicFollowUp, AcademicGroup } from "@/lib/academic/types";
 import { roleLabel } from "@/lib/auth/admin";
 import type { PublicUser } from "@/lib/auth/types";
 
