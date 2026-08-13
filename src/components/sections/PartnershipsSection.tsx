@@ -34,7 +34,7 @@ export function PartnershipsSection() {
         <button
           type="button"
           onClick={sheet.openSheet}
-          className="mt-5 text-sm font-semibold text-ail-cyan"
+          className="ail-btn mt-5"
         >
           Ver convenios →
         </button>

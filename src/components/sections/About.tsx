@@ -20,7 +20,7 @@ export async function About() {
   const { about } = await getCmsContent();
 
   return (
-    <section id="nosotros" className="bg-mist py-12 sm:py-14">
+    <section id="nosotros" className="ail-section ail-section--tint">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
           {about.eyebrow}
@@ -34,9 +34,9 @@ export async function About() {
         <ExpandInline summary="Conocer más sobre AIL">
           <div className="grid gap-5 md:grid-cols-3">
             {pillars.map((item) => (
-              <article key={item.title} className="border-t-2 border-cyan/70 pt-4">
-                <h3 className="font-display text-lg font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted">{item.text}</p>
+              <article key={item.title} className="ail-card ail-card--compact">
+                <h3 className="ail-card-title text-lg">{item.title}</h3>
+                <p className="ail-card-text">{item.text}</p>
               </article>
             ))}
           </div>

@@ -137,7 +137,7 @@ export function Languages() {
                 <h3 className="font-display text-xl font-semibold">{language.name}</h3>
                 <FlagCluster flags={[...language.flags]} groupLabel={language.flagsLabel} />
               </div>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-white/75">
+              <p className="ail-card-text">
                 {language.text}
               </p>
               <button
