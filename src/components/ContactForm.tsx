@@ -176,7 +176,7 @@ export function ContactForm() {
             required
             name="name"
             autoComplete="given-name"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="ail-input mt-2"
             placeholder="Tu nombre"
           />
         </label>
@@ -207,7 +207,7 @@ export function ContactForm() {
                 validateEmailField(event.currentTarget.value);
               }
             }}
-            className="mt-2 w-full max-w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="ail-input mt-2 max-w-full"
             placeholder="nombre@correo.com"
           />
           {emailError ? (
@@ -226,7 +226,7 @@ export function ContactForm() {
             type="tel"
             autoComplete="tel"
             inputMode="tel"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="ail-input mt-2"
             placeholder="+52 ..."
           />
         </label>
@@ -237,7 +237,7 @@ export function ContactForm() {
             name="interest"
             value={interest}
             onChange={(event) => setInterest(event.target.value)}
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="ail-input mt-2"
           >
             <option value="" disabled>
               Selecciona una opción
@@ -259,7 +259,7 @@ export function ContactForm() {
           <input
             name="company"
             autoComplete="organization"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="ail-input mt-2"
             placeholder="Nombre de tu organización"
           />
         </label>
@@ -271,7 +271,7 @@ export function ContactForm() {
           required
           name="goals"
           rows={3}
-          className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+          className="ail-input mt-2"
           placeholder="Académicos, profesionales, viaje, certificación..."
         />
       </label>
@@ -280,7 +280,7 @@ export function ContactForm() {
         Disponibilidad
         <input
           name="availability"
-          className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+          className="ail-input mt-2"
           placeholder="Días y horarios preferidos"
         />
       </label>

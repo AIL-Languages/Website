@@ -19,7 +19,7 @@ const skills = [
 
 export function SkillsStrip() {
   return (
-    <section className="ail-section ail-section--navy">
+    <section className="ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill) => (

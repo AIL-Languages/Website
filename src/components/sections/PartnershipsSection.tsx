@@ -14,27 +14,25 @@ export function PartnershipsSection() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section id="convenios" className="ail-section ail-section--tint">
+    <section id="convenios" className="ail-section ail-section--navy">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-          Alianzas AIL
-        </p>
-        <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+        <p className="ail-kicker">Alianzas AIL</p>
+        <h2 className="font-display text-3xl font-bold sm:text-4xl">
           Convenios y beneficios
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+        <p className="ail-lead mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
           Alianzas para acercar la formación en idiomas con condiciones preferenciales.
         </p>
-        <p className="mt-4 text-sm font-semibold text-ink">
+        <p className="mt-4 text-sm font-semibold text-white">
           YMCA · Rotary International · Juntas Podemos Ahorrar
-          <span className="ml-2 rounded-full bg-ail-cyan/15 px-2.5 py-1 text-xs font-semibold text-ail-navy">
+          <span className="ml-2 rounded-full bg-ail-aqua px-2.5 py-1 text-xs font-semibold text-ail-navy-primary">
             Próximamente
           </span>
         </p>
         <button
           type="button"
           onClick={sheet.openSheet}
-          className="ail-btn mt-5"
+          className="ail-btn ail-btn--on-dark mt-5"
         >
           Ver convenios →
         </button>

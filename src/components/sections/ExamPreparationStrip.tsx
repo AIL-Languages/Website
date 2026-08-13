@@ -15,20 +15,18 @@ export function ExamPreparationStrip() {
   }
 
   return (
-    <section id="preparacion-certificaciones" className="ail-section ail-section--tint">
+    <section id="preparacion-certificaciones" className="ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-          Preparación internacional
-        </p>
-        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+        <p className="ail-kicker">Preparación internacional</p>
+        <h2 className="font-display text-2xl font-bold sm:text-3xl">
           Preparación para certificaciones internacionales
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+        <p className="ail-lead mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
           Prepárate con AIL para exámenes internacionales mediante acompañamiento
           académico enfocado en las habilidades evaluadas.
         </p>
 
-        <div className="mt-6 rounded-[1.5rem] border border-ail-cyan/25 bg-ail-navy px-5 py-5 text-white sm:px-6 sm:py-6">
+        <div className="mt-6 rounded-[1.5rem] border border-ail-blue-300/50 bg-ail-navy-section px-5 py-5 text-white sm:px-6 sm:py-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2 lg:flex lg:flex-wrap lg:items-center lg:gap-3">
               {examPreparations.map((exam) => (
@@ -36,7 +34,7 @@ export function ExamPreparationStrip() {
                   key={exam.id}
                   type="button"
                   onClick={() => openExam(exam.id)}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-sm font-semibold text-cyan-soft transition hover:scale-[1.02] hover:bg-ail-cyan/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-ail-blue-300/70 bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-ail-cyan/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70"
                 >
                   <span className="inline-flex items-center gap-1">
                     {exam.flags.map((flag) => (

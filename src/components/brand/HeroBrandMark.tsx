@@ -22,10 +22,10 @@ export function HeroBrandMark({ className = "" }: Props) {
         alt=""
       />
       <div className="text-center lg:text-left">
-        <p className="font-display text-xl font-medium tracking-tight text-ink sm:text-2xl dark:text-white">
+        <p className="font-display text-xl font-medium tracking-tight text-white sm:text-2xl">
           {site.name}
         </p>
-        <p className="mt-1.5 text-[11px] font-medium tracking-[0.16em] text-ail-green sm:text-xs">
+        <p className="mt-1.5 text-[11px] font-medium tracking-[0.16em] text-ail-aqua sm:text-xs">
           • {site.tagline} •
         </p>
       </div>

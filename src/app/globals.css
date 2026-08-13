@@ -4,10 +4,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --ail-navy-950: #061b38;
-  --ail-navy-900: #08254a;
-  --ail-navy-800: #10345f;
-  --ail-navy: var(--ail-navy-900);
+  --ail-navy-primary: #061b38;
+  --ail-navy-secondary: #0b2a52;
+  --ail-navy-section: #123b68;
+  --ail-navy-950: var(--ail-navy-primary);
+  --ail-navy-900: var(--ail-navy-secondary);
+  --ail-navy-800: var(--ail-navy-section);
+  --ail-navy: var(--ail-navy-primary);
 
   --ail-blue-100: #e7f4fc;
   --ail-blue-150: #d9eefa;
@@ -16,72 +19,83 @@
 
   --ail-aqua: #00d7d7;
   --ail-aqua-soft: #76eeee;
+  --ail-aqua-dark: #0b8f8f;
   --ail-blue: #168bff;
   --ail-cyan: var(--ail-aqua);
   --ail-green: #00f0a3;
   --ail-white: #ffffff;
 
   --ail-text-on-dark: #f4faff;
-  --ail-text-muted-dark: #c6d9ea;
-  --ail-text-on-light: #08254a;
-  --ail-text-muted-light: #365b78;
+  --ail-text-muted-dark: #c9ddf0;
+  --ail-text-secondary-dark: #b6cce0;
+  --ail-text-on-light: var(--ail-navy-primary);
+  --ail-text-muted-light: #294e6d;
+  --ail-text-placeholder: #4a6a86;
 
-  --ail-border-light: rgba(8, 37, 74, 0.18);
+  --ail-border-light: rgba(6, 27, 56, 0.28);
   --ail-border-aqua: rgba(0, 215, 215, 0.55);
 
   --ail-card-blue: var(--ail-blue-150);
   --ail-card-blue-hover: var(--ail-blue-200);
-  --ail-card-icon: rgba(8, 37, 74, 0.08);
+  --ail-card-icon: rgba(6, 27, 56, 0.08);
   --ail-text-secondary: var(--ail-text-muted-light);
   --ail-card-border: var(--ail-border-light);
   --ail-card-border-hover: var(--ail-border-aqua);
-  --ail-card-icon-border: rgba(8, 37, 74, 0.25);
+  --ail-card-icon-border: rgba(6, 27, 56, 0.28);
   --ail-card-radius: 1.15rem;
-  --ail-card-shadow: 0 6px 18px rgba(3, 25, 55, 0.1);
+  --ail-card-shadow: 0 8px 22px rgba(3, 12, 32, 0.28);
   --whatsapp: #25d366;
 
-  --navy: var(--ail-navy-900);
-  --navy-deep: var(--ail-navy-950);
-  --navy-mid: var(--ail-navy-800);
+  --navy: var(--ail-navy-primary);
+  --navy-deep: var(--ail-navy-primary);
+  --navy-mid: var(--ail-navy-secondary);
   --cyan: var(--ail-aqua);
   --cyan-bright: #4aebf0;
   --cyan-soft: var(--ail-aqua-soft);
   --lime: var(--ail-green);
   --lime-deep: #00d48f;
   --white: var(--ail-white);
-  --mist: var(--ail-blue-100);
-  --ink: var(--ail-text-on-light);
-  --muted: var(--ail-text-muted-light);
-  --background: var(--ail-blue-100);
-  --foreground: var(--ail-text-on-light);
+  --mist: var(--ail-navy-secondary);
+  --ink: var(--ail-text-on-dark);
+  --muted: var(--ail-text-muted-dark);
+  --background: var(--ail-navy-primary);
+  --foreground: var(--ail-text-on-dark);
   --card: var(--ail-blue-150);
-  --border: var(--ail-border-light);
-  --header-bg: color-mix(in srgb, var(--ail-navy-950) 92%, transparent);
+  --border: rgba(0, 215, 215, 0.22);
+  --header-bg: color-mix(in srgb, var(--ail-navy-primary) 94%, transparent);
   --header-fg: var(--ail-text-on-dark);
-  --header-muted: var(--ail-text-muted-dark);
+  --header-muted: var(--ail-text-secondary-dark);
+  color-scheme: dark;
 }
 
 html.dark,
 html[data-theme="dark"] {
-  --navy: var(--ail-navy-900);
-  --navy-deep: var(--ail-navy-950);
-  --navy-mid: var(--ail-navy-800);
-  --cyan: var(--ail-aqua);
-  --cyan-bright: #4aebf0;
-  --cyan-soft: var(--ail-aqua-soft);
-  --lime: var(--ail-green);
-  --lime-deep: #00d48f;
-  --white: var(--ail-white);
-  --mist: var(--ail-navy-800);
+  --mist: var(--ail-navy-secondary);
   --ink: var(--ail-text-on-dark);
   --muted: var(--ail-text-muted-dark);
-  --background: var(--ail-navy-950);
+  --background: var(--ail-navy-primary);
   --foreground: var(--ail-text-on-dark);
   --card: var(--ail-blue-150);
-  --border: var(--ail-border-light);
-  --header-bg: color-mix(in srgb, var(--ail-navy-950) 92%, transparent);
+  --border: rgba(0, 215, 215, 0.22);
+  --header-bg: color-mix(in srgb, var(--ail-navy-primary) 94%, transparent);
   --header-fg: var(--ail-text-on-dark);
-  --header-muted: var(--ail-text-muted-dark);
+  --header-muted: var(--ail-text-secondary-dark);
+  color-scheme: dark;
+}
+
+html.light,
+html[data-theme="light"] {
+  --mist: var(--ail-blue-100);
+  --ink: var(--ail-navy-primary);
+  --muted: var(--ail-text-muted-light);
+  --background: var(--ail-blue-100);
+  --foreground: var(--ail-navy-primary);
+  --card: var(--ail-blue-150);
+  --border: var(--ail-border-light);
+  --header-bg: color-mix(in srgb, var(--ail-navy-primary) 94%, transparent);
+  --header-fg: var(--ail-text-on-dark);
+  --header-muted: var(--ail-text-secondary-dark);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -100,6 +114,9 @@ html[data-theme="dark"] {
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-ail-navy: var(--ail-navy);
+  --color-ail-navy-primary: var(--ail-navy-primary);
+  --color-ail-navy-secondary: var(--ail-navy-secondary);
+  --color-ail-navy-section: var(--ail-navy-section);
   --color-ail-navy-950: var(--ail-navy-950);
   --color-ail-navy-900: var(--ail-navy-900);
   --color-ail-navy-800: var(--ail-navy-800);
@@ -164,39 +181,42 @@ body {
 }
 
 .ail-section--navy,
-.ail-section--navy-soft {
+.ail-section--navy-soft,
+.ail-section--tint {
   color: var(--ail-text-on-dark);
 }
 
 .ail-section--navy {
-  background: var(--ail-navy-950);
+  background: var(--ail-navy-primary);
 }
 
-.ail-section--navy-soft {
-  background: var(--ail-navy-800);
-}
-
+.ail-section--navy-soft,
 .ail-section--tint {
-  background: var(--ail-blue-100);
-  color: var(--ail-text-on-light);
+  background: var(--ail-navy-secondary);
+}
+
+.ail-section + .ail-section {
+  box-shadow: inset 0 1px 0 rgba(0, 215, 215, 0.22);
 }
 
 .ail-section--navy .ail-kicker,
-.ail-section--navy-soft .ail-kicker {
-  color: var(--ail-aqua-soft);
+.ail-section--navy-soft .ail-kicker,
+.ail-section--tint .ail-kicker {
+  color: var(--ail-aqua);
 }
 
 .ail-section--navy h1,
 .ail-section--navy h2,
-.ail-section--navy h3,
 .ail-section--navy-soft h1,
 .ail-section--navy-soft h2,
-.ail-section--navy-soft h3 {
+.ail-section--tint h1,
+.ail-section--tint h2 {
   color: var(--ail-text-on-dark);
 }
 
 .ail-section--navy .ail-lead,
-.ail-section--navy-soft .ail-lead {
+.ail-section--navy-soft .ail-lead,
+.ail-section--tint .ail-lead {
   color: var(--ail-text-muted-dark);
 }
 
@@ -241,7 +261,7 @@ body {
   top: 0;
   right: 0;
   left: 0;
-  height: 4px;
+  height: 3px;
   border-radius: var(--ail-card-radius) var(--ail-card-radius) 0 0;
   background: var(--ail-aqua);
   pointer-events: none;
@@ -253,17 +273,18 @@ body {
 }
 
 .ail-card--dark {
-  border-color: rgba(244, 250, 255, 0.12);
-  background: var(--ail-navy-900);
+  border-color: rgba(0, 215, 215, 0.28);
+  background: var(--ail-navy-section);
   color: var(--ail-text-on-dark);
+  box-shadow: 0 8px 24px rgba(3, 12, 32, 0.35);
   --ink: var(--ail-text-on-dark);
   --muted: var(--ail-text-muted-dark);
   --foreground: var(--ail-text-on-dark);
 }
 
 .ail-card--compact {
-  gap: 10px;
-  padding: 22px 18px;
+  gap: 8px;
+  padding: 16px 16px;
 }
 
 .ail-card--center {
@@ -297,16 +318,34 @@ body {
   outline-offset: 3px;
 }
 
+.ail-card h1,
+.ail-card h2,
+.ail-card h3,
+.ail-surface-card h1,
+.ail-surface-card h2,
+.ail-surface-card h3,
+.ail-module-card h1,
+.ail-module-card h2,
+.ail-module-card h3,
+.theme-card h1,
+.theme-card h2,
+.theme-card h3 {
+  color: var(--ail-navy-primary);
+}
+
 .ail-card-title,
 .ail-module-card-title {
   margin: 0;
   width: 100%;
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
+.ail-card--dark h1,
+.ail-card--dark h2,
+.ail-card--dark h3,
 .ail-card--dark .ail-card-title {
   color: var(--ail-text-on-dark);
 }
@@ -340,7 +379,7 @@ body {
   border-radius: 50%;
   border: 1px solid var(--ail-card-icon-border);
   background: var(--ail-blue-200);
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
 }
 
 .ail-icon-bubble svg,
@@ -369,7 +408,7 @@ body {
 .ail-card-badge,
 .ail-module-card-badge {
   margin: 0;
-  color: var(--lime-deep);
+  color: var(--ail-aqua-dark);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -402,9 +441,9 @@ body {
   justify-content: center;
   gap: 0.4rem;
   padding: 10px 18px;
-  border: 1px solid var(--ail-navy-900);
+  border: 1px solid var(--ail-navy-primary);
   border-radius: 999px;
-  background: var(--ail-navy-900);
+  background: var(--ail-navy-primary);
   color: var(--ail-white);
   font-size: 0.875rem;
   font-weight: 700;
@@ -422,7 +461,7 @@ body {
 .ail-module-card-btn:hover {
   border-color: var(--ail-aqua);
   background: var(--ail-aqua);
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
   transform: translateY(-2px);
 }
 
@@ -445,33 +484,39 @@ body {
 }
 
 .ail-btn--secondary {
-  border-color: var(--ail-navy-900);
+  border-color: var(--ail-navy-primary);
   background: transparent;
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
 }
 
 .ail-btn--secondary:hover {
-  border-color: var(--ail-navy-900);
-  background: var(--ail-navy-900);
+  border-color: var(--ail-navy-primary);
+  background: var(--ail-navy-primary);
   color: var(--ail-white);
 }
 
 .ail-btn--on-dark {
   border-color: var(--ail-aqua);
   background: var(--ail-aqua);
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
 }
 
 .ail-btn--on-dark:hover {
-  border-color: var(--ail-aqua-soft);
-  background: var(--ail-aqua-soft);
-  color: var(--ail-navy-950);
+  border-color: var(--ail-aqua);
+  background: var(--ail-navy-section);
+  color: var(--ail-white);
 }
 
 .ail-btn--ghost {
-  border-color: transparent;
+  border-color: var(--ail-aqua);
   background: transparent;
-  color: var(--ail-aqua-soft);
+  color: var(--ail-text-on-dark);
+}
+
+.ail-btn--ghost:hover {
+  border-color: var(--ail-aqua);
+  background: var(--ail-navy-section);
+  color: var(--ail-white);
 }
 
 .ail-btn-arrow,
@@ -533,13 +578,24 @@ body {
   border: 1px solid var(--ail-border-light);
   border-radius: 0.75rem;
   background: var(--ail-white);
-  color: var(--ail-navy-900);
+  color: var(--ail-navy-primary);
   padding: 0.75rem 1rem;
 }
 
+.ail-input::placeholder {
+  color: var(--ail-text-placeholder);
+}
+
 .ail-input:focus {
+  border-color: var(--ail-aqua);
   outline: 2px solid var(--ail-aqua);
   outline-offset: 1px;
+}
+
+label.ail-field,
+.ail-card label,
+.ail-surface-card label {
+  color: var(--ail-navy-primary);
 }
 
 .theme-heading {

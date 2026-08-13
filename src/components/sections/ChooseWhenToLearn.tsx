@@ -59,21 +59,19 @@ export function ChooseWhenToLearn() {
   return (
     <section
       id="elige-cuando"
-      className="ail-section ail-section--tint relative overflow-hidden"
+      className="ail-section ail-section--navy-soft relative overflow-hidden"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,184,230,0.18),_transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,215,215,0.12),_transparent_45%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-            Agenda AIL
-          </p>
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          <p className="ail-kicker">Agenda AIL</p>
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
             Tú eliges cuándo aprender
           </h2>
-          <p className="mt-3 text-lg font-semibold text-ink/80">
+          <p className="ail-lead mt-3 text-lg font-semibold">
             Clases que se adaptan a tu disponibilidad.
           </p>
-          <p className="mt-4 text-muted leading-relaxed">
+          <p className="ail-lead mt-4 leading-relaxed">
             Selecciona cuándo quieres comenzar y, una vez inscrito, agenda tus
             clases de acuerdo con la disponibilidad de tu profesor. Desde tu
             perfil AIL podrás consultar tus próximas sesiones y acceder
@@ -81,7 +79,7 @@ export function ChooseWhenToLearn() {
           </p>
         </div>
 
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {steps.map((step, index) => (
             <li
               key={step.title}
@@ -90,21 +88,21 @@ export function ChooseWhenToLearn() {
               <div className="ail-icon-bubble">
                 <StepIcon kind={step.icon} />
               </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-cyan">
+              <p className="ail-card-badge">
                 Paso {index + 1}
               </p>
-              <h3 className="mt-2 font-display text-lg font-semibold text-ink">
+              <h3 className="font-display text-lg font-semibold">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{step.text}</p>
+              <p className="ail-card-text">{step.text}</p>
             </li>
           ))}
         </ol>
 
-        <div className="mt-10">
+        <div className="mt-8">
           <a
             href="/registro"
-            className="inline-flex rounded-full bg-ail-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-ail-cyan hover:text-ail-navy dark:bg-ail-green dark:text-ail-navy"
+            className="ail-btn ail-btn--on-dark"
           >
             Comenzar mi curso
           </a>

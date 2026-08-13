@@ -6,7 +6,7 @@ const fieldClass =
   "mt-1.5 w-full rounded-xl border border-navy/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-cyan";
 
 const buttonClass =
-  "inline-flex items-center justify-center gap-2 rounded-full border border-ail-navy/15 bg-ail-navy/5 px-6 py-3 text-sm font-semibold tracking-wide text-ail-navy transition duration-300 hover:border-ail-cyan hover:bg-ail-navy/8 dark:border-white/35 dark:bg-white/10 dark:text-white dark:hover:bg-white/18";
+  "ail-btn ail-btn--ghost";
 
 export function SendTestEmailButton() {
   const titleId = useId();

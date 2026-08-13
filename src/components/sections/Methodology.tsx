@@ -52,7 +52,7 @@ const modalities = [
 
 export function Methodology() {
   return (
-    <section id="metodologia" className="ail-section ail-section--navy-soft">
+    <section id="metodologia" className="ail-section ail-section--navy">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="ail-kicker">Metodología</p>
         <h2 className="font-display text-3xl font-bold sm:text-4xl">

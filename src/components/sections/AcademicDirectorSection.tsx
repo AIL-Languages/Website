@@ -50,15 +50,15 @@ export function AcademicDirectorSection() {
   }
 
   return (
-    <section id="experiencia" className="bg-[#F7FBFD] py-12 sm:py-16 dark:bg-background">
+    <section id="experiencia" className="ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
+        <p className="ail-kicker">
           Experiencia & dirección académica
         </p>
-        <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="font-display text-3xl font-bold sm:text-4xl">
           Experiencia que respalda tu aprendizaje
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+        <p className="ail-lead mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
           AIL combina experiencia docente, formación internacional y una visión
           multilingüe para ofrecer una enseñanza práctica, profesional y conectada
           con el mundo.
@@ -77,10 +77,10 @@ export function AcademicDirectorSection() {
           </figure>
 
           <div>
-            <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+            <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">
               {founderContent.name}
             </h3>
-            <p className="mt-1 text-sm font-semibold text-ail-navy/80 dark:text-ail-cyan sm:text-base">
+            <p className="mt-1 text-sm font-semibold text-ail-aqua sm:text-base">
               {founderContent.role}
             </p>
 
@@ -88,10 +88,10 @@ export function AcademicDirectorSection() {
               {highlights.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-2xl border border-navy/8 bg-white/80 px-4 py-3"
+                  className="ail-card ail-card--compact"
                 >
-                  <p className="font-display text-base font-semibold text-navy">{item.title}</p>
-                  <p className="mt-1 text-xs leading-snug text-muted sm:text-sm">{item.text}</p>
+                  <p className="ail-card-title text-base">{item.title}</p>
+                  <p className="ail-card-text">{item.text}</p>
                 </article>
               ))}
             </div>
@@ -100,7 +100,7 @@ export function AcademicDirectorSection() {
               {languageChips.map((language) => (
                 <span
                   key={language.name}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-navy/10 bg-white px-2.5 py-1.5 text-xs font-semibold text-navy"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-navy/10 bg-[color:var(--ail-blue-150)] px-2.5 py-1.5 text-xs font-semibold text-ail-navy-primary"
                 >
                   {language.flags.map((flag) => (
                     <span
@@ -116,19 +116,19 @@ export function AcademicDirectorSection() {
             </div>
 
             <div className="mt-5">
-              <p className="text-sm font-semibold text-ink">Trayectoria internacional</p>
+              <p className="text-sm font-semibold text-white">Trayectoria internacional</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {journeyStops.map((stop) => (
                   <span
                     key={stop.id}
-                    className="overflow-hidden rounded-full border border-navy/10"
+                    className="overflow-hidden rounded-full border border-white/20"
                     title={stop.country}
                   >
                     <CountryFlag code={stop.code} title={stop.country} className="h-7 w-7" />
                   </span>
                 ))}
               </div>
-              <p className="mt-2 text-xs text-muted">
+              <p className="ail-lead mt-2 text-xs">
                 Explorar dentro de “Conocer trayectoria”
               </p>
             </div>
@@ -136,7 +136,7 @@ export function AcademicDirectorSection() {
             <button
               type="button"
               onClick={() => openTrajectory("experiencia")}
-              className="mt-6 inline-flex min-h-11 items-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy"
+              className="ail-btn ail-btn--on-dark mt-6"
             >
               Conocer trayectoria →
             </button>

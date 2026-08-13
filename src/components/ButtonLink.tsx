@@ -18,7 +18,7 @@ export function ButtonLink({
   external = false,
 }: Props) {
   const mapped: AILButtonVariant =
-    variant === "lime" || variant === "ghost" ? "on-dark" : variant;
+    variant === "lime" ? "on-dark" : variant === "ghost" ? "ghost" : variant;
 
   return (
     <AILButton

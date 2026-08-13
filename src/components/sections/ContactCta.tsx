@@ -7,20 +7,18 @@ export async function ContactCta() {
   const { contact } = await getCmsContent();
 
   return (
-    <section id="contacto" className="ail-section ail-section--tint">
+    <section id="contacto" className="ail-section ail-section--navy">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:px-8">
         <div>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-            {contact.eyebrow}
-          </p>
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          <p className="ail-kicker">{contact.eyebrow}</p>
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
             {contact.title}
           </h2>
-          <p className="mt-5 max-w-xl leading-relaxed text-muted">{contact.body}</p>
+          <p className="ail-lead mt-5 max-w-xl leading-relaxed">{contact.body}</p>
 
-          <ul className="mt-6 space-y-2 text-sm text-ink/85">
+          <ul className="mt-6 space-y-2 text-sm text-white">
             <li>
-              <a href={`mailto:${site.email}`} className="hover:text-ail-cyan">
+              <a href={`mailto:${site.email}`} className="text-ail-aqua hover:text-ail-aqua-soft">
                 {site.email}
               </a>
             </li>
@@ -29,7 +27,7 @@ export async function ContactCta() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-ail-cyan"
+                className="text-ail-aqua hover:text-ail-aqua-soft"
               >
                 WhatsApp {site.phoneDisplay}
               </a>
@@ -38,15 +36,15 @@ export async function ContactCta() {
             <li>Clases 100% online</li>
           </ul>
 
-          <div className="mt-10 border-t border-navy/10 pt-8">
-            <h3 className="font-display text-lg font-semibold text-ink">
+          <div className="mt-10 border-t border-white/15 pt-8">
+            <h3 className="font-display text-lg font-semibold text-white">
               {contact.socialTitle}
             </h3>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
+            <p className="ail-lead mt-2 max-w-md text-sm leading-relaxed">
               {contact.socialBody}
             </p>
             <SocialLinks
-              variant="onLight"
+              variant="onDark"
               layout="labeled"
               className="mt-5"
               align="start"

@@ -24,9 +24,9 @@ export function Translation() {
   const sheet = useHashOpen("#traduccion-detalle");
 
   return (
-    <section id="traduccion" className="bg-ail-navy py-12 text-white sm:py-16">
+    <section id="traduccion" className="ail-section ail-section--navy-soft text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-ail-green">
+        <p className="ail-kicker">
           Servicios profesionales
         </p>
         <h2 className="font-display text-3xl font-bold sm:text-4xl">
@@ -48,13 +48,13 @@ export function Translation() {
             </span>
           ))}
         </div>
-        <p className="mt-3 max-w-xl text-sm text-white/75">
+        <p className="ail-lead mt-3 max-w-xl text-sm">
           Traducción de documentos · Interpretación profesional
         </p>
         <button
           type="button"
           onClick={sheet.openSheet}
-          className="mt-5 text-sm font-semibold text-ail-cyan"
+          className="ail-btn ail-btn--on-dark mt-5"
         >
           Solicitar cotización →
         </button>

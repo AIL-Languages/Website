@@ -29,6 +29,7 @@ export function applyThemeClass(theme: Theme) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
+  root.classList.toggle("light", theme === "light");
   root.dataset.theme = theme;
   root.style.colorScheme = theme;
 }
@@ -44,12 +45,12 @@ export function readStoredTheme(): Theme | null {
 }
 
 export function systemTheme(): Theme {
-  if (typeof window === "undefined") return "light";
+  if (typeof window === "undefined") return "dark";
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
 
 export function resolveInitialTheme(): Theme {
-  return readStoredTheme() ?? systemTheme();
+  return readStoredTheme() ?? "dark";
 }

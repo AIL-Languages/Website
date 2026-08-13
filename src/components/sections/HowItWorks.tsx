@@ -35,13 +35,13 @@ export function HowItWorks() {
       <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_right,_rgba(0,224,230,0.22),_transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-lime">
+          <p className="ail-kicker mb-3">
             Proceso
           </p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
             ¿Cómo funcionan nuestras clases?
           </h2>
-          <p className="mt-4 text-white/75">
+          <p className="mt-4 text-[#C9DDF0]">
             Nivelación con referencia al MCER y un recorrido claro desde el primer
             contacto hasta el seguimiento continuo.
           </p>
@@ -52,7 +52,7 @@ export function HowItWorks() {
             <li key={step.n} className="relative border-l border-cyan/40 pl-5 md:border-l-0 md:border-t md:pl-0 md:pt-5">
               <span className="font-display text-3xl font-bold text-cyan">{step.n}</span>
               <h3 className="mt-3 font-display text-lg font-semibold">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">{step.text}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#B6CCE0]">{step.text}</p>
             </li>
           ))}
         </ol>

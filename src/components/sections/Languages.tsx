@@ -115,15 +115,13 @@ export function Languages() {
   }
 
   return (
-    <section id="cursos" className="ail-section ail-section--tint">
+    <section id="cursos" className="ail-section ail-section--navy">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-          Programas de idiomas
-        </p>
-        <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+        <p className="ail-kicker">Programas de idiomas</p>
+        <h2 className="font-display text-3xl font-bold sm:text-4xl">
           Elige tu idioma
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+        <p className="ail-lead mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
           Inglés, portugués o español, con clases online personalizadas y grupos reducidos.
         </p>
 

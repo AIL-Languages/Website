@@ -20,15 +20,13 @@ export async function About() {
   const { about } = await getCmsContent();
 
   return (
-    <section id="nosotros" className="ail-section ail-section--tint">
+    <section id="nosotros" className="ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-          {about.eyebrow}
-        </p>
-        <h2 className="max-w-3xl font-display text-2xl font-bold text-ink sm:text-3xl">
+        <p className="ail-kicker">{about.eyebrow}</p>
+        <h2 className="max-w-3xl font-display text-2xl font-bold sm:text-3xl">
           {about.title}
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/80 sm:text-base">
+        <p className="ail-lead mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">
           {about.body}
         </p>
         <ExpandInline summary="Conocer más sobre AIL">

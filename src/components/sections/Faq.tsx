@@ -105,7 +105,7 @@ function FaqAccordionItem({
           onClick={onToggle}
           className="flex w-full min-h-11 items-center justify-between gap-4 px-4 py-4 text-left transition hover:bg-ail-cyan/5 focus-visible:bg-ail-cyan/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ail-cyan/70 sm:px-5"
         >
-          <span className="font-display text-base font-semibold leading-snug text-ink sm:text-[1.05rem]">
+          <span className="font-display text-base font-semibold leading-snug text-ail-navy-primary sm:text-[1.05rem]">
             {item.question}
           </span>
           <IconChevron open={open} />
@@ -279,7 +279,7 @@ export function Faq() {
           <label htmlFor={searchId} className="sr-only">
             Buscar una pregunta
           </label>
-          <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+          <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ail-navy-primary" />
           <input
             id={searchId}
             type="search"
@@ -307,8 +307,8 @@ export function Faq() {
                   onClick={() => selectCategory(item.id)}
                   className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70 ${
                     selected
-                      ? "bg-ail-navy text-white dark:bg-ail-green dark:text-ail-navy"
-                      : "border border-[color:var(--border)] bg-card text-ink hover:border-ail-cyan/50"
+                      ? "bg-ail-aqua text-ail-navy-primary"
+                      : "border border-ail-aqua/35 bg-[color:var(--ail-blue-150)] text-ail-navy-primary hover:border-ail-aqua/70"
                   }`}
                 >
                   {item.label}
@@ -368,7 +368,7 @@ export function Faq() {
             </div>
           ) : (
             <div className="theme-card rounded-[1.5rem] border border-[color:var(--border)] px-6 py-10 text-center">
-              <p className="font-display text-lg font-semibold text-ink">
+              <p className="font-display text-lg font-semibold text-ail-navy-primary">
                 No encontramos preguntas relacionadas con tu búsqueda.
                 Contáctanos y con gusto te ayudamos.
               </p>

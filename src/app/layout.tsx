@@ -42,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="es"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} dark h-full antialiased`}
       suppressHydrationWarning
     >
       <body
