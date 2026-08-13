@@ -11,6 +11,7 @@ type Props = {
   layout?: Layout;
   className?: string;
   align?: "start" | "center";
+  compact?: boolean;
 };
 
 function trackSocialClick(platform: SocialPlatform) {
@@ -30,13 +31,14 @@ export function SocialLinks({
   layout = "icons",
   className = "",
   align = "start",
+  compact = false,
 }: Props) {
   const links = getActiveSocialLinks();
   const isDark = variant === "onDark";
 
   return (
     <ul
-      className={`flex flex-wrap gap-3 ${
+      className={`${compact ? "flex flex-nowrap gap-2" : "flex flex-wrap gap-3"} ${
         align === "center" ? "justify-center" : "justify-start"
       } ${className}`}
     >
@@ -51,10 +53,12 @@ export function SocialLinks({
               title={link.name}
               aria-label={`Visitar ${link.name} de A-Inman Languages`}
               onClick={() => trackSocialClick(link.platform)}
-              className={`group inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/60 ${
+              className={`group inline-flex items-center justify-center gap-2 rounded-full border transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/60 ${
                 layout === "labeled"
-                  ? "px-4 py-2.5 sm:min-w-0"
-                  : "h-11 w-11 sm:h-12 sm:w-12"
+                  ? "min-h-11 min-w-11 px-4 py-2.5 sm:min-w-0"
+                  : compact
+                    ? "h-10 w-10 min-h-10 min-w-10"
+                    : "h-11 w-11 min-h-11 min-w-11 sm:h-12 sm:w-12"
               } ${
                 isDark
                   ? `border-ail-cyan/45 bg-white/12 hover:bg-white/18 ${link.brandHover}`
@@ -63,7 +67,7 @@ export function SocialLinks({
             >
               <SocialBrandIcon
                 platform={link.platform}
-                className={`h-[22px] w-[22px] sm:h-6 sm:w-6 ${link.brandColor}`}
+                className={`${compact ? "h-5 w-5" : "h-[22px] w-[22px] sm:h-6 sm:w-6"} ${link.brandColor}`}
               />
               {layout === "labeled" ? (
                 <span
