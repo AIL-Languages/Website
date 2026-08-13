@@ -43,3 +43,5 @@ next-env.d.ts
 
 # contact leads (local backend storage)
 /data
+
+.vercel
