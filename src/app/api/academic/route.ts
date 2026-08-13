@@ -8,7 +8,7 @@ import {
   updateGroup,
 } from "@/lib/academic/store";
 import { parseDetails } from "@/lib/academic/details";
-import { canCoordinate } from "@/lib/auth/admin";
+import { canAccessCoordination } from "@/lib/auth/admin";
 import { getCurrentProfile, getProfileById } from "@/lib/auth/profile";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -16,7 +16,7 @@ export const runtime = "nodejs";
 
 export async function GET() {
   const current = await getCurrentProfile();
-  if (!current || !canCoordinate(current.role, current.email)) {
+  if (!current || !canAccessCoordination(current.role, current.email)) {
     return NextResponse.json({ ok: false, error: "No autorizado." }, { status: 403 });
   }
   const data = await getAcademicBundle();
@@ -25,7 +25,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const current = await getCurrentProfile();
-  if (!current || !canCoordinate(current.role, current.email)) {
+  if (!current || !canAccessCoordination(current.role, current.email)) {
     return NextResponse.json({ ok: false, error: "No autorizado." }, { status: 403 });
   }
 

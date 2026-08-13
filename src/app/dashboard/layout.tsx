@@ -3,7 +3,11 @@ import { BrandLogo } from "@/components/brand/BrandLogo";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { LogoutButton } from "@/components/dashboard/LogoutButton";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { roleLabel, canCoordinate, canManageSystem } from "@/lib/auth/admin";
+import {
+  roleLabel,
+  canAccessCoordination,
+  canManageSystem,
+} from "@/lib/auth/admin";
 import { requireProfile } from "@/lib/auth/profile";
 import { site } from "@/lib/site";
 
@@ -12,7 +16,7 @@ export default async function DashboardLayout({
 }: LayoutProps<"/dashboard">) {
   const user = await requireProfile();
   const showCms = canManageSystem(user.role, user.email);
-  const showCoordination = canCoordinate(user.role, user.email);
+  const showCoordination = canAccessCoordination(user.role, user.email);
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-[background-color,color] duration-300">

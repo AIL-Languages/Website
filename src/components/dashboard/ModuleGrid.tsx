@@ -16,35 +16,41 @@ type Props = {
 export function ModuleGrid({ modules }: Props) {
   const pathname = usePathname();
 
+  if (!modules.length) return null;
+
   return (
     <div className="ail-module-grid">
       {modules.map((item) => {
         const active = isActivePath(pathname, item.href);
+        const titleId = `module-title-${item.id}`;
         return (
-          <Link
+          <article
             key={item.id}
-            href={item.href}
-            aria-current={active ? "page" : undefined}
             className={`ail-module-card${active ? " is-active" : ""}`}
+            aria-labelledby={titleId}
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--ail-card-border)] bg-[var(--ail-card-icon)] text-cyan">
+            <span className="ail-module-card-icon" aria-hidden="true">
               <ModuleIcon name={item.icon} />
             </span>
             {item.badge ? (
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-lime-deep">
-                {item.badge}
-              </p>
+              <p className="ail-module-card-badge">{item.badge}</p>
             ) : null}
-            <h3 className="ail-module-card-title font-display text-base font-semibold leading-tight">
+            <h3 id={titleId} className="ail-module-card-title font-display">
               {item.title}
             </h3>
-            <p className="ail-module-card-text line-clamp-1 text-sm leading-snug">
-              {item.text}
-            </p>
-            <span className="ail-module-card-link mt-1 inline-flex min-h-11 items-center text-sm font-semibold">
-              Abrir módulo →
-            </span>
-          </Link>
+            <p className="ail-module-card-text">{item.text}</p>
+            <Link
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              aria-label={`Abrir módulo ${item.title}`}
+              className="ail-module-card-btn"
+            >
+              Abrir módulo
+              <span className="ail-module-card-arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          </article>
         );
       })}
     </div>

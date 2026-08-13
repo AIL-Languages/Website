@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
 import type { UserRole } from "@/lib/auth/admin";
 
 export const smrtHubCards = [
@@ -158,6 +158,26 @@ export function smrtGuideForRole(role: UserRole) {
 
 export function usesStudentSmrtExperience(role: UserRole) {
   return role === "student" || role === "company";
+}
+
+export function smrtAccessDescription(role: UserRole) {
+  if (role === "teacher") {
+    return "Accede a los cursos y recursos que utilizas con tus estudiantes.";
+  }
+  if (role === "admin" || role === "coordinator") {
+    return "Accede a la plataforma y consulta los recursos académicos disponibles.";
+  }
+  return "Consulta tus lecciones, actividades, materiales y recursos asignados por tu profesor.";
+}
+
+export function smrtGuideHref(role: UserRole) {
+  return smrtGuideForRole(role) === "teacher"
+    ? "/dashboard/smrt-english/guia/profesor"
+    : "/dashboard/smrt-english/guia/alumno";
+}
+
+export function smrtHelpWhatsappHref() {
+  return whatsappLink("Hola, necesito ayuda para acceder a Smrt English.");
 }
 
 export function coordinationWhatsappHref() {

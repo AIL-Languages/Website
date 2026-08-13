@@ -115,7 +115,7 @@ export function Languages() {
   }
 
   return (
-    <section id="cursos" className="bg-card py-12 sm:py-16">
+    <section id="cursos" className="ail-section ail-section--tint">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
           Programas de idiomas
@@ -131,7 +131,7 @@ export function Languages() {
           {languages.map((language) => (
             <article
               key={language.id}
-              className="flex flex-col rounded-[1.5rem] bg-ail-navy p-6 text-white"
+              className="ail-card ail-card--dark"
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-xl font-semibold">{language.name}</h3>
@@ -143,9 +143,12 @@ export function Languages() {
               <button
                 type="button"
                 onClick={() => openLanguage(language)}
-                className="mt-5 text-left text-sm font-semibold text-ail-cyan"
+                className="ail-btn ail-btn--on-dark mt-2"
               >
-                Ver programa →
+                Ver programa
+                <span className="ail-btn-arrow" aria-hidden="true">
+                  →
+                </span>
               </button>
             </article>
           ))}
@@ -174,7 +177,7 @@ export function Languages() {
                 setContactInterest(current.interest);
                 close();
               }}
-              className="inline-flex min-h-11 items-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy"
+              className="ail-btn mt-2"
             >
               Solicitar información
             </a>

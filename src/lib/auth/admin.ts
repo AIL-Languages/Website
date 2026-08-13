@@ -80,6 +80,11 @@ export function canCoordinate(role: UserRole, email?: string | null) {
   return canManageSystem(role, email) || role === "coordinator";
 }
 
+/** Coordinación académica: coordinadores autorizados y administradora. */
+export function canAccessCoordination(role: UserRole, email?: string | null) {
+  return canCoordinate(role, email);
+}
+
 export function canCreateRole(actor: UserRole, target: UserRole, email?: string | null) {
   if (canManageSystem(actor, email)) {
     return target !== "admin";

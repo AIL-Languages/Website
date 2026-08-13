@@ -1,4 +1,5 @@
 import {
+  canAccessCoordination,
   canCoordinate,
   canManageSystem,
   type UserRole,
@@ -135,10 +136,22 @@ export function canAccessModule(
   role: UserRole,
   email?: string | null,
 ) {
+  if (module.id === "coordinacion") {
+    return canAccessCoordination(role, email);
+  }
   if (module.access === "admin") {
     return canManageSystem(role, email);
   }
   return canCoordinate(role, email);
+}
+
+export function findSystemModule(href: string) {
+  const normalized =
+    href.length > 1 && href.endsWith("/") ? href.slice(0, -1) : href;
+  return SYSTEM_MODULES.find(
+    (item) =>
+      normalized === item.href || normalized.startsWith(`${item.href}/`),
+  );
 }
 
 export function modulesForUser(

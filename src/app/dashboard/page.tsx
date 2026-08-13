@@ -5,6 +5,12 @@ import { CoordinatorHome } from "@/components/dashboard/CoordinatorHome";
 import { ReportsEntryCard } from "@/components/dashboard/ReportsEntryCard";
 import { SmrtReminderCard } from "@/components/dashboard/SmrtReminderCard";
 import {
+  AILCard,
+  AILCardText,
+  AILCardTitle,
+} from "@/components/ui/AILCard";
+import { AILButton } from "@/components/ui/AILButton";
+import {
   ACCESS_DENIED_QUERY,
   canManageSystem,
   roleLabel,
@@ -12,7 +18,6 @@ import {
 import { listProfiles, requireProfile } from "@/lib/auth/profile";
 import { site, whatsappLink } from "@/lib/site";
 import { usesStudentSmrtExperience } from "@/lib/smrt";
-import Link from "next/link";
 
 export const metadata = {
   title: "Dashboard",
@@ -94,72 +99,52 @@ export default async function DashboardPage({ searchParams }: Props) {
     <main>
       <AccessDeniedNotice show={params.aviso === ACCESS_DENIED_QUERY} />
       <section className="rounded-[2rem] bg-navy px-6 py-8 text-white sm:px-10">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime">
-          Inicio
-        </p>
+        <p className="ail-kicker text-lime">Inicio</p>
         <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
           Hola, {user.name}
         </h1>
-        <p className="mt-3 max-w-2xl text-white/75">{greeting(user.role)}</p>
+        <p className="ail-lead mt-3 max-w-2xl">{greeting(user.role)}</p>
       </section>
 
-      <section className="mt-8 grid gap-6 lg:grid-cols-3">
-        <article className="rounded-[1.5rem] bg-white p-6 shadow-[0_12px_40px_rgba(0,26,61,0.06)] lg:col-span-2">
-          <h2 className="font-display text-xl font-semibold text-navy">
-            Próximos pasos
-          </h2>
-          <ul className="mt-5 space-y-3 text-sm text-muted">
+      <section className="mt-8 grid gap-4 lg:grid-cols-3">
+        <AILCard className="lg:col-span-2">
+          <AILCardTitle className="text-xl">Próximos pasos</AILCardTitle>
+          <ul className="space-y-3 text-sm text-[color:var(--ail-text-muted-light)]">
             {nextSteps(user.role).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-2 flex flex-wrap gap-3">
             {user.role === "student" ? (
-              <Link
-                href="/dashboard/clases"
-                className="inline-flex rounded-full bg-cyan px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright"
-              >
-                Ir a Mis clases
-              </Link>
+              <AILButton href="/dashboard/clases">Ir a Mis clases</AILButton>
             ) : (
-              <Link
-                href="/dashboard/smrt-english"
-                className="inline-flex rounded-full bg-cyan px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright"
-              >
-                Ir a Smrt English
-              </Link>
+              <AILButton href="/dashboard/smrt-english">Ir a Smrt English</AILButton>
             )}
-            <a
+            <AILButton
               href={whatsappLink(
                 `Hola, soy ${user.name}. Ya tengo cuenta en el dashboard (${roleLabel(user.role)}) y quiero continuar.`,
               )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-lime-deep"
+              external
+              variant="secondary"
             >
               Escribir por WhatsApp
-            </a>
+            </AILButton>
           </div>
-        </article>
+        </AILCard>
 
         {usesStudentSmrtExperience(user.role) || user.role === "teacher" ? (
           <SmrtReminderCard />
         ) : (
-          <article className="rounded-[1.5rem] bg-white p-6">
-            <h2 className="font-display text-xl font-semibold text-navy">
-              Smrt English
-            </h2>
-            <p className="mt-3 text-sm text-muted">
+          <AILCard>
+            <AILCardTitle className="text-xl">Smrt English</AILCardTitle>
+            <AILCardText>
               Recursos y guía de uso para alumnos y profesores, integrados al
               ecosistema AIL.
-            </p>
-            <Link
-              href="/dashboard/smrt-english"
-              className="mt-5 inline-flex text-sm font-semibold text-cyan"
-            >
-              Abrir pestaña Smrt English →
-            </Link>
-          </article>
+            </AILCardText>
+            <AILButton href="/dashboard/smrt-english" arrow>
+              Abrir pestaña Smrt English
+            </AILButton>
+          </AILCard>
         )}
       </section>
 
@@ -171,7 +156,7 @@ export default async function DashboardPage({ searchParams }: Props) {
         <CompanyPanel user={user} students={companyStudents} />
       ) : null}
       {user.role === "student" || user.role === "teacher" ? (
-        <section className="mt-10">
+        <section className="mt-8">
           <ReportsEntryCard />
         </section>
       ) : null}

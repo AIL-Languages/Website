@@ -9,6 +9,7 @@ import {
   canManageSystem,
   resolveRole,
 } from "@/lib/auth/admin";
+import { canAccessModule, findSystemModule } from "@/lib/auth/modules";
 import { type Profile, toPublicUser } from "@/lib/auth/types";
 
 export async function getSessionUser() {
@@ -65,6 +66,15 @@ export async function requireAdmin() {
 export async function requireCoordinatorAccess() {
   const user = await requireProfile();
   if (!canCoordinate(user.role, user.email)) redirect(ACCESS_DENIED_PATH);
+  return user;
+}
+
+export async function requireModuleAccess(href: string) {
+  const user = await requireProfile();
+  const module = findSystemModule(href);
+  if (!module || !canAccessModule(module, user.role, user.email)) {
+    redirect(ACCESS_DENIED_PATH);
+  }
   return user;
 }
 

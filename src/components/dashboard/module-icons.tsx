@@ -1,11 +1,31 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import type { ModuleIconName } from "@/lib/auth/modules";
 
 type IconProps = { className?: string };
 
-function IconCms({ className = "h-5 w-5" }: IconProps) {
+function SvgIcon({
+  children,
+  className = "h-6 w-6",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      {children}
+    </svg>
+  );
+}
+
+function IconCms({ className }: IconProps) {
+  return (
+    <SvgIcon className={className}>
       <path
         d="M4 5h16v14H4z"
         stroke="currentColor"
@@ -18,27 +38,35 @@ function IconCms({ className = "h-5 w-5" }: IconProps) {
         strokeWidth="1.8"
         strokeLinecap="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconMail({ className = "h-5 w-5" }: IconProps) {
+function IconMail({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
+    <SvgIcon className={className}>
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
       <path
         d="m4 7 8 6 8-6"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconUsers({ className = "h-5 w-5" }: IconProps) {
+function IconUsers({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <circle cx="9" cy="8" r="3.2" stroke="currentColor" strokeWidth="1.8" />
       <path
         d="M3.8 19c.7-3 2.8-4.7 5.2-4.7s4.5 1.7 5.2 4.7"
@@ -53,13 +81,13 @@ function IconUsers({ className = "h-5 w-5" }: IconProps) {
         strokeWidth="1.8"
         strokeLinecap="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconSettings({ className = "h-5 w-5" }: IconProps) {
+function IconSettings({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.8" />
       <path
         d="M12 3.5v2.2M12 18.3v2.2M4.9 6.5l1.6 1.6M17.5 16l1.6 1.6M3.5 12h2.2M18.3 12h2.2M4.9 17.5l1.6-1.6M17.5 8.1l1.6-1.6"
@@ -67,34 +95,34 @@ function IconSettings({ className = "h-5 w-5" }: IconProps) {
         strokeWidth="1.8"
         strokeLinecap="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconPanel({ className = "h-5 w-5" }: IconProps) {
+function IconPanel({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <rect x="3" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
       <rect x="14" y="4" width="7" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
       <rect x="14" y="11" width="7" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
       <rect x="3" y="14" width="7" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconBilling({ className = "h-5 w-5" }: IconProps) {
+function IconBilling({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.8" />
       <path d="M3 10h18" stroke="currentColor" strokeWidth="1.8" />
       <path d="M7 15h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconDocuments({ className = "h-5 w-5" }: IconProps) {
+function IconDocuments({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <path
         d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"
         stroke="currentColor"
@@ -103,13 +131,13 @@ function IconDocuments({ className = "h-5 w-5" }: IconProps) {
       />
       <path d="M14 3v5h5" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
       <path d="M8 13h8M8 17h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconTeachers({ className = "h-5 w-5" }: IconProps) {
+function IconTeachers({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <path
         d="M22 10 12 5 2 10l10 5 10-5z"
         stroke="currentColor"
@@ -122,13 +150,13 @@ function IconTeachers({ className = "h-5 w-5" }: IconProps) {
         strokeWidth="1.8"
         strokeLinecap="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconCoordination({ className = "h-5 w-5" }: IconProps) {
+function IconCoordination({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <path
         d="M12 7v13M12 7c-2-1.6-5.2-2.2-8-2v13c2.8.2 6 1 8 2.5M12 7c2-1.6 5.2-2.2 8-2v13c-2.8.2-6 1-8 2.5"
         stroke="currentColor"
@@ -136,13 +164,13 @@ function IconCoordination({ className = "h-5 w-5" }: IconProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconAssignment({ className = "h-5 w-5" }: IconProps) {
+function IconAssignment({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <SvgIcon className={className}>
       <circle cx="7" cy="8" r="2.6" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="17" cy="8" r="2.6" stroke="currentColor" strokeWidth="1.8" />
       <path
@@ -152,15 +180,20 @@ function IconAssignment({ className = "h-5 w-5" }: IconProps) {
         strokeLinecap="round"
       />
       <path d="M10 9.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
+    </SvgIcon>
   );
 }
 
-function IconReports({ className = "h-5 w-5" }: IconProps) {
+function IconReports({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <path d="M5 19V9M10 19V5M15 19v-7M20 19V8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
+    <SvgIcon className={className}>
+      <path
+        d="M5 19V9M10 19V5M15 19v-7M20 19V8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </SvgIcon>
   );
 }
 
@@ -180,7 +213,7 @@ const icons: Record<ModuleIconName, (props: IconProps) => ReactElement> = {
 
 export function ModuleIcon({
   name,
-  className = "h-5 w-5",
+  className = "h-6 w-6",
 }: {
   name: ModuleIconName;
   className?: string;

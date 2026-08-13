@@ -1,54 +1,64 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { TeacherApplicationModal } from "@/components/recruitment/TeacherApplicationModal";
+import {
+  AILCard,
+  AILCardText,
+  AILCardTitle,
+  AILIconBubble,
+} from "@/components/ui/AILCard";
+import { AILButton } from "@/components/ui/AILButton";
+import { IconChalkboard, IconUserPlus } from "@/components/director/icons";
 
 export function JoinProfiles() {
   const [teacherModalOpen, setTeacherModalOpen] = useState(false);
 
   return (
-    <section id="registro" className="bg-card py-12 sm:py-16">
+    <section id="registro" className="ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-2">
-          <article className="rounded-[1.5rem] bg-navy p-6 text-white sm:p-8">
-            <h2 className="font-display text-2xl font-semibold">
+          <AILCard>
+            <AILIconBubble>
+              <IconChalkboard />
+            </AILIconBubble>
+            <AILCardTitle className="text-2xl">
               ¿Te interesa enseñar con AIL?
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-white/75">
+            </AILCardTitle>
+            <AILCardText>
               Conoce nuestro proceso de selección docente.
-            </p>
-            <button
+            </AILCardText>
+            <AILButton
               type="button"
+              arrow
+              className="mt-2"
               onClick={() => setTeacherModalOpen(true)}
-              className="mt-6 inline-flex min-h-11 items-center rounded-full bg-lime px-5 text-sm font-semibold text-navy-deep"
             >
-              Postularme →
-            </button>
-          </article>
+              Postularme
+            </AILButton>
+          </AILCard>
 
-          <article className="rounded-[1.5rem] border border-navy/10 bg-mist/70 p-6 sm:p-8">
-            <h2 className="font-display text-2xl font-semibold text-navy">
-              Crea tu cuenta
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
+          <AILCard>
+            <AILIconBubble>
+              <IconUserPlus />
+            </AILIconBubble>
+            <AILCardTitle className="text-2xl">Crea tu cuenta</AILCardTitle>
+            <AILCardText>
               Alumnos y empresas pueden registrarse para acceder a la plataforma.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/registro?perfil=alumno"
-                className="inline-flex min-h-11 items-center rounded-full bg-cyan px-5 text-sm font-semibold text-navy-deep"
-              >
+            </AILCardText>
+            <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <AILButton href="/registro?perfil=alumno" className="sm:flex-1">
                 Soy alumno
-              </Link>
-              <Link
+              </AILButton>
+              <AILButton
                 href="/registro?perfil=empresa"
-                className="inline-flex min-h-11 items-center rounded-full border border-navy/15 px-5 text-sm font-semibold text-navy"
+                variant="secondary"
+                className="sm:flex-1"
               >
                 Soy empresa
-              </Link>
+              </AILButton>
             </div>
-          </article>
+          </AILCard>
         </div>
       </div>
 

@@ -1,12 +1,12 @@
 import { AdminModuleHeader } from "@/components/dashboard/AdminModuleHeader";
 import { CoordinationDesk } from "@/components/dashboard/CoordinationDesk";
 import { getAcademicBundle } from "@/lib/academic/store";
-import { listProfiles, requireCoordinatorAccess } from "@/lib/auth/profile";
+import { listProfiles, requireModuleAccess } from "@/lib/auth/profile";
 
 export const metadata = { title: "Coordinación académica" };
 
 export default async function CoordinationPage() {
-  await requireCoordinatorAccess();
+  await requireModuleAccess("/dashboard/coordinacion");
   const users = await listProfiles();
   const academic = await getAcademicBundle();
 

@@ -7,5 +7,5 @@ export const metadata = {
 
 export default async function SmrtEnglishPage() {
   const user = await requireProfile();
-  return <SmrtHub role={user.role} name={user.name} />;
+  return <SmrtHub role={user.role} />;
 }

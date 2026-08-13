@@ -21,7 +21,7 @@ export function ExpandInline({
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
-        className="mt-5 text-sm font-semibold text-ail-cyan transition hover:text-ail-navy"
+        className="ail-btn ail-btn--on-dark mt-5"
       >
         {open ? "Mostrar menos ↑" : `${summary} ↓`}
       </button>
