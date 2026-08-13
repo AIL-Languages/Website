@@ -11,7 +11,7 @@ type Props = {
 export function HeroBrandMark({ className = "" }: Props) {
   return (
     <div
-      className={`relative flex w-full max-w-[300px] flex-col items-center gap-4 lg:max-w-[320px] lg:items-start ${className}`}
+      className={`relative flex w-full max-w-[300px] flex-col items-center gap-4 lg:max-w-[320px] ${className}`}
     >
       <BrandLogo
         variant="isotype"
@@ -21,7 +21,7 @@ export function HeroBrandMark({ className = "" }: Props) {
         priority
         alt=""
       />
-      <div className="text-center lg:text-left">
+      <div className="text-center">
         <p className="font-display text-xl font-medium tracking-tight text-white sm:text-2xl">
           {site.name}
         </p>

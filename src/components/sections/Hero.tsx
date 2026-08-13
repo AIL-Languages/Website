@@ -39,7 +39,7 @@ export async function Hero() {
 
       <div className="relative mx-auto w-[calc(100%-2rem)] max-w-[1440px] py-12 sm:w-[calc(100%-3rem)] sm:py-16 xl:max-w-[1520px] lg:py-20">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:gap-14">
-          <div className="relative mx-auto flex w-full max-w-[260px] justify-center lg:mx-0 lg:max-w-[280px] lg:justify-start">
+          <div className="relative mx-auto flex w-full max-w-[260px] justify-center lg:max-w-[280px]">
             <HeroBrandMark />
             <p className="sr-only">
               {site.name}. {site.tagline}.
