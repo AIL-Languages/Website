@@ -113,14 +113,19 @@ export const languages: LanguageProfile[] = [
   },
 ];
 
+export type JourneyExperienceKind = "origin" | "rotary" | "language-stay" | "academic";
+
 export type JourneyStop = {
   id: string;
   country: string;
   region?: string;
   code: "MX" | "US" | "BR" | "GB" | "CA" | "IT";
   description: string;
+  kind: JourneyExperienceKind;
+  kindLabel: string;
   pinColor: string;
   origin?: boolean;
+  viaRotary?: boolean;
   education?: {
     degree: string;
     institution: string;
@@ -134,6 +139,8 @@ export const journeyStops: JourneyStop[] = [
     country: "México",
     code: "MX",
     description: "Base profesional y académica",
+    kind: "origin",
+    kindLabel: "Punto de origen",
     pinColor: "#00F0A3",
     origin: true,
   },
@@ -141,7 +148,9 @@ export const journeyStops: JourneyStop[] = [
     id: "us",
     country: "Estados Unidos",
     code: "US",
-    description: "Estudios académicos de inglés",
+    description: "Estancia lingüística en inglés",
+    kind: "language-stay",
+    kindLabel: "Estancia lingüística",
     pinColor: "#168BFF",
   },
   {
@@ -149,14 +158,19 @@ export const journeyStops: JourneyStop[] = [
     country: "Brasil",
     code: "BR",
     description: "Inmersión lingüística y cultural",
+    kind: "rotary",
+    kindLabel: "Experiencia Rotary",
     pinColor: "#00E0E6",
+    viaRotary: true,
   },
   {
     id: "uk",
     country: "Reino Unido",
     region: "Escocia",
     code: "GB",
-    description: "University of Glasgow",
+    description: "Formación académica en University of Glasgow",
+    kind: "academic",
+    kindLabel: "Formación académica",
     pinColor: "#071B3A",
     education: {
       degree: "M.Sc. Sustainable Water Environments",
@@ -169,14 +183,20 @@ export const journeyStops: JourneyStop[] = [
     country: "Canadá",
     code: "CA",
     description: "Experiencia profesional internacional",
+    kind: "rotary",
+    kindLabel: "Experiencia Rotary",
     pinColor: "#00E0E6",
+    viaRotary: true,
   },
   {
     id: "it",
     country: "Italia",
     code: "IT",
     description: "Experiencia profesional internacional",
+    kind: "rotary",
+    kindLabel: "Experiencia Rotary",
     pinColor: "#00F0A3",
+    viaRotary: true,
   },
 ];
 

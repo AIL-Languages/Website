@@ -1,5 +1,6 @@
 "use client";
 
+import type { KeyboardEvent } from "react";
 import { useId } from "react";
 import { CareerTimeline } from "@/components/director/CareerTimeline";
 import { CountryFlag } from "@/components/director/CountryFlags";
@@ -16,7 +17,7 @@ const tabs = [
   { id: "experiencia", label: "Experiencia" },
   { id: "formacion", label: "Formación" },
   { id: "certificaciones", label: "Certificaciones" },
-  { id: "journey", label: "Global Journey" },
+  { id: "journey", label: "Trayectoria internacional" },
 ] as const;
 
 export type ExperienceTab = (typeof tabs)[number]["id"];
@@ -42,15 +43,40 @@ const languageFlags: Record<string, { code: "US" | "CA" | "GB" | "BR" | "MX" | "
 export function AcademicExperienceModal({ open, onClose, tab, onTabChange }: Props) {
   const tablistId = useId();
 
+  function onTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const last = tabs.length - 1;
+    let next = index;
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      next = index === last ? 0 : index + 1;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      next = index === 0 ? last : index - 1;
+    } else if (event.key === "Home") {
+      next = 0;
+    } else if (event.key === "End") {
+      next = last;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    const nextTab = tabs[next];
+    onTabChange(nextTab.id);
+    window.requestAnimationFrame(() => {
+      document.getElementById(`${tablistId}-${nextTab.id}`)?.focus();
+    });
+  }
+
   return (
     <DetailSheet open={open} onClose={onClose} title="Conocer trayectoria">
       <div
         role="tablist"
-        aria-label="Trayectoria académica"
+        aria-label="Secciones de trayectoria"
+        aria-orientation="horizontal"
         id={tablistId}
-        className="mb-5 flex gap-2 overflow-x-auto pb-1"
+        className="mb-5 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2.5"
       >
-        {tabs.map((item) => {
+        {tabs.map((item, index) => {
           const selected = tab === item.id;
           return (
             <button
@@ -62,8 +88,11 @@ export function AcademicExperienceModal({ open, onClose, tab, onTabChange }: Pro
               aria-controls={`${tablistId}-panel-${item.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => onTabChange(item.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                selected ? "bg-navy text-white" : "bg-mist text-navy"
+              onKeyDown={(event) => onTabKeyDown(event, index)}
+              className={`relative inline-flex min-h-11 w-full items-center justify-center rounded-full border px-3.5 py-2.5 text-center text-sm font-semibold leading-snug transition duration-200 sm:w-auto sm:shrink-0 sm:px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                selected
+                  ? "border-ail-cyan bg-ail-navy text-white shadow-[0_0_16px_rgba(0,224,230,0.28)] after:absolute after:inset-x-4 after:-bottom-px after:h-0.5 after:rounded-full after:bg-ail-cyan"
+                  : "border-ail-navy/45 bg-white text-ail-navy hover:border-ail-cyan hover:bg-ail-cyan/15"
               }`}
             >
               {item.label}
@@ -76,7 +105,7 @@ export function AcademicExperienceModal({ open, onClose, tab, onTabChange }: Pro
         role="tabpanel"
         id={`${tablistId}-panel-${tab}`}
         aria-labelledby={`${tablistId}-${tab}`}
-        className="space-y-6"
+        className="space-y-6 overflow-x-hidden"
       >
         {tab === "experiencia" ? (
           <div className="space-y-6">
@@ -150,14 +179,7 @@ export function AcademicExperienceModal({ open, onClose, tab, onTabChange }: Pro
           </div>
         ) : null}
 
-        {tab === "journey" ? (
-          <div>
-            <p className="mb-4 text-sm font-semibold text-ail-green">
-              Linking Worldwide · trayectoria internacional
-            </p>
-            <GlobalJourney />
-          </div>
-        ) : null}
+        {tab === "journey" ? <GlobalJourney /> : null}
       </div>
     </DetailSheet>
   );

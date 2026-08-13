@@ -88,7 +88,7 @@ export function DetailSheet({ open, onClose, title, children, wide = true }: Pro
             ✕ Cerrar
           </button>
         </div>
-        <div className="overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">{children}</div>
+        <div className="overflow-x-hidden overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">{children}</div>
       </div>
     </div>
   );

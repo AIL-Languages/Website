@@ -71,15 +71,25 @@ export function FlagGB({ className = "h-12 w-12", title = "Reino Unido" }: Props
 }
 
 export function FlagCA({ className = "h-12 w-12", title = "Canadá" }: Props) {
+  const clipId = useId();
   return (
     <svg viewBox="0 0 36 36" className={className} role="img" aria-label={title}>
       <title>{title}</title>
-      <circle cx="18" cy="18" r="18" fill="#ff0000" />
-      <path fill="#fff" d="M10 0h16v36H10z" />
-      <path
-        fill="#ff0000"
-        d="M18 9.5 20.2 15l5.8.2-4.5 3.6 1.5 5.5L18 21.2l-4.9 3.1 1.5-5.5-4.5-3.6 5.8-.2z"
-      />
+      <defs>
+        <clipPath id={clipId}>
+          <circle cx="18" cy="18" r="18" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clipId})`}>
+        <g transform="scale(0.00375 0.0075)">
+          <path fill="#d52b1e" d="M0 0h9600v4800H0z" />
+          <path
+            fill="#fff"
+            fillRule="evenodd"
+            d="m2400 0h4800v4800h-4800zm2490 4430-45-863a95 95 0 0 1 111-98l859 151-116-320a65 65 0 0 1 20-73l941-762-212-99a65 65 0 0 1-34-79l186-572-542 115a65 65 0 0 1-73-38l-105-247-423 454a65 65 0 0 1-111-57l204-1052-327 189a65 65 0 0 1-91-27l-332-652-332 652a65 65 0 0 1-91 27l-327-189 204 1052a65 65 0 0 1-111 57l-423-454-105 247a65 65 0 0 1-73 38l-542-115 186 572a65 65 0 0 1-34 79l-212 99 941 762a65 65 0 0 1 20 73l-116 320 859-151a95 95 0 0 1 111 98l-45 863z"
+          />
+        </g>
+      </g>
     </svg>
   );
 }
