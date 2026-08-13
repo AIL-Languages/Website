@@ -146,6 +146,9 @@ body {
 .theme-card {
   background-color: var(--card);
   border-color: var(--border);
+  color: var(--ail-text-on-light);
+  --ink: var(--ail-text-on-light);
+  --muted: var(--ail-text-muted-light);
   transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
