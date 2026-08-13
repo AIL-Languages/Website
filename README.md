@@ -2,6 +2,16 @@
 
 Sitio profesional de A-Inman Languages (Next.js + TypeScript) conectado a **Supabase** (Auth + Postgres).
 
+## Producción (Render)
+
+El sitio público se publica **automáticamente en Render** con cada push a `main`:
+
+- URL: [https://website-jml9.onrender.com](https://website-jml9.onrender.com)
+- Servicio: `Website` · repo `AIL-Languages/Website` · rama `main`
+- Blueprint: `render.yaml`
+
+No usar Vercel ni otro host para producción. Las claves (Supabase, Resend, `AUTH_SECRET`) se configuran en Render → Environment.
+
 ## Desarrollo
 
 1. Copia `.env.example` a `.env.local` y completa las claves de Supabase.
@@ -26,7 +36,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 | `RESEND_API_KEY` o `EMAIL_API_KEY` | [Resend](https://resend.com/api-keys) → API Keys (solo servidor) |
 | `RESEND_FROM` o `EMAIL_FROM` | Remitente verificado, p. ej. `A-Inman Languages <xavier.y@example.org>` |
 | `CONTACT_INBOX_EMAIL` | Buzón interno de nuevos leads (`ainman.languages@gmail.com`) |
-| `PUBLIC_SITE_URL` | Dominio público para CTAs de correo (no usar URL de staging) |
+| `PUBLIC_SITE_URL` | `https://website-jml9.onrender.com` (producción Render) |
 
 Proyecto Supabase: `bnxhxkpqbstgzxlzwuii` (`https://bnxhxkpqbstgzxlzwuii.supabase.co`).
 

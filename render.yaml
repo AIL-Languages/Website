@@ -1,0 +1,23 @@
+# Producción AIL — Render (único host público)
+# Push a main → deploy automático en https://website-jml9.onrender.com
+services:
+  - type: web
+    name: Website
+    runtime: node
+    plan: free
+    region: oregon
+    repo: https://github.com/AIL-Languages/Website
+    branch: main
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_SITE_URL
+        value: https://website-jml9.onrender.com
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://website-jml9.onrender.com

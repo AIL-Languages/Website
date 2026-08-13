@@ -38,14 +38,18 @@ export function whatsappLink(message: string = site.whatsappPrefill) {
   return `${site.whatsappUrl}?text=${encodeURIComponent(message)}`;
 }
 
+/** Host público en Render. Cada push a `main` actualiza esta URL. */
+export const PRODUCTION_SITE_URL = "https://website-jml9.onrender.com";
+
 export function publicSiteUrl() {
   const explicit = (
     process.env.PUBLIC_SITE_URL ||
     process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.RENDER_EXTERNAL_URL ||
     ""
   ).replace(/\/$/, "");
   if (explicit) return explicit;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.RENDER === "true") return PRODUCTION_SITE_URL;
   return "http://localhost:3000";
 }
 

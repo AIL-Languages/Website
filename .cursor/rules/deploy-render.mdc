@@ -1,0 +1,25 @@
+---
+description: Producción AIL siempre se publica en Render, no en Vercel
+alwaysApply: true
+---
+
+# Despliegue AIL — Render
+
+La web pública de A-Inman Languages se publica **solo en Render**.
+
+- URL: https://website-jml9.onrender.com
+- Servicio: `Website` (plan Free, región Oregon)
+- Repo: `AIL-Languages/Website`
+- Rama: `main`
+- Auto-deploy: cada push a `main` dispara el build en Render
+
+Cuando el usuario pida subir, publicar o poner cambios “en la red”:
+
+1. Confirmar que no hay secretos (`.env`, claves).
+2. Hacer commit si hay cambios pendientes.
+3. `git push origin main`.
+4. El sitio queda en https://website-jml9.onrender.com (el primer arranque del plan Free puede tardar 1–2 minutos).
+
+No desplegar con Vercel, Netlify ni GitHub Pages.
+No crear un segundo host de producción.
+Las claves de Supabase y Resend viven en Render → Environment, no en el repo.
