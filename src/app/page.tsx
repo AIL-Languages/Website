@@ -3,10 +3,12 @@ import { Header } from "@/components/Header";
 import { About } from "@/components/sections/About";
 import { AcademicDirectorSection } from "@/components/sections/AcademicDirectorSection";
 import { BillingNote } from "@/components/sections/BillingNote";
+import { ChooseWhenToLearn } from "@/components/sections/ChooseWhenToLearn";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { ExamPreparationStrip } from "@/components/sections/ExamPreparationStrip";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { Hero } from "@/components/sections/Hero";
+import { HowItWorks } from "@/components/sections/HowItWorks";
 import { JoinProfiles } from "@/components/sections/JoinProfiles";
 import { Languages } from "@/components/sections/Languages";
 import { Methodology } from "@/components/sections/Methodology";
@@ -24,10 +26,12 @@ export default function HomePage() {
         <Languages />
         <SkillsStrip />
         <Methodology />
+        <HowItWorks />
         <About />
         <AcademicDirectorSection />
         <ExamPreparationStrip />
         <Programs />
+        <ChooseWhenToLearn />
         <PartnershipsSection />
         <Translation />
         <BillingNote />

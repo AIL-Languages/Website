@@ -23,6 +23,8 @@ const primaryNav = [
 
 const moreNav = [
   { href: "#experiencia", label: "Experiencia" },
+  { href: "#proceso", label: "Proceso" },
+  { href: "#elige-cuando", label: "Agenda" },
   { href: "#preparacion-certificaciones", label: "Certificaciones" },
   { href: "#convenios", label: "Convenios" },
   { href: "#facturacion", label: "Pagos" },

@@ -13,11 +13,7 @@ export const faqRoutes = {
   translationQuote: "#traduccion-detalle",
   team: "#experiencia",
   contact: "#contacto",
-  /**
-   * TODO: `ChooseWhenToLearn` (`#elige-cuando`) existe como componente
-   * pero no está montado en la landing. Calendly vive en `/dashboard/clases`.
-   */
-  agenda: null,
+  agenda: "#elige-cuando",
   /**
    * TODO: las políticas de cancelación/reprogramación solo existen en el
    * dashboard del alumno (`StudentClassesPanel`), no hay sección pública.
@@ -37,10 +33,6 @@ export const faqRoutes = {
 export type FaqRouteKey = keyof typeof faqRoutes;
 
 export const faqRouteTodos: { key: FaqRouteKey; note: string }[] = [
-  {
-    key: "agenda",
-    note: "Enlazar con Agenda / Calendly cuando la sección pública esté en la landing.",
-  },
   {
     key: "classPolicies",
     note: "Publicar políticas de clases y apuntar el FAQ a esa ancla.",

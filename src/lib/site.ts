@@ -25,6 +25,7 @@ export const navItems = [
   { href: "#experiencia", label: "Experiencia" },
   { href: "#cursos", label: "Cursos" },
   { href: "#metodologia", label: "Metodología" },
+  { href: "#elige-cuando", label: "Agenda" },
   { href: "#empresas", label: "Empresas" },
   { href: "#convenios", label: "Convenios" },
   { href: "#facturacion", label: "Pagos" },
