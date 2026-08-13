@@ -144,6 +144,12 @@ export function CreateUserForm({
               </option>
             ))}
           </select>
+          {allowedRoles.includes("coordinator") ? (
+            <p className="mt-2 text-xs text-muted">
+              Coordinación académica se asigna internamente. No aparece en el
+              registro público.
+            </p>
+          ) : null}
         </label>
       </div>
 

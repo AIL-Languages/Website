@@ -19,9 +19,15 @@ type Props = {
   user: PublicUser;
   canDelete: boolean;
   canResetPassword: boolean;
+  canAssignInternalRoles?: boolean;
 };
 
-export function UserAccountForm({ user, canDelete, canResetPassword }: Props) {
+export function UserAccountForm({
+  user,
+  canDelete,
+  canResetPassword,
+  canAssignInternalRoles = false,
+}: Props) {
   const router = useRouter();
   const [role, setRole] = useState<PublicProfileRole>(
     user.role === "admin" ? "student" : user.role,
@@ -115,16 +121,28 @@ export function UserAccountForm({ user, canDelete, canResetPassword }: Props) {
             Perfil
             <select
               value={role}
-              disabled={locked}
+              disabled={locked || (!canAssignInternalRoles && user.role === "coordinator")}
               onChange={(event) => setRole(event.target.value as PublicProfileRole)}
               className={fieldClass}
             >
-              {(["student", "teacher", "coordinator", "company"] as const).map((item) => (
+              {(
+                canAssignInternalRoles
+                  ? (["student", "teacher", "coordinator", "company"] as const)
+                  : user.role === "coordinator"
+                    ? (["coordinator"] as const)
+                    : (["student", "teacher", "company"] as const)
+              ).map((item) => (
                 <option key={item} value={item}>
                   {roleLabel(item)}
                 </option>
               ))}
             </select>
+            {canAssignInternalRoles ? (
+              <span className="mt-2 block text-xs text-muted">
+                Coordinación académica se asigna o retira internamente. No está
+                disponible en el registro público.
+              </span>
+            ) : null}
           </label>
           <label className="text-sm font-medium">
             Estatus de acceso

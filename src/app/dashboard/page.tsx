@@ -1,9 +1,14 @@
 import { AdminPanel } from "@/components/dashboard/AdminPanel";
+import { AccessDeniedNotice } from "@/components/dashboard/AccessDeniedNotice";
 import { CompanyPanel } from "@/components/dashboard/CompanyPanel";
 import { CoordinatorHome } from "@/components/dashboard/CoordinatorHome";
 import { ReportsEntryCard } from "@/components/dashboard/ReportsEntryCard";
 import { SmrtReminderCard } from "@/components/dashboard/SmrtReminderCard";
-import { canManageSystem, roleLabel } from "@/lib/auth/admin";
+import {
+  ACCESS_DENIED_QUERY,
+  canManageSystem,
+  roleLabel,
+} from "@/lib/auth/admin";
 import { listProfiles, requireProfile } from "@/lib/auth/profile";
 import { site, whatsappLink } from "@/lib/site";
 import { usesStudentSmrtExperience } from "@/lib/smrt";
@@ -15,7 +20,7 @@ export const metadata = {
 
 function greeting(role: string) {
   if (role === "admin") {
-    return `Acceso completo de administración en ${site.name}.`;
+    return `Panel de administración de ${site.name}.`;
   }
   if (role === "coordinator") {
     return `Panel operativo de coordinación académica en ${site.name}.`;
@@ -65,8 +70,13 @@ function nextSteps(role: string) {
   ];
 }
 
-export default async function DashboardPage() {
+type Props = {
+  searchParams: Promise<{ aviso?: string }>;
+};
+
+export default async function DashboardPage({ searchParams }: Props) {
   const user = await requireProfile();
+  const params = await searchParams;
   const isAdmin = canManageSystem(user.role, user.email);
   const users = user.role === "company" ? await listProfiles() : [];
   const companyStudents = users.filter(
@@ -82,6 +92,7 @@ export default async function DashboardPage() {
 
   return (
     <main>
+      <AccessDeniedNotice show={params.aviso === ACCESS_DENIED_QUERY} />
       <section className="rounded-[2rem] bg-navy px-6 py-8 text-white sm:px-10">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime">
           Inicio
@@ -152,8 +163,10 @@ export default async function DashboardPage() {
         )}
       </section>
 
-      {isAdmin ? <AdminPanel /> : null}
-      {user.role === "coordinator" ? <CoordinatorHome /> : null}
+      {isAdmin ? <AdminPanel role={user.role} email={user.email} /> : null}
+      {user.role === "coordinator" ? (
+        <CoordinatorHome role={user.role} email={user.email} />
+      ) : null}
       {user.role === "company" ? (
         <CompanyPanel user={user} students={companyStudents} />
       ) : null}

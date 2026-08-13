@@ -32,7 +32,7 @@ export function JoinProfiles() {
               Crea tu cuenta
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Alumnos, empresas y coordinación pueden registrarse para acceder a la plataforma.
+              Alumnos y empresas pueden registrarse para acceder a la plataforma.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link

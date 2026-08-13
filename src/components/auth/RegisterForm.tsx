@@ -6,20 +6,15 @@ import { useRouter } from "next/navigation";
 import { RoleFields } from "@/components/auth/RoleFields";
 import { AvailabilityEditor } from "@/components/scheduling/AvailabilityEditor";
 import { detailsFromForm } from "@/lib/academic/details";
-import type { PublicProfileRole } from "@/lib/auth/admin";
+import type { SelfServeRole } from "@/lib/auth/admin";
 import { roleLabel } from "@/lib/auth/admin";
 import { TEACHER_APPLICATION_FORM_URL } from "@/lib/recruitment";
 
-const profiles: { value: PublicProfileRole; title: string; text: string }[] = [
+const profiles: { value: SelfServeRole; title: string; text: string }[] = [
   {
     value: "student",
     title: "Alumno",
     text: "Aprende un idioma con clases personalizadas y seguimiento académico.",
-  },
-  {
-    value: "coordinator",
-    title: "Coordinación académica",
-    text: "Gestiona profesores, alumnos, grupos, horarios y seguimiento.",
   },
   {
     value: "company",
@@ -29,13 +24,12 @@ const profiles: { value: PublicProfileRole; title: string; text: string }[] = [
 ];
 
 type Props = {
-  defaultRole?: PublicProfileRole;
+  defaultRole?: SelfServeRole;
 };
 
 export function RegisterForm({ defaultRole = "student" }: Props) {
   const router = useRouter();
-  const initialRole = defaultRole === "teacher" ? "student" : defaultRole;
-  const [role, setRole] = useState<PublicProfileRole>(initialRole);
+  const [role, setRole] = useState<SelfServeRole>(defaultRole);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);

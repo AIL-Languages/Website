@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AuthShell } from "@/components/auth/AuthShell";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { TeacherApplicationPanel } from "@/components/recruitment/TeacherApplicationPanel";
-import { parsePublicRole } from "@/lib/auth/admin";
+import { parseSelfServeRole } from "@/lib/auth/admin";
 
 export const metadata: Metadata = {
   title: "Registro",
@@ -38,15 +38,14 @@ export default async function RegisterPage({ searchParams }: Props) {
     );
   }
 
-  const defaultRole = parsePublicRole(params.perfil);
-  const safeRole = defaultRole === "teacher" ? "student" : defaultRole;
+  const defaultRole = parseSelfServeRole(params.perfil);
 
   return (
     <AuthShell
       title="Crea tu cuenta"
-      subtitle="Elige tu perfil. Los campos del formulario cambian si eres alumno, coordinación académica o empresa. La postulación docente usa un proceso aparte."
+      subtitle="Elige tu perfil. Los campos del formulario cambian si eres alumno o empresa. La postulación docente usa un proceso aparte."
     >
-      <RegisterForm key={safeRole} defaultRole={safeRole} />
+      <RegisterForm key={defaultRole} defaultRole={defaultRole} />
     </AuthShell>
   );
 }

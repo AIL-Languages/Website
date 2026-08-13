@@ -9,6 +9,16 @@ export type UserRole =
 
 export type PublicProfileRole = Exclude<UserRole, "admin">;
 
+/** Perfiles que una persona puede elegir en registro público. */
+export const SELF_SERVE_ROLES = ["student", "company"] as const;
+export type SelfServeRole = (typeof SELF_SERVE_ROLES)[number];
+
+export const ACCESS_DENIED_QUERY = "sin-permiso";
+export const ACCESS_DENIED_MESSAGE =
+  "No tienes permisos para acceder a este módulo";
+
+export const ACCESS_DENIED_PATH = `/dashboard?aviso=${ACCESS_DENIED_QUERY}`;
+
 export function isSoleAdminEmail(email?: string | null) {
   return email?.trim().toLowerCase() === SOLE_ADMIN_EMAIL;
 }
@@ -35,6 +45,15 @@ export function parsePublicRole(value?: string | null): PublicProfileRole {
     return "company";
   }
   return "student";
+}
+
+export function isSelfServeRole(role: string): role is SelfServeRole {
+  return role === "student" || role === "company";
+}
+
+/** Nunca expone coordinación ni docente como perfil de autoservicio. */
+export function parseSelfServeRole(value?: string | null): SelfServeRole {
+  return parsePublicRole(value) === "company" ? "company" : "student";
 }
 
 export function resolveRole(

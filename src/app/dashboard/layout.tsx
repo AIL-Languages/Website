@@ -3,7 +3,7 @@ import { BrandLogo } from "@/components/brand/BrandLogo";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { LogoutButton } from "@/components/dashboard/LogoutButton";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { roleLabel, canManageSystem } from "@/lib/auth/admin";
+import { roleLabel, canCoordinate, canManageSystem } from "@/lib/auth/admin";
 import { requireProfile } from "@/lib/auth/profile";
 import { site } from "@/lib/site";
 
@@ -12,6 +12,7 @@ export default async function DashboardLayout({
 }: LayoutProps<"/dashboard">) {
   const user = await requireProfile();
   const showCms = canManageSystem(user.role, user.email);
+  const showCoordination = canCoordinate(user.role, user.email);
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-[background-color,color] duration-300">
@@ -43,10 +44,10 @@ export default async function DashboardLayout({
           </div>
         </div>
         <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
-          <DashboardNav showCms={showCms} />
+          <DashboardNav showCms={showCms} showCoordination={showCoordination} />
         </div>
       </header>
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">{children}</div>
+      <div className="mx-auto min-w-0 max-w-7xl px-4 py-10 sm:px-6 lg:px-8">{children}</div>
     </div>
   );
 }

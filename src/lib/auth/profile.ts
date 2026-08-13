@@ -3,7 +3,12 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { parseDetails } from "@/lib/academic/details";
-import { canCoordinate, canManageSystem, resolveRole } from "@/lib/auth/admin";
+import {
+  ACCESS_DENIED_PATH,
+  canCoordinate,
+  canManageSystem,
+  resolveRole,
+} from "@/lib/auth/admin";
 import { type Profile, toPublicUser } from "@/lib/auth/types";
 
 export async function getSessionUser() {
@@ -53,13 +58,13 @@ export async function requireProfile() {
 
 export async function requireAdmin() {
   const user = await requireProfile();
-  if (!canManageSystem(user.role, user.email)) redirect("/dashboard");
+  if (!canManageSystem(user.role, user.email)) redirect(ACCESS_DENIED_PATH);
   return user;
 }
 
 export async function requireCoordinatorAccess() {
   const user = await requireProfile();
-  if (!canCoordinate(user.role, user.email)) redirect("/dashboard");
+  if (!canCoordinate(user.role, user.email)) redirect(ACCESS_DENIED_PATH);
   return user;
 }
 

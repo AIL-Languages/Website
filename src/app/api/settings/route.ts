@@ -31,7 +31,9 @@ export async function PATCH(request: NextRequest) {
   const enabled = Array.isArray(body.enabledProfiles)
     ? body.enabledProfiles.filter(
         (item): item is PublicProfileRole =>
-          typeof item === "string" && PROFILES.includes(item as PublicProfileRole),
+          typeof item === "string" &&
+          PROFILES.includes(item as PublicProfileRole) &&
+          item !== "coordinator",
       )
     : undefined;
 

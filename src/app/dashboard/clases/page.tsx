@@ -100,26 +100,32 @@ export default async function ClassesPage() {
         </p>
       </section>
 
-      {groups.length ? (
-        <section className="rounded-[1.75rem] bg-white p-6 sm:p-8">
-          <h2 className="font-display text-xl font-semibold text-navy">Grupos</h2>
-          <ul className="mt-4 space-y-3 text-sm text-muted">
-            {groups.map((group) => (
-              <li key={group.id}>
-                <strong className="text-ink">{group.name}</strong> · {group.language}{" "}
-                {group.level} · {group.schedule}
-              </li>
-            ))}
-          </ul>
-        </section>
+      {canCoordinate(user.role, user.email) ? (
+        groups.length ? (
+          <section className="rounded-[1.75rem] bg-white p-6 sm:p-8">
+            <h2 className="font-display text-xl font-semibold text-navy">Grupos</h2>
+            <ul className="mt-4 space-y-3 text-sm text-muted">
+              {groups.map((group) => (
+                <li key={group.id}>
+                  <strong className="text-ink">{group.name}</strong> · {group.language}{" "}
+                  {group.level} · {group.schedule}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : (
+          <section className="rounded-[1.75rem] bg-white p-6 text-sm text-muted">
+            Usa <Link href="/dashboard/asignacion" className="font-semibold text-cyan">Asignación académica</Link>{" "}
+            para el match alumno–profesor, o{" "}
+            <Link href="/dashboard/coordinacion" className="font-semibold text-cyan">
+              Coordinación
+            </Link>{" "}
+            para grupos y horarios.
+          </section>
+        )
       ) : (
         <section className="rounded-[1.75rem] bg-white p-6 text-sm text-muted">
-          Usa <Link href="/dashboard/asignacion" className="font-semibold text-cyan">Asignación académica</Link>{" "}
-          para el match alumno–profesor, o{" "}
-          <Link href="/dashboard/coordinacion" className="font-semibold text-cyan">
-            Coordinación
-          </Link>{" "}
-          para grupos y horarios.
+          Tu agenda de clases aparecerá aquí cuando AIL te asigne grupos.
         </section>
       )}
     </main>

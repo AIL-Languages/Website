@@ -45,6 +45,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (role === "coordinator") {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Este perfil no está disponible para registro público.",
+        },
+        { status: 403 },
+      );
+    }
+
     const details = parseDetails(rawDetails);
     if (details.preferredStartDate && !details.startDate) {
       details.startDate = details.preferredStartDate;

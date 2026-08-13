@@ -52,6 +52,7 @@ export default async function UserAccountPage({ params }: Props) {
         user={user}
         canDelete={isAdmin}
         canResetPassword
+        canAssignInternalRoles={isAdmin}
       />
     </main>
   );

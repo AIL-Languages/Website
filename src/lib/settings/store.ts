@@ -23,7 +23,7 @@ export function defaultSettings(): InstitutionSettings {
     maxGroupSize: 5,
     classDurationMinutes: 60,
     allowPublicRegistration: true,
-    enabledProfiles: ["student", "teacher", "coordinator", "company"],
+    enabledProfiles: ["student", "teacher", "company"],
     classModalities: "Clases personalizadas y grupos reducidos (máximo 5) en Zoom.",
     classTypes: "Personalizada, grupo reducido, English for Business, English + STEM, certificaciones.",
     timezone: "America/Chihuahua",
@@ -50,7 +50,9 @@ async function readSettings(): Promise<InstitutionSettings> {
         ...defaults.bankTransfer,
         ...(parsed.bankTransfer ?? {}),
       },
-      enabledProfiles: parsed.enabledProfiles ?? defaults.enabledProfiles,
+      enabledProfiles: (parsed.enabledProfiles ?? defaults.enabledProfiles).filter(
+        (item) => item !== "coordinator",
+      ),
       log: parsed.log ?? defaults.log,
     };
   } catch {

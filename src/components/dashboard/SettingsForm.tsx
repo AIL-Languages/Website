@@ -5,10 +5,9 @@ import { useRouter } from "next/navigation";
 import { roleLabel, type PublicProfileRole } from "@/lib/auth/admin";
 import type { InstitutionSettings } from "@/lib/settings/types";
 
-const profiles: PublicProfileRole[] = [
+const publicProfiles: PublicProfileRole[] = [
   "student",
   "teacher",
-  "coordinator",
   "company",
 ];
 
@@ -23,7 +22,7 @@ export function SettingsForm({ settings }: Props) {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const [enabled, setEnabled] = useState<PublicProfileRole[]>(
-    settings.enabledProfiles,
+    settings.enabledProfiles.filter((item) => item !== "coordinator"),
   );
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -157,8 +156,12 @@ export function SettingsForm({ settings }: Props) {
           <input type="checkbox" name="allowPublicRegistration" defaultChecked={settings.allowPublicRegistration} />
           Permitir registro público
         </label>
+        <p className="mt-3 text-sm text-muted">
+          Coordinación académica no se ofrece en el registro público. Administración
+          asigna o retira ese rol desde Usuarios.
+        </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          {profiles.map((item) => (
+          {publicProfiles.map((item) => (
             <label key={item} className="inline-flex items-center gap-2 text-sm">
               <input
                 type="checkbox"

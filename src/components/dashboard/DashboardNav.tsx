@@ -19,6 +19,11 @@ const adminItems = [
   { href: "/dashboard/correos", label: "Correos" },
 ];
 
+const coordinationItem = {
+  href: "/dashboard/coordinacion",
+  label: "Coordinación",
+};
+
 function isActive(pathname: string, href: string) {
   if (href === "/dashboard") return pathname === "/dashboard";
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -26,11 +31,19 @@ function isActive(pathname: string, href: string) {
 
 type Props = {
   showCms?: boolean;
+  showCoordination?: boolean;
 };
 
-export function DashboardNav({ showCms = false }: Props) {
+export function DashboardNav({
+  showCms = false,
+  showCoordination = false,
+}: Props) {
   const pathname = usePathname();
-  const items = showCms ? [...adminItems, ...baseItems] : baseItems;
+  const items = [
+    ...(showCms ? adminItems : []),
+    ...(showCoordination ? [coordinationItem] : []),
+    ...baseItems,
+  ];
 
   return (
     <nav
