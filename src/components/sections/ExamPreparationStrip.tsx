@@ -15,7 +15,7 @@ export function ExamPreparationStrip() {
   }
 
   return (
-    <section id="preparacion-certificaciones" className="bg-card py-10 sm:py-12">
+    <section id="preparacion-certificaciones" className="ail-section ail-section--tint">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
           Preparación internacional
@@ -52,7 +52,7 @@ export function ExamPreparationStrip() {
             <button
               type="button"
               onClick={() => openExam("ielts")}
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy"
+              className="ail-btn ail-btn--on-dark shrink-0"
             >
               Ver preparación →
             </button>

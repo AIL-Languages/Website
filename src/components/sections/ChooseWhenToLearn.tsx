@@ -59,7 +59,7 @@ export function ChooseWhenToLearn() {
   return (
     <section
       id="elige-cuando"
-      className="relative overflow-hidden bg-mist py-20 sm:py-28"
+      className="ail-section ail-section--tint relative overflow-hidden"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,184,230,0.18),_transparent_45%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,7 +85,7 @@ export function ChooseWhenToLearn() {
           {steps.map((step, index) => (
             <li
               key={step.title}
-              className="rounded-[1.5rem] bg-card p-6 shadow-[0_12px_40px_rgba(0,26,61,0.06)]"
+              className="ail-card"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-navy text-lime">
                 <StepIcon kind={step.icon} />
