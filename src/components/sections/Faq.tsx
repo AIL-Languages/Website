@@ -254,16 +254,16 @@ export function Faq() {
   }
 
   return (
-    <section id="faq" className="scroll-mt-24 bg-mist py-12 sm:py-16">
+    <section id="faq" className="scroll-mt-24 ail-section ail-section--navy-soft">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
             Preguntas frecuentes
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
+          <p className="ail-lead mt-3 text-sm leading-relaxed sm:text-base">
             Todo lo que necesitas saber antes de comenzar en A-Inman Languages.
           </p>
-          <p className="mt-3 text-sm text-muted">
+          <p className="ail-lead mt-3 text-sm">
             ¿No encuentras la respuesta que buscas? Nuestro equipo puede ayudarte.
           </p>
           <div className="mt-5 flex justify-center">

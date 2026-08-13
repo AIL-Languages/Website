@@ -7,7 +7,7 @@ export async function ContactCta() {
   const { contact } = await getCmsContent();
 
   return (
-    <section id="contacto" className="bg-card py-12 sm:py-16">
+    <section id="contacto" className="ail-section ail-section--tint">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:px-8">
         <div>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
