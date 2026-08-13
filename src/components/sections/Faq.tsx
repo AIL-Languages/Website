@@ -64,7 +64,7 @@ function FaqCtaLink({
   return (
     <a
       href={cta.href}
-      className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-ail-cyan transition hover:text-ail-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70 dark:hover:text-ail-green"
+      className="mt-4 ail-btn"
       target={cta.external ? "_blank" : undefined}
       rel={cta.external ? "noopener noreferrer" : undefined}
       onClick={() => {
@@ -143,8 +143,8 @@ function ContactAilButton({
 }) {
   const classes =
     variant === "primary"
-      ? "inline-flex min-h-11 items-center justify-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy transition hover:bg-ail-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70"
-      : "inline-flex min-h-11 items-center justify-center rounded-full border border-ail-navy/15 bg-ail-navy/5 px-5 text-sm font-semibold text-ink transition hover:border-ail-cyan hover:bg-ail-navy/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/70 dark:border-white/35 dark:bg-white/10 dark:text-white dark:hover:bg-white/18";
+      ? "ail-btn ail-btn--on-dark"
+      : "ail-btn ail-btn--on-dark";
 
   return (
     <a
@@ -287,7 +287,7 @@ export function Faq() {
             onChange={(event) => handleQueryChange(event.target.value)}
             placeholder="Buscar una pregunta…"
             autoComplete="off"
-            className="h-11 w-full rounded-full border border-[color:var(--border)] bg-card pl-11 pr-4 text-sm text-ink placeholder:text-muted transition focus-visible:border-ail-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/40"
+            className="h-11 w-full rounded-full border border-[color:var(--ail-border-light)] bg-white pl-11 pr-4 text-sm text-navy placeholder:text-[color:var(--ail-text-muted-light)] transition focus-visible:border-ail-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ail-cyan/40"
           />
         </form>
 
