@@ -23,9 +23,11 @@ const primaryNav = [
 
 const moreNav = [
   { href: "#experiencia", label: "Experiencia" },
+  { href: "#preparacion-certificaciones", label: "Certificaciones" },
   { href: "#convenios", label: "Convenios" },
   { href: "#facturacion", label: "Pagos" },
   { href: "#traduccion", label: "Traducción e Interpretación" },
+  { href: "#faq", label: "Preguntas frecuentes" },
 ] as const;
 
 const contactNav = { href: "#contacto", label: "Contacto" } as const;

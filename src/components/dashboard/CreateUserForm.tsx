@@ -14,9 +14,17 @@ const roles: PublicProfileRole[] = [
   "company",
 ];
 
+type CreatedUser = {
+  id?: string;
+  name: string;
+  email: string;
+  role: PublicProfileRole;
+  password?: string;
+};
+
 type Props = {
   allowedRoles?: PublicProfileRole[];
-  onCreated?: () => void;
+  onCreated?: (user: CreatedUser) => void;
 };
 
 export function CreateUserForm({
@@ -54,14 +62,33 @@ export function CreateUserForm({
         }),
       });
 
-      const payload = (await response.json()) as { ok?: boolean; error?: string };
+      const payload = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        user?: { id?: string; name?: string; email?: string; role?: PublicProfileRole };
+        studentWelcomeEmail?: string;
+      };
       if (!response.ok || !payload.ok) {
         throw new Error(payload.error || "No se pudo crear el usuario.");
       }
 
-      setSuccess("Usuario creado correctamente.");
+      const created: CreatedUser = {
+        id: payload.user?.id,
+        name: payload.user?.name || String(data.get("name") ?? ""),
+        email: payload.user?.email || String(data.get("email") ?? ""),
+        role: payload.user?.role || role,
+        password: String(data.get("password") ?? ""),
+      };
+
+      setSuccess(
+        role === "student"
+          ? payload.studentWelcomeEmail === "sent"
+            ? "Alumno inscrito. Se envió el correo académico de onboarding."
+            : "Alumno inscrito. El correo académico quedó pendiente o falló; puedes reenviarlo."
+          : "Usuario creado. Puedes enviar el correo de bienvenida de equipo.",
+      );
       form.reset();
-      onCreated?.();
+      onCreated?.(created);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al crear usuario.");

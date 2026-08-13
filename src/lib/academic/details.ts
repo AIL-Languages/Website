@@ -33,7 +33,12 @@ export type ProfileDetails = {
   academicStatus?: string;
   observations?: string;
   smrtCourse?: string;
+  smrtAccess?: string;
   smrtProgress?: string;
+  leadId?: string;
+  studentWelcomeEmailSent?: string;
+  studentWelcomeEmailSentAt?: string;
+  studentWelcomeEmailError?: string;
   weeklyHoursMax?: string;
   weeklyHoursAssigned?: string;
   education?: string;
@@ -79,7 +84,12 @@ const KEYS: (keyof ProfileDetails)[] = [
   "academicStatus",
   "observations",
   "smrtCourse",
+  "smrtAccess",
   "smrtProgress",
+  "leadId",
+  "studentWelcomeEmailSent",
+  "studentWelcomeEmailSentAt",
+  "studentWelcomeEmailError",
   "weeklyHoursMax",
   "weeklyHoursAssigned",
   "education",

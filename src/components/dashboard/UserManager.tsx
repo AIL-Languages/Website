@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CreateUserForm } from "@/components/dashboard/CreateUserForm";
+import {
+  WelcomeEmailModal,
+  type WelcomeDraftRecipient,
+} from "@/components/dashboard/WelcomeEmailModal";
 import { roleLabel, type PublicProfileRole, type UserRole } from "@/lib/auth/admin";
 import { languages, optionLabel } from "@/lib/academic/options";
 import type { PublicUser } from "@/lib/auth/types";
@@ -18,6 +22,7 @@ export function UserManager({ users, allowedRoles }: Props) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [openCreate, setOpenCreate] = useState(false);
+  const [welcome, setWelcome] = useState<WelcomeDraftRecipient | null>(null);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -102,7 +107,10 @@ export function UserManager({ users, allowedRoles }: Props) {
             se gestiona en Coordinación.
           </p>
           <div className="mt-6">
-            <CreateUserForm allowedRoles={allowedRoles} />
+            <CreateUserForm
+              allowedRoles={allowedRoles}
+              onCreated={(user) => setWelcome(user)}
+            />
           </div>
         </div>
       ) : null}
@@ -141,12 +149,29 @@ export function UserManager({ users, allowedRoles }: Props) {
                       : "—"}
                   </td>
                   <td className="px-5 py-3">
-                    <Link
-                      href={`/dashboard/usuarios/${user.id}`}
-                      className="font-semibold text-cyan"
-                    >
-                      Ver · Editar
-                    </Link>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      <Link
+                        href={`/dashboard/usuarios/${user.id}`}
+                        className="font-semibold text-cyan"
+                      >
+                        Ver · Editar
+                      </Link>
+                      {user.role !== "admin" ? (
+                        <button
+                          type="button"
+                          className="font-semibold text-navy"
+                          onClick={() =>
+                            setWelcome({
+                              name: user.name,
+                              email: user.email,
+                              role: user.role as PublicProfileRole,
+                            })
+                          }
+                        >
+                          Bienvenida
+                        </button>
+                      ) : null}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -154,6 +179,12 @@ export function UserManager({ users, allowedRoles }: Props) {
           </table>
         </div>
       </div>
+
+      <WelcomeEmailModal
+        open={Boolean(welcome)}
+        recipient={welcome}
+        onClose={() => setWelcome(null)}
+      />
     </div>
   );
 }

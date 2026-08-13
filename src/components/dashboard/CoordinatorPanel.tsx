@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateUserForm } from "@/components/dashboard/CreateUserForm";
+import { CreateUserWithWelcome } from "@/components/dashboard/CreateUserWithWelcome";
 import { languages, levels } from "@/lib/academic/options";
 import type { AcademicFollowUp, AcademicGroup } from "@/lib/academic/types";
 import { roleLabel } from "@/lib/auth/admin";
@@ -105,7 +105,7 @@ export function CoordinatorPanel({
             Crea cuentas de alumnos o profesores.
           </p>
           <div className="mt-6">
-            <CreateUserForm allowedRoles={["student", "teacher"]} />
+            <CreateUserWithWelcome allowedRoles={["student", "teacher"]} />
           </div>
         </div>
       ) : null}

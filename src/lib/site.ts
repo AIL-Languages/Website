@@ -29,6 +29,7 @@ export const navItems = [
   { href: "#convenios", label: "Convenios" },
   { href: "#facturacion", label: "Pagos" },
   { href: "#traduccion", label: "Traducción e Interpretación" },
+  { href: "#faq", label: "Preguntas frecuentes" },
   { href: "#contacto", label: "Contacto" },
 ] as const;
 
@@ -37,7 +38,11 @@ export function whatsappLink(message: string = site.whatsappPrefill) {
 }
 
 export function publicSiteUrl() {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const explicit = (
+    process.env.PUBLIC_SITE_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    ""
+  ).replace(/\/$/, "");
   if (explicit) return explicit;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return "http://localhost:3000";

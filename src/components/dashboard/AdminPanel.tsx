@@ -7,6 +7,11 @@ const adminModules = [
     text: "Gestor de contenido de la página pública. Contraseña exclusiva de administradora.",
   },
   {
+    href: "/dashboard/correos",
+    title: "Correos de bienvenida",
+    text: "Edita y envía el correo de bienvenida para alumnos, profesores, coordinación y empresas.",
+  },
+  {
     href: "/dashboard/usuarios",
     title: "Usuarios",
     text: "Alta, edición, suspensión y búsqueda de cuentas de acceso.",

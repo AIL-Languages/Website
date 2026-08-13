@@ -1,4 +1,4 @@
-import { CreateUserForm } from "@/components/dashboard/CreateUserForm";
+import { CreateUserWithWelcome } from "@/components/dashboard/CreateUserWithWelcome";
 import { ReportsEntryCard } from "@/components/dashboard/ReportsEntryCard";
 import { optionLabel, programs } from "@/lib/academic/options";
 import type { PublicUser } from "@/lib/auth/types";
@@ -75,7 +75,7 @@ export function CompanyPanel({ user, students }: Props) {
           Registrar alumno de la empresa
         </h3>
         <div className="mt-6">
-          <CreateUserForm allowedRoles={["student"]} />
+          <CreateUserWithWelcome allowedRoles={["student"]} />
         </div>
       </div>
 

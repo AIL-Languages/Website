@@ -14,7 +14,10 @@ const baseItems = [
   { href: "/dashboard/perfil", label: "Mi perfil" },
 ];
 
-const adminItems = [{ href: "/dashboard/cms", label: "CMS" }];
+const adminItems = [
+  { href: "/dashboard/cms", label: "CMS" },
+  { href: "/dashboard/correos", label: "Correos" },
+];
 
 function isActive(pathname: string, href: string) {
   if (href === "/dashboard") return pathname === "/dashboard";

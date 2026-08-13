@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { RoleFields } from "@/components/auth/RoleFields";
+import { WelcomeEmailModal } from "@/components/dashboard/WelcomeEmailModal";
 import { detailsFromForm } from "@/lib/academic/details";
 import {
   isSoleAdminEmail,
@@ -27,6 +28,7 @@ export function UserAccountForm({ user, canDelete, canResetPassword }: Props) {
   );
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
   const locked = isSoleAdminEmail(user.email);
 
   async function patch(body: Record<string, unknown>) {
@@ -144,9 +146,20 @@ export function UserAccountForm({ user, canDelete, canResetPassword }: Props) {
         ) : null}
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         {message ? <p className="text-sm text-lime-deep">{message}</p> : null}
-        <button className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white">
-          Guardar cambios
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white">
+            Guardar cambios
+          </button>
+          {user.role !== "admin" ? (
+            <button
+              type="button"
+              onClick={() => setWelcomeOpen(true)}
+              className="rounded-full border border-navy/15 px-5 py-2.5 text-sm font-semibold text-navy"
+            >
+              Editar y enviar bienvenida
+            </button>
+          ) : null}
+        </div>
       </form>
 
       {canResetPassword ? (
@@ -163,6 +176,20 @@ export function UserAccountForm({ user, canDelete, canResetPassword }: Props) {
         </button>
       </form>
       ) : null}
+
+      <WelcomeEmailModal
+        open={welcomeOpen}
+        recipient={
+          user.role === "admin"
+            ? null
+            : {
+                name: user.name,
+                email: user.email,
+                role,
+              }
+        }
+        onClose={() => setWelcomeOpen(false)}
+      />
 
       {canDelete && !locked ? (
         <div className="rounded-[1.75rem] bg-white p-6">

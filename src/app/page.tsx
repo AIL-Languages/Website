@@ -2,19 +2,18 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { About } from "@/components/sections/About";
 import { AcademicDirectorSection } from "@/components/sections/AcademicDirectorSection";
+import { BillingNote } from "@/components/sections/BillingNote";
 import { ContactCta } from "@/components/sections/ContactCta";
+import { ExamPreparationStrip } from "@/components/sections/ExamPreparationStrip";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { Hero } from "@/components/sections/Hero";
 import { JoinProfiles } from "@/components/sections/JoinProfiles";
-import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Languages } from "@/components/sections/Languages";
 import { Methodology } from "@/components/sections/Methodology";
-import { Programs } from "@/components/sections/Programs";
 import { PartnershipsSection } from "@/components/sections/PartnershipsSection";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { Programs } from "@/components/sections/Programs";
+import { SkillsStrip } from "@/components/sections/SkillsStrip";
 import { Translation } from "@/components/sections/Translation";
-import { WhyAil } from "@/components/sections/WhyAil";
-import { BillingNote } from "@/components/sections/BillingNote";
-import { ChooseWhenToLearn } from "@/components/sections/ChooseWhenToLearn";
 
 export default function HomePage() {
   return (
@@ -22,19 +21,18 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <Languages />
+        <SkillsStrip />
+        <Methodology />
         <About />
         <AcademicDirectorSection />
-        <Languages />
-        <ChooseWhenToLearn />
-        <HowItWorks />
-        <Methodology />
+        <ExamPreparationStrip />
         <Programs />
-        <BillingNote />
-        <WhyAil />
-        <Translation />
-        <Testimonials />
         <PartnershipsSection />
+        <Translation />
+        <BillingNote />
         <JoinProfiles />
+        <FaqSection />
         <ContactCta />
       </main>
       <Footer />

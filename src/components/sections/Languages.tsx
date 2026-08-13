@@ -1,41 +1,71 @@
-import { ButtonLink } from "@/components/ButtonLink";
+"use client";
+
+import { useEffect, useState } from "react";
 import { CountryFlag } from "@/components/director/CountryFlags";
+import { DetailSheet } from "@/components/ui/DetailSheet";
+import { setContactInterest } from "@/lib/interests";
 
 type FlagCode = "US" | "CA" | "GB" | "BR" | "MX";
 
-const languages: {
-  name: string;
-  text: string;
-  accent: string;
-  flags: { code: FlagCode; label: string }[];
-  flagsLabel: string;
-}[] = [
+const languages = [
   {
+    id: "ingles",
+    hash: "#ingles",
+    interest: "ingles",
     name: "Inglés",
-    text: "Desarrolla tu capacidad de comunicarte con confianza en contextos profesionales, académicos, personales e internacionales.",
-    accent: "from-cyan/20 to-transparent",
-    flagsLabel: "Referentes lingüísticos internacionales del inglés",
+    text: "Desarrolla tu comunicación para contextos personales, académicos y profesionales.",
+    flagsLabel: "Inglés internacional",
     flags: [
-      { code: "US", label: "Estados Unidos" },
-      { code: "CA", label: "Canadá" },
-      { code: "GB", label: "Reino Unido" },
+      { code: "US" as FlagCode, label: "Estados Unidos" },
+      { code: "CA" as FlagCode, label: "Canadá" },
+      { code: "GB" as FlagCode, label: "Reino Unido" },
     ],
+    details: {
+      levels: "A1 a C1, con evaluación diagnóstica y referencia al MCER.",
+      modality: "Clases personalizadas o grupos reducidos (máximo 5), 100% online.",
+      method: "Enfoque comunicativo y práctico: escuchas, hablas y usas el idioma desde el primer día.",
+      skills: "Listening, Speaking, Reading y Writing, con grammar, vocabulary y pronunciación.",
+      schedule: "Horarios flexibles según tu disponibilidad y la de tu profesor.",
+      exams: "Preparación opcional para IELTS, TOEFL iBT y TOEFL ITP.",
+    },
   },
   {
+    id: "portugues",
+    hash: "#portugues",
+    interest: "portugues",
     name: "Portugués",
-    text: "Aprende portugués mediante un enfoque práctico y comunicativo, desarrollando comprensión, fluidez y seguridad al expresarte.",
-    accent: "from-lime/20 to-transparent",
+    text: "Aprende portugués con un enfoque práctico, comunicativo y cultural.",
     flagsLabel: "Portugués · Brasil",
-    flags: [{ code: "BR", label: "Brasil" }],
+    flags: [{ code: "BR" as FlagCode, label: "Brasil" }],
+    details: {
+      levels: "Desde principiante hasta avanzado, con nivelación inicial.",
+      modality: "Clases online personalizadas o en grupos reducidos.",
+      method: "Comunicación real, comprensión y fluidez para viajar, estudiar o trabajar.",
+      skills: "Las cuatro habilidades + vocabulario y pronunciación brasileña.",
+      schedule: "Sesiones que se adaptan a tu agenda.",
+      exams: "Preparación opcional para CELPE-BRAS.",
+    },
   },
   {
-    name: "Español para extranjeros",
-    text: "Programa diseñado para estudiantes internacionales que desean mejorar su comunicación en español para vivir, estudiar, trabajar o desenvolverse en contextos hispanohablantes.",
-    accent: "from-cyan-soft/25 to-transparent",
+    id: "espanol",
+    hash: "#espanol",
+    interest: "espanol",
+    name: "Español",
+    text: "Programa para extranjeros que necesitan comunicarse en contextos hispanohablantes.",
     flagsLabel: "Español · México",
-    flags: [{ code: "MX", label: "México" }],
+    flags: [{ code: "MX" as FlagCode, label: "México" }],
+    details: {
+      levels: "Nivelación según tus conocimientos previos y objetivos.",
+      modality: "100% online, personalizada o en grupo reducido.",
+      method: "Español práctico para vivir, estudiar, trabajar o viajar.",
+      skills: "Comprensión, expresión oral y escrita en situaciones reales.",
+      schedule: "Horarios flexibles con seguimiento académico.",
+      exams: "Preparación lingüística según tu meta comunicativa.",
+    },
   },
-];
+] as const;
+
+type Language = (typeof languages)[number];
 
 function FlagCluster({
   flags,
@@ -45,24 +75,10 @@ function FlagCluster({
   groupLabel: string;
 }) {
   return (
-    <div
-      className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-1.5"
-      role="group"
-      aria-label={groupLabel}
-    >
+    <div className="inline-flex items-center gap-1.5" role="group" aria-label={groupLabel}>
       {flags.map((flag) => (
-        <span
-          key={flag.code}
-          title={flag.label}
-          className="inline-flex origin-center transition duration-200 ease-out hover:scale-110"
-        >
-          <span className="overflow-hidden rounded-full border border-white/70 shadow-[0_4px_10px_rgba(0,0,0,0.28)]">
-            <CountryFlag
-              code={flag.code}
-              title={flag.label}
-              className="h-7 w-7 sm:h-8 sm:w-8 lg:h-[34px] lg:w-[34px]"
-            />
-          </span>
+        <span key={flag.code} className="overflow-hidden rounded-full border border-white/70">
+          <CountryFlag code={flag.code} title={flag.label} className="h-7 w-7" />
         </span>
       ))}
     </div>
@@ -70,58 +86,101 @@ function FlagCluster({
 }
 
 export function Languages() {
-  return (
-    <section id="cursos" className="bg-card py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-              Nuestros programas
-            </p>
-            <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-              Nuestros programas de idiomas
-            </h2>
-          </div>
-          <ButtonLink href="#contacto" variant="ghost">
-            Solicitar información
-          </ButtonLink>
-        </div>
+  const [current, setCurrent] = useState<Language | null>(null);
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+  useEffect(() => {
+    function sync() {
+      const match = languages.find((item) => item.hash === window.location.hash);
+      setCurrent(match ?? null);
+    }
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+
+  function openLanguage(language: Language) {
+    window.history.pushState(null, "", language.hash);
+    setCurrent(language);
+  }
+
+  function close() {
+    setCurrent(null);
+    if (languages.some((item) => item.hash === window.location.hash)) {
+      window.history.pushState(
+        null,
+        "",
+        `${window.location.pathname}${window.location.search}`,
+      );
+    }
+  }
+
+  return (
+    <section id="cursos" className="bg-card py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
+          Programas de idiomas
+        </p>
+        <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          Elige tu idioma
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+          Inglés, portugués o español, con clases online personalizadas y grupos reducidos.
+        </p>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
           {languages.map((language) => (
-            <a
-              key={language.name}
-              href="#contacto"
-              className="group relative overflow-hidden rounded-[1.75rem] bg-ail-navy p-8 text-white transition duration-300 hover:-translate-y-[3px] hover:shadow-[0_24px_60px_rgba(0,26,61,0.28)] hover:ring-1 hover:ring-ail-cyan/40"
+            <article
+              key={language.id}
+              className="flex flex-col rounded-[1.5rem] bg-ail-navy p-6 text-white"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${language.accent} opacity-90 transition group-hover:opacity-100`}
-              />
-              <div className="absolute inset-0 bg-ail-navy/85 transition group-hover:bg-ail-navy/75" />
-              <div className="relative flex h-full flex-col">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                  <h3 className="font-display text-2xl font-semibold">
-                    {language.name}
-                  </h3>
-                  <FlagCluster
-                    flags={language.flags}
-                    groupLabel={language.flagsLabel}
-                  />
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-white/80">
-                  {language.text}
-                </p>
-                <span className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-ail-cyan transition group-hover:gap-2">
-                  Quiero este programa
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </span>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-display text-xl font-semibold">{language.name}</h3>
+                <FlagCluster flags={[...language.flags]} groupLabel={language.flagsLabel} />
               </div>
-            </a>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-white/75">
+                {language.text}
+              </p>
+              <button
+                type="button"
+                onClick={() => openLanguage(language)}
+                className="mt-5 text-left text-sm font-semibold text-ail-cyan"
+              >
+                Ver programa →
+              </button>
+            </article>
           ))}
         </div>
       </div>
+
+      <DetailSheet open={Boolean(current)} onClose={close} title={current?.name ?? "Programa"}>
+        {current ? (
+          <div className="space-y-4 text-sm leading-relaxed text-ink/85">
+            {[
+              ["Niveles", current.details.levels],
+              ["Modalidad", current.details.modality],
+              ["Metodología", current.details.method],
+              ["Habilidades", current.details.skills],
+              ["Horarios", current.details.schedule],
+              ["Certificaciones", current.details.exams],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted">{label}</p>
+                <p className="mt-1">{value}</p>
+              </div>
+            ))}
+            <a
+              href="#contacto"
+              onClick={() => {
+                setContactInterest(current.interest);
+                close();
+              }}
+              className="inline-flex min-h-11 items-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy"
+            >
+              Solicitar información
+            </a>
+          </div>
+        ) : null}
+      </DetailSheet>
     </section>
   );
 }

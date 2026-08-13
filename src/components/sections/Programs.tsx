@@ -1,77 +1,84 @@
-import { ButtonLink } from "@/components/ButtonLink";
-import { CertificationExamCards } from "@/components/sections/CertificationExamCards";
-import { getCmsContent } from "@/lib/cms/store";
+"use client";
 
-const programs = [
+import { DetailSheet } from "@/components/ui/DetailSheet";
+import { useHashOpen } from "@/components/ui/useHashOpen";
+
+const benefits = [
+  { title: "Programas corporativos", text: "Capacitación diseñada para equipos y objetivos de negocio." },
+  { title: "Seguimiento académico", text: "Avance, asistencia y reportes para coordinación empresarial." },
+  { title: "Flexibilidad de horarios", text: "Clases online que se adaptan a la operación de tu empresa." },
+];
+
+const details = [
   {
     title: "English for Business",
-    text: "Inglés aplicado a reuniones, presentaciones, comunicación empresarial, entrevistas y situaciones profesionales.",
+    text: "Inglés para reuniones, presentaciones, comunicación empresarial y entrevistas.",
   },
   {
     title: "English + STEM",
-    text: "Aprendizaje del idioma mediante actividades de ciencia, tecnología, ingeniería, matemáticas, robótica y programación.",
-  },
-  {
-    title: "Preparación para certificaciones",
-    text: "Programas orientados a estudiantes que requieren preparación para exámenes internacionales.",
+    text: "Idioma aplicado a ciencia, tecnología, ingeniería, matemáticas y programación.",
   },
   {
     title: "Programas corporativos",
-    text: "Capacitación lingüística diseñada de acuerdo con las necesidades específicas de empresas y equipos de trabajo.",
+    text: "Rutas a la medida para empresas, con seguimiento y reportes.",
   },
 ];
 
-export async function Programs() {
-  const { programs: copy } = await getCmsContent();
+export function Programs() {
+  const sheet = useHashOpen("#empresas-detalle");
 
   return (
-    <section id="empresas" className="bg-card py-20 sm:py-28">
+    <section id="empresas" className="bg-card py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
-            {copy.eyebrow}
-          </p>
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-            {copy.title}
-          </h2>
-        </div>
+        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
+          Empresas
+        </p>
+        <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          Soluciones para empresas
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+          Capacitación lingüística para equipos, con seguimiento académico y horarios flexibles.
+        </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {programs.map((program) => (
-            <article
-              key={program.title}
-              className="rounded-[1.5rem] border border-navy/8 bg-mist/70 p-7 transition hover:border-cyan/40"
-            >
-              <h3 className="font-display text-xl font-semibold text-ink">
-                {program.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{program.text}</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {benefits.map((item) => (
+            <article key={item.title} className="rounded-2xl border border-navy/8 bg-mist/70 p-5">
+              <h3 className="font-display text-lg font-semibold text-navy">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted">{item.text}</p>
             </article>
           ))}
         </div>
 
-        <div className="mt-16 overflow-hidden rounded-[2rem] bg-navy px-8 py-10 text-white sm:px-12">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime">
-                {copy.certificationsEyebrow}
-              </p>
-              <h3 className="mt-3 font-display text-3xl font-bold">
-                {copy.certificationsTitle}
-              </h3>
-              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75">
-                {copy.certificationsBody}
-              </p>
-              <div className="mt-8">
-                <ButtonLink href="#contacto" variant="lime">
-                  {copy.certificationsCta}
-                </ButtonLink>
-              </div>
-            </div>
-            <CertificationExamCards />
-          </div>
-        </div>
+        <button
+          type="button"
+          onClick={sheet.openSheet}
+          className="mt-6 text-sm font-semibold text-ail-cyan"
+        >
+          Conocer soluciones corporativas →
+        </button>
       </div>
+
+      <DetailSheet
+        open={sheet.open}
+        onClose={sheet.closeSheet}
+        title="Soluciones corporativas AIL"
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {details.map((item) => (
+            <article key={item.title} className="rounded-2xl border border-navy/8 p-5">
+              <h3 className="font-display text-lg font-semibold text-navy">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+        <a
+          href="#contacto"
+          onClick={sheet.closeSheet}
+          className="mt-6 inline-flex min-h-11 items-center rounded-full bg-ail-green px-5 text-sm font-semibold text-ail-navy"
+        >
+          Solicitar información corporativa
+        </a>
+      </DetailSheet>
     </section>
   );
 }

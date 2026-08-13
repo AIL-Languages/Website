@@ -10,6 +10,7 @@ import {
 import { getCurrentProfile, getProfileById } from "@/lib/auth/profile";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { type Profile, toPublicUser } from "@/lib/auth/types";
+import { onStudentEnrolled } from "@/lib/email/send-student-welcome";
 
 export const runtime = "nodejs";
 
@@ -70,6 +71,10 @@ export async function PATCH(request: NextRequest, context: Context) {
   }
 
   details.accountStatus = accountStatus;
+  const becameEnrolled =
+    role === "student" &&
+    existing.details.enrollmentStatus !== "active" &&
+    details.enrollmentStatus === "active";
 
   const admin = createAdminClient();
   await admin.auth.admin.updateUserById(id, {
@@ -113,6 +118,17 @@ export async function PATCH(request: NextRequest, context: Context) {
     );
   }
 
+  let welcome: { studentEmail?: string } | undefined;
+  if (becameEnrolled) {
+    welcome = await onStudentEnrolled({
+      studentId: id,
+      name,
+      email: existing.email,
+      role,
+      details,
+    });
+  }
+
   return NextResponse.json({
     ok: true,
     user: toPublicUser({
@@ -121,6 +137,7 @@ export async function PATCH(request: NextRequest, context: Context) {
       details,
       account_status: accountStatus,
     }),
+    studentWelcomeEmail: welcome?.studentEmail,
   });
 }
 

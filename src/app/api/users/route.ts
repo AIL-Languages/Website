@@ -11,6 +11,7 @@ import { getCurrentProfile, listProfiles } from "@/lib/auth/profile";
 import { createUserSchema } from "@/lib/auth/validation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { type Profile, toPublicUser } from "@/lib/auth/types";
+import { onStudentEnrolled } from "@/lib/email/send-student-welcome";
 
 export const runtime = "nodejs";
 
@@ -108,6 +109,9 @@ export async function POST(request: NextRequest) {
       details.companyName =
         current.details.companyLegalName || current.name;
     }
+    if (role === "student") {
+      details.enrollmentStatus = "active";
+    }
 
     const admin = createAdminClient();
     const { data, error } = await admin.auth.admin.createUser({
@@ -164,9 +168,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    let welcome: { studentEmail?: string } | undefined;
+    if (role === "student") {
+      welcome = await onStudentEnrolled({
+        studentId: data.user.id,
+        name,
+        email: email.trim().toLowerCase(),
+        role,
+        details,
+      });
+    }
+
     return NextResponse.json({
       ok: true,
       user: toPublicUser({ ...(profile as Profile), role, details }),
+      studentWelcomeEmail: welcome?.studentEmail,
     });
   } catch (error) {
     console.error("[users]", error);

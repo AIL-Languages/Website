@@ -10,6 +10,7 @@ import {
   WEEKDAYS,
   type Weekday,
 } from "@/lib/scheduling/store";
+import { maybeSendStaffWelcomeOnRegister } from "@/lib/email/welcome";
 
 export const runtime = "nodejs";
 
@@ -49,7 +50,7 @@ export async function POST(request: NextRequest) {
       details.startDate = details.preferredStartDate;
     }
     details.timezone = details.timezone || "America/Chihuahua";
-    details.enrollmentStatus = details.enrollmentStatus || "pending";
+    details.enrollmentStatus = "pending";
     const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signUp({
@@ -96,6 +97,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!data.session) {
+      await maybeSendStaffWelcomeOnRegister({ name, email, role });
       return NextResponse.json({
         ok: true,
         needsEmailConfirmation: true,
@@ -137,6 +139,8 @@ export async function POST(request: NextRequest) {
       await new Promise((resolve) => setTimeout(resolve, 400));
       profile = await getCurrentProfile();
     }
+
+    await maybeSendStaffWelcomeOnRegister({ name, email, role });
 
     return NextResponse.json({
       ok: true,
