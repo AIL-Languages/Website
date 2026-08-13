@@ -129,7 +129,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="space-y-5 rounded-[1.75rem] bg-white p-6 shadow-[0_20px_60px_rgba(0,26,61,0.12)] sm:p-8">
+      <div className="ail-card ail-card--plain space-y-5 sm:p-8">
         <h3 className="font-display text-2xl font-semibold text-ink">
           {welcomeEmailSent
             ? "¡Gracias por tu interés! 🌎"
@@ -146,7 +146,7 @@ export function ContactForm() {
         </p>
         <a
           href="#inicio"
-          className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-cyan px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright sm:w-auto"
+          className="ail-btn w-full sm:w-auto"
         >
           Continuar explorando AIL →
         </a>
@@ -207,7 +207,7 @@ export function ContactForm() {
                 validateEmailField(event.currentTarget.value);
               }
             }}
-            className="mt-2 w-full max-w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="mt-2 w-full max-w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
             placeholder="nombre@correo.com"
           />
           {emailError ? (
@@ -271,7 +271,7 @@ export function ContactForm() {
           required
           name="goals"
           rows={3}
-          className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+          className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
           placeholder="Académicos, profesionales, viaje, certificación..."
         />
       </label>
@@ -280,7 +280,7 @@ export function ContactForm() {
         Disponibilidad
         <input
           name="availability"
-          className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+          className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
           placeholder="Días y horarios preferidos"
         />
       </label>
