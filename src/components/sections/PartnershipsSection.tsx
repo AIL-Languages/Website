@@ -14,7 +14,7 @@ export function PartnershipsSection() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section id="convenios" className="bg-mist/50 py-12 sm:py-16">
+    <section id="convenios" className="ail-section ail-section--tint">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan">
           Alianzas AIL

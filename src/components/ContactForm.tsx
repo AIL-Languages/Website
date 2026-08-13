@@ -157,7 +157,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative space-y-4 overflow-x-hidden rounded-[1.75rem] bg-white p-6 shadow-[0_20px_60px_rgba(0,26,61,0.12)] sm:p-8"
+      className="relative space-y-4 overflow-x-hidden ail-card ail-card--plain sm:p-8"
     >
       <div
         className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
@@ -176,7 +176,7 @@ export function ContactForm() {
             required
             name="name"
             autoComplete="given-name"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
             placeholder="Tu nombre"
           />
         </label>
@@ -226,7 +226,7 @@ export function ContactForm() {
             type="tel"
             autoComplete="tel"
             inputMode="tel"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
             placeholder="+52 ..."
           />
         </label>
@@ -237,7 +237,7 @@ export function ContactForm() {
             name="interest"
             value={interest}
             onChange={(event) => setInterest(event.target.value)}
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
           >
             <option value="" disabled>
               Selecciona una opción
@@ -259,7 +259,7 @@ export function ContactForm() {
           <input
             name="company"
             autoComplete="organization"
-            className="mt-2 w-full rounded-xl border border-navy/10 bg-mist/60 px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
+            className="mt-2 w-full rounded-xl border border-navy/10 bg-white px-4 py-3 outline-none transition focus:border-cyan focus:ring-2 focus:ring-cyan/30"
             placeholder="Nombre de tu organización"
           />
         </label>
@@ -294,7 +294,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex flex-1 items-center justify-center rounded-full bg-cyan px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-cyan-bright disabled:cursor-not-allowed disabled:opacity-70"
+          className="ail-btn flex-1 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "loading" ? "Enviando..." : "Quiero información"}
         </button>
@@ -302,7 +302,7 @@ export function ContactForm() {
           href={whatsappLink()}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex flex-1 items-center justify-center rounded-full border border-navy/15 bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-lime hover:text-navy-mid"
+          className="ail-btn ail-btn--secondary flex-1"
         >
           Enviar WhatsApp
         </a>

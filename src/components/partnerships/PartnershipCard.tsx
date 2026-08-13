@@ -53,16 +53,16 @@ export function PartnershipCard({ partnership, onConsultBenefit }: Props) {
         {partnership.name}
       </h3>
       <p className="mt-1 text-sm font-medium text-ail-cyan">{typeLabel}</p>
-      <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
+      <p className="ail-card-text">
         {partnership.description}
       </p>
 
-      <div className="mt-6 space-y-3">
+      <div className="w-full space-y-3">
         {isActive ? (
           <button
             type="button"
             onClick={() => onConsultBenefit(partnership)}
-            className="inline-flex w-full items-center justify-center gap-1 rounded-full bg-ail-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-ail-cyan hover:text-ail-navy"
+            className="ail-btn ail-btn--block"
           >
             Consultar mi beneficio
             <span aria-hidden>→</span>
