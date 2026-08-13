@@ -87,7 +87,7 @@ export function ChooseWhenToLearn() {
               key={step.title}
               className="ail-card"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-navy text-lime">
+              <div className="ail-icon-bubble">
                 <StepIcon kind={step.icon} />
               </div>
               <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-cyan">
